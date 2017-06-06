@@ -18,12 +18,39 @@ Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher suppor
 
 ## Example
 
+PHP version
+
+```
+php71 -v
+PHP 7.1.5 (cli) (built: May  9 2017 17:04:23) ( NTS )
+Copyright (c) 1997-2017 The PHP Group
+Zend Engine v3.1.0, Copyright (c) 1998-2017 Zend Technologies
+    with Zend OPcache v7.1.5, Copyright (c) 1999-2017, by Zend Technologies
+```
+
 Example for configuring Centmin Mod Nginx vhost to use this custom `php71` version at `/php71` location
 
 ```
 location /php71 {
  include /usr/local/nginx/conf/php71-remi.conf;
 }
+```
+
+process listing
+
+```
+root      6835  0.0  1.4 109280 26972 ?        Ss   14:18   0:00 nginx: master process /usr/local/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+nginx     6836  0.1  2.7 137952 52420 ?        S<   14:18   0:04  \_ nginx: worker process
+nginx     6837  0.1  2.7 137952 52428 ?        S<   14:18   0:04  \_ nginx: worker process
+nginx     6839  0.1  2.7 137952 52424 ?        S<   14:18   0:04  \_ nginx: worker process
+root      6847  0.0  0.5 642156  9420 ?        Ss   14:18   0:00 php-fpm: master process (/usr/local/etc/php-fpm.conf)
+root      7754  0.0  2.1 768576 40584 ?        Ss   15:15   0:00 php-fpm: master process (/etc/opt/remi/php71/php-fpm.conf)
+nginx     7755  0.0  1.3 1145812 25220 ?       S    15:15   0:00  \_ php-fpm: pool php71-www
+nginx     7756  0.0  0.5 768576 10952 ?        S    15:15   0:00  \_ php-fpm: pool php71-www
+nginx     7757  0.0  0.5 768576 10952 ?        S    15:15   0:00  \_ php-fpm: pool php71-www
+nginx     7758  0.0  0.5 768576 10952 ?        S    15:15   0:00  \_ php-fpm: pool php71-www
+nginx     7759  0.0  0.5 768576 10956 ?        S    15:15   0:00  \_ php-fpm: pool php71-www
+nginx     7760  0.0  0.5 768576 10956 ?        S    15:15   0:00  \_ php-fpm: pool php71-www
 ```
 
 ## Usage
