@@ -59,6 +59,14 @@ if [[ "$CENTOS_SEVEN" -ne '7' ]]; then
   exit
 fi
 
+if [ ! -f /etc/yum.repos.d/remi.repo ]; then
+  echo
+  echo "Requires Remi Yum Repository"
+  echo "aborting..."
+  echo
+  exit
+fi
+
 
 phpsededit() {
     TOTALMEM=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
