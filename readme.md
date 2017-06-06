@@ -12,10 +12,10 @@ This PHP-FPM 7.1 branch version:
 * centmin mod nginx's php include file is at `/usr/local/nginx/conf/php71-remi.conf` instead of default at `/usr/local/nginx/conf/php.conf` which you replace references to in your centmin mod nginx vhost config file
 * `fpmconfphp71` is centmin mod command shortcut to invoke nano linux text editor to edit `/etc/opt/remi/php71/php-fpm.d/www.conf`
 * `phpincphp71` is centmin mod command shortcut to invoke nano linux text editor to edit `/usr/local/nginx/conf/php71-remi.conf`
-* `systemctl start php71-php-fpm` command to start php71-php-fpm service
-* `systemctl restart php71-php-fpm` command to restart php71-php-fpm service
-* `systemctl stop php71-php-fpm` command to stop php71-php-fpm service
-* `systemctl status php71-php-fpm` command to get status for php71-php-fpm service
+* `systemctl start php71-php-fpm` command to start php71-php-fpm service with command shortcut = `fpm71start`
+* `systemctl restart php71-php-fpm` command to restart php71-php-fpm service with command shortcut = `fpm71restart`
+* `systemctl stop php71-php-fpm` command to stop php71-php-fpm service with command shortcut = `fpm71stop`
+* `systemctl status php71-php-fpm` command to get status for php71-php-fpm service with command shortcut = `fpm71status`
 
 ![](images/phpinfo-7.1.5-01.png)
 

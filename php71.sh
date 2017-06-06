@@ -169,6 +169,11 @@ phpinstall() {
     chmod 0666 /var/opt/remi/php71/log/php-fpm/www-error.log
     chown nginx:nginx /var/opt/remi/php71/log/php-fpm/www-error.log
   fi
+  echo "systemctl stop php71-php-fpm" >/usr/bin/fpm71stop ; chmod 700 /usr/bin/fpm71stop
+  echo "systemctl start php71-php-fpm" >/usr/bin/fpm71start ; chmod 700 /usr/bin/fpm71start
+  echo "systemctl restart php71-php-fpm" >/usr/bin/fpm71restart ; chmod 700 /usr/bin/fpm71restart
+  echo "systemctl reload php71-php-fpm" >/usr/bin/fpm71reload ; chmod 700 /usr/bin/fpm71reload
+  echo "systemctl status php71-php-fpm" >/usr/bin/fpm71status ; chmod 700 /usr/bin/fpm71status
   echo "nano -w /etc/opt/remi/php71/php-fpm.d/www.conf" >/usr/bin/fpmconfphp71 ; chmod 700 /usr/bin/fpmconfphp71
   echo "nano -w /usr/local/nginx/conf/php71-remi.conf" >/usr/bin/phpincphp71 ; chmod 700 /usr/bin/phpincphp71
   cp -a /usr/local/nginx/conf/php.conf /usr/local/nginx/conf/php71-remi.conf
