@@ -14,8 +14,17 @@ Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher suppor
 * `systemctl stop php71-php-fpm` command to stop php71-php-fpm service
 * `systemctl status php71-php-fpm` command to get status for php71-php-fpm service
 
-
 ![](images/phpinfo-7.1.5-01.png)
+
+## Example
+
+Example for configuring Centmin Mod Nginx vhost to use this custom `php71` version at `/php71` location
+
+```
+location /php71 {
+ include /usr/local/nginx/conf/php71-remi.conf;
+}
+```
 
 ## Usage
 

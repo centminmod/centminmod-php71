@@ -153,6 +153,12 @@ phpsededit() {
     echo "max_input_vars = 10000" >> ${CUSTOMPHPINIFILE}
     echo "mysqlnd.net_cmd_buffer_size = 16384" >> ${CUSTOMPHPINIFILE}
     echo "always_populate_raw_post_data=-1" >> ${CUSTOMPHPINIFILE}
+    if [ ! -f "${CONFIGSCANDIR}/20-opcache.ini" ]; then
+      echo "opcache.memory_consumption=$ZOLIMIT" > "${CONFIGSCANDIR}/20-opcache.ini"
+    fi
+    if [ -f "${CONFIGSCANDIR}/20-opcache.ini" ]; then
+      sed -i "s|opcache.memory_consumption=.*|opcache.memory_consumption=$ZOLIMIT|" "${CONFIGSCANDIR}/20-opcache.ini"
+    fi
 }
 
 phpinstall() {
