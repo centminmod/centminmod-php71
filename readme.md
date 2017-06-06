@@ -5,6 +5,7 @@ Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher suppor
 This PHP-FPM 7.1 branch version:
 
 * listens on port `9900` instead of `9000` with php-fpm pool named `php71-www`
+* custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php71/php.d/zzz_customphp.ini`
 * php config scan directory is at `/etc/opt/remi/php71/php.d`
 * php-fpm config file at `/etc/opt/remi/php71/php-fpm.d/www.conf`
 * error log at `/var/opt/remi/php71/log/php-fpm/www-error.log`
