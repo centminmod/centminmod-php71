@@ -1,6 +1,6 @@
 # Multiple PHP-FPM Versions For Centmin Mod LEMP
 
-Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher support for multiple PHP-FPM versions utilising Remi Yum Repository's SCL `php71` version to work side by side concurrently with Centmin Mod's default PHP-FPM version. This PHP-FPM 7.1 branch version:
+Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher support for multiple PHP-FPM versions utilising [Remi Yum Repository's SCL](https://blog.remirepo.net/post/2017/05/11/PHP-version-7.0.19-and-7.1.5) `php71` version to work side by side concurrently with Centmin Mod's default PHP-FPM version. This PHP-FPM 7.1 branch version:
 
 * listens on port `9900` instead of `9000` with php-fpm pool named `php71-www`
 * php config scan directory is at `/etc/opt/remi/php71/php.d`
