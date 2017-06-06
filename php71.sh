@@ -169,6 +169,11 @@ phpinstall() {
     chmod 0666 /var/opt/remi/php71/log/php-fpm/www-error.log
     chown nginx:nginx /var/opt/remi/php71/log/php-fpm/www-error.log
   fi
+  if [ ! -f /var/opt/remi/php71/log/php-fpm/www-slow.log ]; then
+    touch /var/opt/remi/php71/log/php-fpm/www-slow.log
+    chmod 0666 /var/opt/remi/php71/log/php-fpm/www-slow.log
+    chown nginx:nginx /var/opt/remi/php71/log/php-fpm/www-slow.log
+  fi
   echo "systemctl stop php71-php-fpm" >/usr/bin/fpm71stop ; chmod 700 /usr/bin/fpm71stop
   echo "systemctl start php71-php-fpm" >/usr/bin/fpm71start ; chmod 700 /usr/bin/fpm71start
   echo "systemctl restart php71-php-fpm" >/usr/bin/fpm71restart ; chmod 700 /usr/bin/fpm71restart
@@ -185,6 +190,8 @@ phpinstall() {
   sed -i 's|;listen.group = .*|listen.group = nginx|' /etc/opt/remi/php71/php-fpm.d/www.conf
   sed -i 's|user = apache|user = nginx|' /etc/opt/remi/php71/php-fpm.d/www.conf
   sed -i 's|group = apache|group = nginx|' /etc/opt/remi/php71/php-fpm.d/www.conf
+  sed -i 's|;pm.status_path = \/status|pm.status_path = \/php71status|' /etc/opt/remi/php71/php-fpm.d/www.conf
+
   echo
   echo "start php71-php-fpm service"
   systemctl start php71-php-fpm
@@ -244,6 +251,12 @@ case "$1" in
       nano /etc/opt/remi/php71/php.d/zzz_customphp.ini
     fi
     ;;
+  phpslowlog )
+    if [ -f /var/opt/remi/php71/log/php-fpm/www-slow.log ]; then
+      echo "tail -100 /var/opt/remi/php71/log/php-fpm/www-slow.log"
+      tail -100 /var/opt/remi/php71/log/php-fpm/www-slow.log
+    fi
+    ;;
   phpini )
     php71 --ini
     ;;
@@ -263,6 +276,6 @@ case "$1" in
     systemctl status php71-php-fpm
     ;;
   * )
-    echo "$0 {install|update|list|phpconfig|phperrors|phpcustom|phpini|phpext|start|restart|stop|status}"
+    echo "$0 {install|update|list|phpconfig|phperrors|phpcustom|phpslowlog|phpini|phpext|start|restart|stop|status}"
     ;;
 esac
