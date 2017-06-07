@@ -34,6 +34,22 @@ The PHP-FPM 7.0 branch version `php70.sh`:
 * `systemctl stop php70-php-fpm` command to stop php70-php-fpm service with command shortcut = `fpm70stop`
 * `systemctl status php70-php-fpm` command to get status for php70-php-fpm service with command shortcut = `fpm70status`
 
+The PHP-FPM 5.6 branch version `php56.sh` has slightly different paths compared to `php71.sh` and `php70.sh`:
+
+* CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
+* listens on port `9700` instead of `9000` with php-fpm pool named `php56-www`
+* custom php.ini settings calculated by centmin mod are placed in `/opt/remi/php56/root/etc/php.d/zzz_customphp.ini`
+* php config scan directory is at `/opt/remi/php56/root/etc/php.d`
+* php-fpm config file at `/opt/remi/php56/root/etc/php-fpm.d/www.conf`
+* error log at `/var/opt/remi/php56/log/php-fpm/www-error.log`
+* centmin mod nginx's php include file is at `/usr/local/nginx/conf/php56-remi.conf` instead of default at `/usr/local/nginx/conf/php.conf` which you replace references to in your centmin mod nginx vhost config file
+* `fpmconfphp56` is centmin mod command shortcut to invoke nano linux text editor to edit `/etc/opt/remi/php56/php-fpm.d/www.conf`
+* `phpincphp56` is centmin mod command shortcut to invoke nano linux text editor to edit `/usr/local/nginx/conf/php56-remi.conf`
+* `systemctl start php56-php-fpm` command to start php56-php-fpm service with command shortcut = `fpm56start`
+* `systemctl restart php56-php-fpm` command to restart php56-php-fpm service with command shortcut = `fpm56restart`
+* `systemctl stop php56-php-fpm` command to stop php56-php-fpm service with command shortcut = `fpm56stop`
+* `systemctl status php56-php-fpm` command to get status for php56-php-fpm service with command shortcut = `fpm56status`
+
 ![](images/phpinfo-7.1.5-01.png)
 
 ## Example
