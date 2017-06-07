@@ -36,7 +36,7 @@ The PHP-FPM 7.0 branch version `php70.sh`:
 
 The PHP-FPM 5.6 branch version `php56.sh` has slightly different paths compared to `php71.sh` and `php70.sh`:
 
-* CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
+* CentOS 7 transparent hugepages support for Zend Opcache is disabled as PHP <7 doesn't support it in Zend Opcache
 * listens on port `9700` instead of `9000` with php-fpm pool named `php56-www`
 * custom php.ini settings calculated by centmin mod are placed in `/opt/remi/php56/root/etc/php.d/zzz_customphp.ini`
 * php config scan directory is at `/opt/remi/php56/root/etc/php.d`
