@@ -67,6 +67,70 @@ if [ ! -f /etc/yum.repos.d/remi.repo ]; then
   exit
 fi
 
+opcachehugepages() {
+  # check if redis installed as redis server requires huge pages disabled
+  if [[ -f /usr/bin/redis-cli ]]; then
+    if [[ -f /sys/kernel/mm/transparent_hugepage/enabled ]]; then
+      echo never > /sys/kernel/mm/transparent_hugepage/enabled
+      if [[ -z "$(grep transparent_hugepage /etc/rc.local)" ]]; then
+        echo "echo never > /sys/kernel/mm/transparent_hugepage/enabled" >> /etc/rc.local
+      fi
+    fi
+  fi
+
+  # https://www.kernel.org/doc/Documentation/vm/transhuge.txt
+  # only enable PHP zend opcache opcache.huge_code_pages=1 support if on CentOS 7.x and kernel
+  # supports transparent hugepages. Otherwise, disable it in PHP zend opcache
+  if [[ -f /sys/kernel/mm/transparent_hugepage/enabled ]]; then
+    # cat /sys/kernel/mm/transparent_hugepage/enabled
+    HP_CHECK=$(cat /sys/kernel/mm/transparent_hugepage/enabled | grep -o '\[.*\]')
+    if [[ "$CENTOS_SIX" = '6' ]]; then
+      if [ -f "${CONFIGSCANDIR}/20-opcache.ini" ]; then
+        OPCACHEHUGEPAGES_OPT=''
+        echo $OPCACHEHUGEPAGES_OPT
+        if [[ "$(grep 'opcache.huge_code_pages' ${CONFIGSCANDIR}/20-opcache.ini)" ]]; then
+          sed -i 's|^opcache.huge_code_pages=1|opcache.huge_code_pages=0|' ${CONFIGSCANDIR}/20-opcache.ini
+          sed -i 's|^;opcache.huge_code_pages=1|opcache.huge_code_pages=0|' ${CONFIGSCANDIR}/20-opcache.ini
+        else
+          echo -e "\nopcache.huge_code_pages=0" >> ${CONFIGSCANDIR}/20-opcache.ini
+        fi
+      fi      
+    elif [[ "$CENTOS_SEVEN" = '7' && "$HP_CHECK" = '[always]' ]]; then
+      if [ -f "${CONFIGSCANDIR}/20-opcache.ini" ]; then
+        OPCACHEHUGEPAGES_OPT=' --enable-huge-code-pages'
+        echo $OPCACHEHUGEPAGES_OPT
+        if [ -f "../tools/hptweaks.sh" ]; then
+          ../tools/hptweaks.sh
+        fi
+        if [[ "$(grep 'opcache.huge_code_pages' ${CONFIGSCANDIR}/20-opcache.ini)" ]]; then
+          sed -i 's|^;opcache.huge_code_pages=1|opcache.huge_code_pages=1|' ${CONFIGSCANDIR}/20-opcache.ini
+        else
+          echo -e "\nopcache.huge_code_pages=1" >> ${CONFIGSCANDIR}/20-opcache.ini
+        fi
+      fi
+    elif [[ "$CENTOS_SEVEN" = '7' && "$HP_CHECK" = '[never]' ]]; then
+      if [ -f "${CONFIGSCANDIR}/20-opcache.ini" ]; then
+        OPCACHEHUGEPAGES_OPT=''
+        echo $OPCACHEHUGEPAGES_OPT
+        if [[ "$(grep 'opcache.huge_code_pages' ${CONFIGSCANDIR}/20-opcache.ini)" ]]; then
+          sed -i 's|^opcache.huge_code_pages=1|opcache.huge_code_pages=0|' ${CONFIGSCANDIR}/20-opcache.ini
+          sed -i 's|^;opcache.huge_code_pages=1|opcache.huge_code_pages=0|' ${CONFIGSCANDIR}/20-opcache.ini
+        else
+          echo -e "\nopcache.huge_code_pages=0" >> ${CONFIGSCANDIR}/20-opcache.ini
+        fi
+      fi        
+    fi
+  else
+    if [ -f "${CONFIGSCANDIR}/20-opcache.ini" ]; then
+      if [[ "$(grep 'opcache.huge_code_pages' ${CONFIGSCANDIR}/20-opcache.ini)" ]]; then
+        sed -i 's|^opcache.huge_code_pages=1|opcache.huge_code_pages=0|' ${CONFIGSCANDIR}/20-opcache.ini
+        sed -i 's|^;opcache.huge_code_pages=1|opcache.huge_code_pages=0|' ${CONFIGSCANDIR}/20-opcache.ini
+      else
+        echo -e "\nopcache.huge_code_pages=0" >> ${CONFIGSCANDIR}/20-opcache.ini
+      fi    
+    fi
+  fi
+}
 
 phpsededit() {
     TOTALMEM=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
@@ -155,10 +219,26 @@ phpsededit() {
     echo "always_populate_raw_post_data=-1" >> ${CUSTOMPHPINIFILE}
     if [ ! -f "${CONFIGSCANDIR}/20-opcache.ini" ]; then
       echo "opcache.memory_consumption=$ZOLIMIT" > "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "opcache.interned_strings_buffer=8" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "opcache.max_wasted_percentage=5" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "opcache.max_accelerated_files=24000" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "; http://php.net/manual/en/opcache.configuration.php#ini.opcache.revalidate-freq" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "; defaults to zend opcache checking every 180 seconds for PHP file changes" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "; set to zero to check every second if you are doing alot of frequent" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "; php file edits/developer work" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "; opcache.revalidate_freq=0" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "opcache.revalidate_freq=180" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "opcache.fast_shutdown=0" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "opcache.enable_cli=0" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "opcache.save_comments=1" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "opcache.enable_file_override=1" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo "opcache.validate_timestamps=1" >> "${CONFIGSCANDIR}/20-opcache.ini"
+      echo ";opcache.huge_code_pages=1" >> "${CONFIGSCANDIR}/20-opcache.ini"
     fi
     if [ -f "${CONFIGSCANDIR}/20-opcache.ini" ]; then
       sed -i "s|opcache.memory_consumption=.*|opcache.memory_consumption=$ZOLIMIT|" "${CONFIGSCANDIR}/20-opcache.ini"
     fi
+    opcachehugepages
 }
 
 phpinstall() {
