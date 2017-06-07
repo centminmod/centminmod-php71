@@ -254,11 +254,11 @@ phpinstall() {
     chmod 0666 /var/opt/remi/php70/log/php-fpm/www-slow.log
     chown nginx:nginx /var/opt/remi/php70/log/php-fpm/www-slow.log
   fi
-  echo "systemctl stop php70-php-fpm" >/usr/bin/fpm71stop ; chmod 700 /usr/bin/fpm71stop
-  echo "systemctl start php70-php-fpm" >/usr/bin/fpm71start ; chmod 700 /usr/bin/fpm71start
-  echo "systemctl restart php70-php-fpm" >/usr/bin/fpm71restart ; chmod 700 /usr/bin/fpm71restart
-  echo "systemctl reload php70-php-fpm" >/usr/bin/fpm71reload ; chmod 700 /usr/bin/fpm71reload
-  echo "systemctl status php70-php-fpm" >/usr/bin/fpm71status ; chmod 700 /usr/bin/fpm71status
+  echo "systemctl stop php70-php-fpm" >/usr/bin/fpm70stop ; chmod 700 /usr/bin/fpm70stop
+  echo "systemctl start php70-php-fpm" >/usr/bin/fpm70start ; chmod 700 /usr/bin/fpm70start
+  echo "systemctl restart php70-php-fpm" >/usr/bin/fpm70restart ; chmod 700 /usr/bin/fpm70restart
+  echo "systemctl reload php70-php-fpm" >/usr/bin/fpm70reload ; chmod 700 /usr/bin/fpm70reload
+  echo "systemctl status php70-php-fpm" >/usr/bin/fpm70status ; chmod 700 /usr/bin/fpm70status
   echo "nano -w /etc/opt/remi/php70/php-fpm.d/www.conf" >/usr/bin/fpmconfphp70 ; chmod 700 /usr/bin/fpmconfphp70
   echo "nano -w /usr/local/nginx/conf/php70-remi.conf" >/usr/bin/phpincphp70 ; chmod 700 /usr/bin/phpincphp70
   cp -a /usr/local/nginx/conf/php.conf /usr/local/nginx/conf/php70-remi.conf

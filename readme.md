@@ -2,7 +2,7 @@
 
 Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher support for multiple PHP-FPM versions utilising [Remi Yum Repository's SCL](https://blog.remirepo.net/post/2017/05/11/PHP-version-7.0.19-and-7.1.5) `php71` version to work side by side concurrently with Centmin Mod's default PHP-FPM version. This Remi SCL based PHP 7.1 branch version will not be able to support advanced optimisations like Centmin Mod 123.09beta01's source compiled PHP 7.x versions which support optionally, [Profile Guide Optimisations](https://community.centminmod.com/threads/added-profile-guided-optimizations-to-boost-php-7-performance.8961/) to boost PHP 7 performance by another 3-17% or Intel cpu specific optimised PHP compilations.
 
-This PHP-FPM 7.1 branch version:
+This PHP-FPM 7.1 branch version `php71.sh`:
 
 * CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
 * listens on port `9900` instead of `9000` with php-fpm pool named `php71-www`
@@ -17,6 +17,22 @@ This PHP-FPM 7.1 branch version:
 * `systemctl restart php71-php-fpm` command to restart php71-php-fpm service with command shortcut = `fpm71restart`
 * `systemctl stop php71-php-fpm` command to stop php71-php-fpm service with command shortcut = `fpm71stop`
 * `systemctl status php71-php-fpm` command to get status for php71-php-fpm service with command shortcut = `fpm71status`
+
+The PHP-FPM 7.0 branch version `php70.sh`:
+
+* CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
+* listens on port `9800` instead of `9000` with php-fpm pool named `php70-www`
+* custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php70/php.d/zzz_customphp.ini`
+* php config scan directory is at `/etc/opt/remi/php70/php.d`
+* php-fpm config file at `/etc/opt/remi/php70/php-fpm.d/www.conf`
+* error log at `/var/opt/remi/php70/log/php-fpm/www-error.log`
+* centmin mod nginx's php include file is at `/usr/local/nginx/conf/php70-remi.conf` instead of default at `/usr/local/nginx/conf/php.conf` which you replace references to in your centmin mod nginx vhost config file
+* `fpmconfphp70` is centmin mod command shortcut to invoke nano linux text editor to edit `/etc/opt/remi/php70/php-fpm.d/www.conf`
+* `phpincphp70` is centmin mod command shortcut to invoke nano linux text editor to edit `/usr/local/nginx/conf/php70-remi.conf`
+* `systemctl start php70-php-fpm` command to start php70-php-fpm service with command shortcut = `fpm70start`
+* `systemctl restart php70-php-fpm` command to restart php70-php-fpm service with command shortcut = `fpm70restart`
+* `systemctl stop php70-php-fpm` command to stop php70-php-fpm service with command shortcut = `fpm70stop`
+* `systemctl status php70-php-fpm` command to get status for php70-php-fpm service with command shortcut = `fpm70status`
 
 ![](images/phpinfo-7.1.5-01.png)
 
