@@ -59,7 +59,7 @@ for p in $PHPBIN; do
   TIMECS=$(echo $TOTAL | awk '/maxmem:/ {print $0}' $PHPBENCHLOG | awk '{ sum += $13 } END { if (NR > 0) printf "%.2f\n", sum / NR }' )
   echo 
   
-  echo "$p"
+  echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
   echo -e "bench.php results from $RUNS runs\n$TOTAL"
   echo
   echo "bench.php avg: $AVG"
@@ -87,7 +87,7 @@ for p in $PHPBIN; do
   MTIMECS=$(echo $TOTAL | awk '/maxmem:/ {print $0}' $PHPMICROBENCHLOG | awk '{ sum += $13 } END { if (NR > 0) printf "%.2f\n", sum / NR }' )
   echo 
   
-  echo "$p"
+  echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
   echo -e "micro_bench.php results from $RUNS runs\n$MTOTAL"
   echo
   echo "micro_bench.php avg: $MAVG"
