@@ -2,6 +2,8 @@
 
 Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher support for multiple PHP-FPM versions utilising [Remi Yum Repository's SCL](https://blog.remirepo.net/post/2017/05/11/PHP-version-7.0.19-and-7.1.5) `php71` version to work side by side concurrently with Centmin Mod's default PHP-FPM version. This Remi SCL based PHP 7.1 branch version will not be able to support advanced optimisations like Centmin Mod 123.09beta01's source compiled PHP 7.x versions which support optionally, [Profile Guide Optimisations](https://community.centminmod.com/threads/added-profile-guided-optimizations-to-boost-php-7-performance.8961/) to boost PHP 7 performance by another 3-17% or Intel cpu specific optimised PHP compilations.
 
+## PHP 7.1
+
 This PHP-FPM 7.1 branch version `php71.sh`:
 
 * CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
@@ -18,6 +20,8 @@ This PHP-FPM 7.1 branch version `php71.sh`:
 * `systemctl stop php71-php-fpm` command to stop php71-php-fpm service with command shortcut = `fpm71stop`
 * `systemctl status php71-php-fpm` command to get status for php71-php-fpm service with command shortcut = `fpm71status`
 
+## PHP 7.0
+
 The PHP-FPM 7.0 branch version `php70.sh`:
 
 * CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
@@ -33,6 +37,8 @@ The PHP-FPM 7.0 branch version `php70.sh`:
 * `systemctl restart php70-php-fpm` command to restart php70-php-fpm service with command shortcut = `fpm70restart`
 * `systemctl stop php70-php-fpm` command to stop php70-php-fpm service with command shortcut = `fpm70stop`
 * `systemctl status php70-php-fpm` command to get status for php70-php-fpm service with command shortcut = `fpm70status`
+
+## PHP 5.6
 
 The PHP-FPM 5.6 branch version `php56.sh` has slightly different paths compared to `php71.sh` and `php70.sh`:
 
