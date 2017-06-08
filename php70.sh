@@ -25,6 +25,14 @@ for g in "" e f; do
     alias ${g}grep="LC_ALL=C ${g}grep"  # speed-up grep, egrep, fgrep
 done
 
+if [[ "$(uname -m)" != 'x86_64' ]]; then
+  echo
+  echo "64bit Only"
+  echo "aborting..."
+  echo
+  exit
+fi
+
 CENTOSVER=$(awk '{ print $3 }' /etc/redhat-release)
 
 if [ ! -d "$CENTMINLOGDIR" ]; then
