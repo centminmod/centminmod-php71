@@ -13,7 +13,7 @@ PHPBENCHLOGFILE="bench_${DT}.log"
 PHPMICROBENCHLOGFILE="bench_micro_${DT}.log"
 PHPBENCHLOG="${PHPBENCHLOGDIR}/${PHPBENCHLOGFILE}"
 PHPMICROBENCHLOG="${PHPBENCHLOGDIR}/${PHPMICROBENCHLOGFILE}"
-BENCHDIR='/svr-setup/php-7.1.5/Zend'
+BENCHDIR='/svr-setup/php-7.1.6/Zend'
 ######################################################
 # functions
 #############
