@@ -47,7 +47,7 @@ The PHP-FPM 5.6 branch version `php56.sh` has slightly different paths compared 
 * custom php.ini settings calculated by centmin mod are placed in `/opt/remi/php56/root/etc/php.d/zzz_customphp.ini`
 * php config scan directory is at `/opt/remi/php56/root/etc/php.d`
 * php-fpm config file at `/opt/remi/php56/root/etc/php-fpm.d/www.conf`
-* error log at `/var/opt/remi/php56/log/php-fpm/www-error.log`
+* error log at `/opt/remi/php56/root/var/log/php-fpm/www-error.log`
 * centmin mod nginx's php include file is at `/usr/local/nginx/conf/php56-remi.conf` instead of default at `/usr/local/nginx/conf/php.conf` which you replace references to in your centmin mod nginx vhost config file
 * `fpmconfphp56` is centmin mod command shortcut to invoke nano linux text editor to edit `/opt/remi/php56/root/etc/php-fpm.d/www.conf`
 * `phpincphp56` is centmin mod command shortcut to invoke nano linux text editor to edit `/usr/local/nginx/conf/php56-remi.conf`

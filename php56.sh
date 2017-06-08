@@ -244,10 +244,10 @@ phpsededit() {
 phpinstall() {
   yum -y install $packages $repoopt
   phpsededit
-  if [ ! -f /var/opt/remi/php56/log/php-fpm/www-error.log ]; then
-    touch /var/opt/remi/php56/log/php-fpm/www-error.log
-    chmod 0666 /var/opt/remi/php56/log/php-fpm/www-error.log
-    chown nginx:nginx /var/opt/remi/php56/log/php-fpm/www-error.log
+  if [ ! -f /opt/remi/php56/root/var/log/php-fpm/www-error.log ]; then
+    touch /opt/remi/php56/root/var/log/php-fpm/www-error.log
+    chmod 0666 /opt/remi/php56/root/var/log/php-fpm/www-error.log
+    chown nginx:nginx /opt/remi/php56/root/var/log/php-fpm/www-error.log
   fi
   if [ ! -f /opt/remi/php56/root/var/log/php-fpm/www-slow.log ]; then
     touch /opt/remi/php56/root/var/log/php-fpm/www-slow.log
@@ -321,9 +321,9 @@ case "$1" in
     fi
     ;;
   phperrors )
-    if [ -f /var/opt/remi/php56/log/php-fpm/www-error.log ]; then
-      echo "tail -100 /var/opt/remi/php56/log/php-fpm/www-error.log"
-      tail -100 /var/opt/remi/php56/log/php-fpm/www-error.log
+    if [ -f /opt/remi/php56/root/var/log/php-fpm/www-error.log ]; then
+      echo "tail -100 /opt/remi/php56/root/var/log/php-fpm/www-error.log"
+      tail -100 /opt/remi/php56/root/var/log/php-fpm/www-error.log
     fi
     ;;
   phpcustom )
