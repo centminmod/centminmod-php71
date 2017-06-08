@@ -318,3 +318,17 @@ php71-php-tidy.x86_64                                                           
 php71-php-xml.x86_64                                                                                                     7.1.5-1.el7.remi                                                                                                            @remi
 php71-php-xmlrpc.x86_64                                                                                                  7.1.5-1.el7.remi                                                                                                            @remi
 ```
+
+Example for php71.sh updating from PHP 7.1.5 to 7.1.6
+
+```
+./php71.sh update
+```
+
+```
+php71 -v
+PHP 7.1.6 (cli) (built: Jun  7 2017 11:02:48) ( NTS )
+Copyright (c) 1997-2017 The PHP Group
+Zend Engine v3.1.0, Copyright (c) 1998-2017 Zend Technologies
+    with Zend OPcache v7.1.6, Copyright (c) 1999-2017, by Zend Technologies
+```
