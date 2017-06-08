@@ -1,6 +1,6 @@
 # Multiple PHP-FPM Versions For Centmin Mod LEMP
 
-Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher support for multiple PHP-FPM versions utilising [Remi Yum Repository's SCL](https://blog.remirepo.net/post/2017/05/11/PHP-version-7.0.19-and-7.1.5) `php71` version to work side by side concurrently with Centmin Mod's default PHP-FPM version. This Remi SCL based PHP 7.1 branch version will not be able to support advanced optimisations like Centmin Mod 123.09beta01's source compiled PHP 7.x versions which support optionally, [Profile Guide Optimisations](https://community.centminmod.com/threads/added-profile-guided-optimizations-to-boost-php-7-performance.8961/) to boost PHP 7 performance by another 3-17% or Intel cpu specific optimised PHP compilations.
+Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher support for multiple PHP-FPM versions utilising [Remi Yum Repository's SCL](https://blog.remirepo.net/post/2017/05/11/PHP-version-7.0.19-and-7.1.5) `php71` version to work side by side concurrently with Centmin Mod's default PHP-FPM version. This Remi SCL based PHP 7.1 branch version will not be able to support advanced optimisations like Centmin Mod 123.09beta01's source compiled PHP 7.x versions which support optionally, [Profile Guide Optimisations](https://community.centminmod.com/threads/added-profile-guided-optimizations-to-boost-php-7-performance.8961/) to boost PHP 7 performance by another 3-17% ([benchmarks](https://community.centminmod.com/threads/addons-php71-sh-multiple-php-fpm-versions-work-preview.11900/#post-50643)) or Intel cpu specific optimised PHP compilations.
 
 ## PHP 7.1
 
@@ -331,4 +331,18 @@ PHP 7.1.6 (cli) (built: Jun  7 2017 11:02:48) ( NTS )
 Copyright (c) 1997-2017 The PHP Group
 Zend Engine v3.1.0, Copyright (c) 1998-2017 Zend Technologies
     with Zend OPcache v7.1.6, Copyright (c) 1999-2017, by Zend Technologies
+```
+
+Example for php70.sh updating from PHP 7.0.19 to 7.0.20
+
+```
+./php70.sh update
+```
+
+```
+php70 -v
+PHP 7.0.20 (cli) (built: Jun  7 2017 06:56:00) ( NTS )
+Copyright (c) 1997-2017 The PHP Group
+Zend Engine v3.0.0, Copyright (c) 1998-2017 Zend Technologies
+    with Zend OPcache v7.0.20, Copyright (c) 1999-2017, by Zend Technologies
 ```
