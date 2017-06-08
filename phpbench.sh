@@ -6,7 +6,7 @@
 # variables
 #############
 DT=$(date +"%d%m%y-%H%M%S")
-RUNS=5
+RUNS=10
 
 PHPBENCHLOGDIR='/home/phpbench_logs'
 PHPBENCHLOGFILE="bench_${DT}.log"
