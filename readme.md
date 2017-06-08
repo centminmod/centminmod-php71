@@ -78,9 +78,26 @@ location /php71 {
 }
 ```
 
+Example for configuring Centmin Mod Nginx vhost to use this custom `php70` version at `/php70` location
+
+```
+location /php70 {
+ include /usr/local/nginx/conf/php70-remi.conf;
+}
+```
+
+Example for configuring Centmin Mod Nginx vhost to use this custom `php56` version at `/php56` location
+
+```
+location /php56 {
+ include /usr/local/nginx/conf/php56-remi.conf;
+}
+```
+
 process listing
 
 ```
+./php71.sh process
 root      6835  0.0  1.4 109280 26972 ?        Ss   14:18   0:00 nginx: master process /usr/local/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
 nginx     6836  0.1  2.7 137952 52420 ?        S<   14:18   0:04  \_ nginx: worker process
 nginx     6837  0.1  2.7 137952 52428 ?        S<   14:18   0:04  \_ nginx: worker process
@@ -98,7 +115,7 @@ nginx     7760  0.0  0.5 768576 10956 ?        S    15:15   0:00  \_ php-fpm: po
 ## Usage
 
     ./php71.sh 
-    ./php71.sh {install|update|list|phpconfig|phperrors|phpcustom|phpini|phpext|start|restart|stop|status}
+    ./php71.sh {install|update|list|phpconfig|phperrors|phpcustom|phpslowlog|phpini|phpext|start|restart|stop|status|process}
 
 ```
 ./php71.sh status
