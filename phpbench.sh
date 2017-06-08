@@ -43,6 +43,7 @@ for p in $PHPBIN; do
  PHPBENCHLOG="${PHPBENCHLOGDIR}/${PHPBENCHLOGFILE}"
  touch "$PHPBENCHLOG"
  for ((i = 0 ; i < $RUNS ; i++)); do
+  echo
   echo "----"
   echo "$p bench.php"
   {
@@ -72,6 +73,7 @@ for p in $PHPBIN; do
  PHPMICROBENCHLOG="${PHPBENCHLOGDIR}/${PHPMICROBENCHLOGFILE}"
  touch $PHPMICROBENCHLOG
  for ((i = 0 ; i < $RUNS ; i++)); do
+  echo
   echo "$p micro_bench.php"
   {
   /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p micro_bench.php
