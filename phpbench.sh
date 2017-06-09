@@ -13,15 +13,30 @@ PHPBENCHLOGFILE="bench_${DT}.log"
 PHPMICROBENCHLOGFILE="bench_micro_${DT}.log"
 PHPBENCHLOG="${PHPBENCHLOGDIR}/${PHPBENCHLOGFILE}"
 PHPMICROBENCHLOG="${PHPBENCHLOGDIR}/${PHPMICROBENCHLOGFILE}"
-BENCHDIR='/svr-setup/php-7.1.6/Zend'
+BENCHDIR='/home/phpbench'
 ######################################################
 # functions
 #############
+if [ ! -d "$BENCHDIR" ]; then
+  mkdir -p $BENCHDIR
+fi
+
 if [ ! -d "$PHPBENCHLOGDIR" ]; then
   mkdir -p $PHPBENCHLOGDIR
 fi
 
+getfiles() {
+  cd "$BENCHDIR"
+  rm -rf bench.php
+  wget -qcnv -O bench.php https://github.com/centminmod/centminmod-php71/raw/master/scripts/bench.php
+  rm -rf micro_bench.php
+  wget -qcnv -O micro_bench.php https://github.com/centminmod/centminmod-php71/raw/master/scripts/micro_bench.php
+  rm -rf mandelbrot.php
+  wget -qcnv -O mandelbrot.php https://github.com/centminmod/centminmod-php71/raw/master/scripts/mandelbrot.php
+}
+
 bench() {
+  getfiles
   cd "$BENCHDIR"
   if [[ -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
     PHPBIN='/usr/local/bin/php /usr/bin/php71 /usr/bin/php70 /usr/bin/php56'
