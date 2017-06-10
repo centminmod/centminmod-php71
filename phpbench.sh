@@ -7,6 +7,7 @@
 #############
 DT=$(date +"%d%m%y-%H%M%S")
 RUNS=10
+SLEEP=5
 
 PHPBENCHLOGDIR='/home/phpbench_logs'
 PHPBENCHLOGFILE="bench_${DT}.log"
@@ -89,6 +90,7 @@ for p in $PHPBIN; do
   echo "bench.php avg: $AVG"
   echo "Avg: real: ${TIMEREAL}s user: ${TIMEUSER}s sys: ${TIMESYS}s cpu: ${TIMECPU}% maxmem: ${TIMEMEM}KB cswaits: ${TIMECS}"
   echo "created results log at $PHPBENCHLOG"
+  sleep "$SLEEP"
   echo
 
  echo -e "\n$(date)" >> $PHPMICROBENCHLOG
@@ -118,6 +120,7 @@ for p in $PHPBIN; do
   echo "micro_bench.php avg: $MAVG"
   echo "Avg: real: ${MTIMEREAL}s user: ${MTIMEUSER}s sys: ${MTIMESYS}s cpu: ${MTIMECPU}% maxmem: ${MTIMEMEM}KB cswaits: ${MTIMECS}"
   echo "created results log at $PHPMICROBENCHLOG"
+  sleep "$SLEEP"
   echo
 
  if [[ "$DETAILBENCH" = [yY] ]]; then
@@ -276,6 +279,7 @@ for p in $PHPBIN; do
     echo "detailed_benchmark.php total avg: $DBAVG"
     echo "Avg: real: ${DBTIMEREAL}s user: ${DBTIMEUSER}s sys: ${DBTIMESYS}s cpu: ${DBTIMECPU}% maxmem: ${DBTIMEMEM}KB cswaits: ${DBTIMECS}"
     echo "created results log at $PHPDETAILBENCHLOG"
+    sleep "$SLEEP"
     echo
   fi
 done
