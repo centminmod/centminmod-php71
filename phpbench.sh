@@ -6,6 +6,7 @@
 # variables
 #############
 DT=$(date +"%d%m%y-%H%M%S")
+VERBOSE='n'
 RUNS=10
 SLEEP=5
 
@@ -18,7 +19,7 @@ PHPMICROBENCHLOG="${PHPBENCHLOGDIR}/${PHPMICROBENCHLOGFILE}"
 PHPDETAILBENCHLOG="${PHPBENCHLOGDIR}/${PHPDETAILBENCHLOGFILE}"
 BENCHDIR='/home/phpbench'
 
-DETAILBENCH='n'
+DETAILBENCH='y'
 ######################################################
 # functions
 #############
@@ -67,12 +68,20 @@ for p in $PHPBIN; do
  PHPBENCHLOG="${PHPBENCHLOGDIR}/${PHPBENCHLOGFILE}"
  touch "$PHPBENCHLOG"
  for ((i = 0 ; i < $RUNS ; i++)); do
-  echo
+  if [[ "$VERBOSE" = [yY] ]]; then
+    echo
+  fi
   echo "----"
-  echo "$p bench.php"
-  {
-  /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p bench.php
-  } 2>&1 | tee -a $PHPBENCHLOG
+  echo "$p bench.php [run: $i]"
+  if [[ "$VERBOSE" = [yY] ]]; then
+    {
+    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p bench.php
+    } 2>&1 | tee -a $PHPBENCHLOG
+  else
+    {
+    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p bench.php
+    } 2>&1 >> $PHPBENCHLOG
+  fi
  done
   TOTAL=$(awk '/Total/ {print $2}' $PHPBENCHLOG)
   AVG=$(awk '/Total/ {print $2}' $PHPBENCHLOG | awk '{ sum += $1 } END { if (NR > 0) printf "%.4f\n", sum / NR }')
@@ -91,18 +100,28 @@ for p in $PHPBIN; do
   echo "Avg: real: ${TIMEREAL}s user: ${TIMEUSER}s sys: ${TIMESYS}s cpu: ${TIMECPU}% maxmem: ${TIMEMEM}KB cswaits: ${TIMECS}"
   echo "created results log at $PHPBENCHLOG"
   sleep "$SLEEP"
-  echo
+  # if [[ "$VERBOSE" = [yY] ]]; then
+    echo
+  # fi
 
  echo -e "\n$(date)" >> $PHPMICROBENCHLOG
  PHPMICROBENCHLOGFILE="bench_micro_${DT}.log"
  PHPMICROBENCHLOG="${PHPBENCHLOGDIR}/${PHPMICROBENCHLOGFILE}"
  touch $PHPMICROBENCHLOG
  for ((i = 0 ; i < $RUNS ; i++)); do
-  echo
-  echo "$p micro_bench.php"
-  {
-  /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p micro_bench.php
-  } 2>&1 | tee -a $PHPMICROBENCHLOG
+  if [[ "$VERBOSE" = [yY] ]]; then
+    echo
+  fi
+  echo "$p micro_bench.php [run: $i]"
+  if [[ "$VERBOSE" = [yY] ]]; then
+    {
+    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p micro_bench.php
+    } 2>&1 | tee -a $PHPMICROBENCHLOG
+  else
+    {
+    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p micro_bench.php
+    } 2>&1 >> $PHPMICROBENCHLOG
+  fi
  done
   MTOTAL=$(awk '/Total/ {print $2}' $PHPMICROBENCHLOG)
   MAVG=$(awk '/Total/ {print $2}' $PHPMICROBENCHLOG | awk '{ sum += $1 } END { if (NR > 0) printf "%.4f\n", sum / NR }')
@@ -121,7 +140,9 @@ for p in $PHPBIN; do
   echo "Avg: real: ${MTIMEREAL}s user: ${MTIMEUSER}s sys: ${MTIMESYS}s cpu: ${MTIMECPU}% maxmem: ${MTIMEMEM}KB cswaits: ${MTIMECS}"
   echo "created results log at $PHPMICROBENCHLOG"
   sleep "$SLEEP"
-  echo
+  # if [[ "$VERBOSE" = [yY] ]]; then
+    echo
+  # fi
 
  if [[ "$DETAILBENCH" = [yY] ]]; then
   echo -e "\n$(date)" >> $PHPDETAILBENCHLOG
@@ -129,11 +150,19 @@ for p in $PHPBIN; do
   PHPDETAILBENCHLOG="${PHPBENCHLOGDIR}/${PHPDETAILBENCHLOGFILE}"
   touch $PHPDETAILBENCHLOG
   for ((i = 0 ; i < $RUNS ; i++)); do
-    echo
-    echo "$p detailed_benchmark.php"
-    {
-    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p detailed_benchmark.php 2>&1 | egrep -v 'Undefined' |sed -e 's|<pre>||' -e 's|</pre>||'| egrep ' sec|real:'
-    } 2>&1 | tee -a $PHPDETAILBENCHLOG
+    if [[ "$VERBOSE" = [yY] ]]; then
+      echo
+    fi
+    echo "$p detailed_benchmark.php [run: $i]"
+    if [[ "$VERBOSE" = [yY] ]]; then
+      {
+      /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p detailed_benchmark.php 2>&1 | egrep -v 'Undefined' |sed -e 's|<pre>||' -e 's|</pre>||'| egrep ' sec|real:'
+      } 2>&1 | tee -a $PHPDETAILBENCHLOG
+    else
+      {
+      /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p detailed_benchmark.php 2>&1 | egrep -v 'Undefined' |sed -e 's|<pre>||' -e 's|</pre>||'| egrep ' sec|real:'
+      } 2>&1 >> $PHPDETAILBENCHLOG
+    fi
   done
     DBTOTAL=$(awk '/Total/ {print $3}' $PHPDETAILBENCHLOG)
     DBAVG=$(awk '/Total/ {print $3}' $PHPDETAILBENCHLOG | awk '{ sum += $1 } END { if (NR > 0) printf "%.4f\n", sum / NR }')
@@ -228,7 +257,9 @@ for p in $PHPBIN; do
     DBTIMECPU=$(echo $DBTOTAL | awk '/maxmem:/ {print $0}' $PHPDETAILBENCHLOG | awk '{ sum += $8 } END { if (NR > 0) printf "%.2f\n", sum / NR }' )
     DBTIMEMEM=$(echo $DBTOTAL | awk '/maxmem:/ {print $0}' $PHPDETAILBENCHLOG | awk '{ sum += $10 } END { if (NR > 0) printf "%.2f\n", sum / NR }' )
     DBTIMECS=$(echo $DBTOTAL | awk '/maxmem:/ {print $0}' $PHPDETAILBENCHLOG | awk '{ sum += $13 } END { if (NR > 0) printf "%.2f\n", sum / NR }' )
-    echo 
+    if [[ "$VERBOSE" = [yY] ]]; then
+      echo 
+    fi
     
     echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
     echo -e "detailed_benchmark.php results from $RUNS runs"
@@ -280,7 +311,9 @@ for p in $PHPBIN; do
     echo "Avg: real: ${DBTIMEREAL}s user: ${DBTIMEUSER}s sys: ${DBTIMESYS}s cpu: ${DBTIMECPU}% maxmem: ${DBTIMEMEM}KB cswaits: ${DBTIMECS}"
     echo "created results log at $PHPDETAILBENCHLOG"
     sleep "$SLEEP"
-    echo
+    # if [[ "$VERBOSE" = [yY] ]]; then
+    #   echo
+    # fi
   fi
 done
 }
