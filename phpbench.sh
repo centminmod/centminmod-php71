@@ -332,6 +332,10 @@ echo
 egrep '\[PHP|bench.php avg :|micro_bench.php avg :|detailed_benchmark.php total avg :' "${PHPBENCHLOGDIR}/phpbench-summary-${DT}.log"
 echo
 
+echo "PHP Version|bench.php|micro_bench.php|detailed_benchmark.php"
+egrep 'bench.php avg :|micro_bench.php avg :|detailed_benchmark.php total avg :' "${PHPBENCHLOGDIR}/phpbench-summary-${DT}.log"| sed -e 's|:|\||g'
+echo
+
 V=$(egrep '\[PHP|bench.php avg :|micro_bench.php avg :|detailed_benchmark.php total avg :' "${PHPBENCHLOGDIR}/phpbench-summary-${DT}.log" | awk -F " : " '/avg : / {print $3}')
 echo "|bench.php|micro_bench.php|detailed_benchmark.php"
 echo $V | xargs -n3 | while read x y z; do echo "|$x|$y|$z"; done
