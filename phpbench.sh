@@ -1,14 +1,17 @@
 #!/bin/bash
 ######################################################
-# bench.php and micro_bench.php script for PHP 7.1.5
+# bench.php and micro_bench.php script for PHP 7.1.6, 
+# 7.0.20, 5.6.30, 7.2.0 etc
 # written by George Liu (eva2000) centminmod.com
 ######################################################
 # variables
 #############
+VERSION='0.1'
 DT=$(date +"%d%m%y-%H%M%S")
 VERBOSE='n'
-RUNS=10
-SLEEP=5
+OPCACHECLI='n'
+RUNS=3
+SLEEP=3
 
 PHPBENCHLOGDIR='/home/phpbench_logs'
 PHPBENCHLOGFILE="bench_${DT}.log"
@@ -29,6 +32,12 @@ fi
 
 if [ ! -d "$PHPBENCHLOGDIR" ]; then
   mkdir -p $PHPBENCHLOGDIR
+fi
+
+if [[ "$OPCACHECLI" = [yY] ]]; then
+  OPCLI='-d opcache.enable_cli=1'
+else
+  OPCLI='-d opcache.enable_cli=0'
 fi
 
 getfiles() {
@@ -80,11 +89,11 @@ for p in $PHPBIN; do
   echo "$p bench.php [run: $i]"
   if [[ "$VERBOSE" = [yY] ]]; then
     {
-    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p bench.php
+    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI bench.php
     } 2>&1 | tee -a $PHPBENCHLOG
   else
     {
-    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p bench.php
+    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI bench.php
     } 2>&1 >> $PHPBENCHLOG
   fi
  done
@@ -120,11 +129,11 @@ for p in $PHPBIN; do
   echo "$p micro_bench.php [run: $i]"
   if [[ "$VERBOSE" = [yY] ]]; then
     {
-    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p micro_bench.php
+    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI micro_bench.php
     } 2>&1 | tee -a $PHPMICROBENCHLOG
   else
     {
-    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p micro_bench.php
+    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI micro_bench.php
     } 2>&1 >> $PHPMICROBENCHLOG
   fi
  done
@@ -161,11 +170,11 @@ for p in $PHPBIN; do
     echo "$p detailed_benchmark.php [run: $i]"
     if [[ "$VERBOSE" = [yY] ]]; then
       {
-      /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p detailed_benchmark.php 2>&1 | egrep -v 'Undefined' |sed -e 's|<pre>||' -e 's|</pre>||'| egrep ' sec|real:'
+      /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI detailed_benchmark.php 2>&1 | egrep -v 'Undefined' |sed -e 's|<pre>||' -e 's|</pre>||'| egrep ' sec|real:'
       } 2>&1 | tee -a $PHPDETAILBENCHLOG
     else
       {
-      /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p detailed_benchmark.php 2>&1 | egrep -v 'Undefined' |sed -e 's|<pre>||' -e 's|</pre>||'| egrep ' sec|real:'
+      /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI detailed_benchmark.php 2>&1 | egrep -v 'Undefined' |sed -e 's|<pre>||' -e 's|</pre>||'| egrep ' sec|real:'
       } 2>&1 >> $PHPDETAILBENCHLOG
     fi
   done
