@@ -62,6 +62,11 @@ bench() {
     PHPBIN='/usr/local/bin/php'
   fi
 for p in $PHPBIN; do
+ if [[ "$p" = '/usr/local/bin/php' ]]; then
+  DESC='centminmod.com php-fpm'
+ else
+  DESC='remi scl php-fpm'
+ fi
  DT=$(date +"%d%m%y-%H%M%S")
  echo -e "\n$(date)" >> $PHPBENCHLOG
  PHPBENCHLOGFILE="bench_${DT}.log"
@@ -96,7 +101,7 @@ for p in $PHPBIN; do
   echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
   echo -e "bench.php results from $RUNS runs\n$TOTAL"
   echo
-  echo "bench.php avg: $AVG"
+  echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : bench.php avg : $AVG"
   echo "Avg: real: ${TIMEREAL}s user: ${TIMEUSER}s sys: ${TIMESYS}s cpu: ${TIMECPU}% maxmem: ${TIMEMEM}KB cswaits: ${TIMECS}"
   echo "created results log at $PHPBENCHLOG"
   sleep "$SLEEP"
@@ -136,7 +141,7 @@ for p in $PHPBIN; do
   echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
   echo -e "micro_bench.php results from $RUNS runs\n$MTOTAL"
   echo
-  echo "micro_bench.php avg: $MAVG"
+  echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : micro_bench.php avg : $MAVG"
   echo "Avg: real: ${MTIMEREAL}s user: ${MTIMEUSER}s sys: ${MTIMESYS}s cpu: ${MTIMECPU}% maxmem: ${MTIMEMEM}KB cswaits: ${MTIMECS}"
   echo "created results log at $PHPMICROBENCHLOG"
   sleep "$SLEEP"
@@ -307,7 +312,7 @@ for p in $PHPBIN; do
     echo -e "addslashes\t\t\t$DB_ADDSLASHESAVG"
     echo -e "stripslashes\t\t\t$DB_STRIPSLASHESAVG"
     echo
-    echo "detailed_benchmark.php total avg: $DBAVG"
+    echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : detailed_benchmark.php total avg : $DBAVG"
     echo "Avg: real: ${DBTIMEREAL}s user: ${DBTIMEUSER}s sys: ${DBTIMESYS}s cpu: ${DBTIMECPU}% maxmem: ${DBTIMEMEM}KB cswaits: ${DBTIMECS}"
     echo "created results log at $PHPDETAILBENCHLOG"
     sleep "$SLEEP"
@@ -319,5 +324,15 @@ done
 }
 
 ######################################################
-
+{
 bench
+} 2>&1 | tee -a "${PHPBENCHLOGDIR}/phpbench-summary-${DT}.log"
+
+echo
+egrep '\[PHP|bench.php avg :|micro_bench.php avg :|detailed_benchmark.php total avg :' "${PHPBENCHLOGDIR}/phpbench-summary-${DT}.log"
+echo
+
+V=$(egrep '\[PHP|bench.php avg :|micro_bench.php avg :|detailed_benchmark.php total avg :' "${PHPBENCHLOGDIR}/phpbench-summary-${DT}.log" | awk -F " : " '/avg : / {print $3}')
+echo "|bench.php|micro_bench.php|detailed_benchmark.php"
+echo $V | xargs -n3 | while read x y z; do echo "|$x|$y|$z"; done
+echo
