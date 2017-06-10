@@ -56,6 +56,25 @@ The PHP-FPM 5.6 branch version `php56.sh` has slightly different paths compared 
 * `systemctl stop php56-php-fpm` command to stop php56-php-fpm service with command shortcut = `fpm56stop`
 * `systemctl status php56-php-fpm` command to get status for php56-php-fpm service with command shortcut = `fpm56status`
 
+## PHP 7.2 Alpha
+
+This PHP-FPM 7.2 branch version `php72.sh`:
+
+* Currently, following PHP extensions, json-post, mailparse, memcache and memcached aren't available yet in Remi SCL php72 YUM repo
+* CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
+* listens on port `10000` instead of `9000` with php-fpm pool named `php72-www`
+* custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php72/php.d/zzz_customphp.ini`
+* php config scan directory is at `/etc/opt/remi/php72/php.d`
+* php-fpm config file at `/etc/opt/remi/php72/php-fpm.d/www.conf`
+* error log at `/var/opt/remi/php72/log/php-fpm/www-error.log`
+* centmin mod nginx's php include file is at `/usr/local/nginx/conf/php72-remi.conf` instead of default at `/usr/local/nginx/conf/php.conf` which you replace references to in your centmin mod nginx vhost config file
+* `fpmconfphp72` is centmin mod command shortcut to invoke nano linux text editor to edit `/etc/opt/remi/php72/php-fpm.d/www.conf`
+* `phpincphp72` is centmin mod command shortcut to invoke nano linux text editor to edit `/usr/local/nginx/conf/php72-remi.conf`
+* `systemctl start php72-php-fpm` command to start php72-php-fpm service with command shortcut = `fpm72start`
+* `systemctl restart php72-php-fpm` command to restart php72-php-fpm service with command shortcut = `fpm72restart`
+* `systemctl stop php72-php-fpm` command to stop php72-php-fpm service with command shortcut = `fpm72stop`
+* `systemctl status php72-php-fpm` command to get status for php72-php-fpm service with command shortcut = `fpm72status`
+
 ![](images/phpinfo-7.1.5-01.png)
 
 ## Example
