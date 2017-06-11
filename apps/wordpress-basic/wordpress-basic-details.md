@@ -96,6 +96,7 @@ wp plugin status --allow-root
 ## Remove Wordpress Install
 
 ```
+echo y | mysqladmin drop wp4206978db_9407
 rm -rf /home/wpdemo-temp
 rm -rf /usr/local/nginx/conf/conf.d/domain.com.conf
 rm -rf /usr/local/nginx/conf/conf.d/domain.com.ssl.conf
