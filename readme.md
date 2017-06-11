@@ -34,7 +34,7 @@ Blitz.io 1000 user load test from Virginia Region to OVH MC-32 BHS, Canada
 |PHP 7.2.0alpha1 centminmod.com php-fpm + PGO|23047|384.12|580|33187680|215ms|115ms|654ms
 |PHP 7.2.0alpha1 remi scl php-fpm|21968|366.13|541|31633920|260ms|115ms|809ms
 |PHP 7.1.6 remi scl php-fpm|21687|361.45|527|31229280|273ms|116ms|845ms
-|PHP 7.0.20 remi scl php-fpm|21886|374.77|531|31515840|264ms|116ms|819ms
+|PHP 7.0.20 remi scl php-fpm|21886|364.77|531|31515840|264ms|116ms|819ms
 |PHP 5.6.30 remi scl php-fpm|11192|186.53|219|16116480|1307ms|127ms|3238ms
 
 
