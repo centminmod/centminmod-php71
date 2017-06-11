@@ -2,6 +2,21 @@
 
 Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher support for multiple PHP-FPM versions utilising [Remi Yum Repository's SCL](https://blog.remirepo.net/post/2017/05/11/PHP-version-7.0.19-and-7.1.5) `php71` version to work side by side concurrently with Centmin Mod's default PHP-FPM version. This Remi SCL based PHP 7.1 branch version will not be able to support advanced optimisations like Centmin Mod 123.09beta01's source compiled PHP 7.x versions which support optionally, [Profile Guide Optimisations](https://community.centminmod.com/threads/added-profile-guided-optimizations-to-boost-php-7-performance.8961/) to boost PHP 7 performance by another 3-17% ([benchmarks](https://community.centminmod.com/threads/addons-php71-sh-multiple-php-fpm-versions-work-preview.11900/#post-50643)) or Intel cpu specific optimised PHP compilations.
 
+## Compare Centmin Mod PHP-FPM vs Remi SCL PHP-FPM
+
+Benchmark comparison for [Centmin Mod 123.09beta01](https://centminmod.com/changelog.html#123eva200009) branch's PHP-FPM source installs with and without [Profile Guide Optimisations](https://community.centminmod.com/threads/added-profile-guided-optimizations-to-boost-php-7-performance.8961/).
+
+|PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
+|--- | --- |--- | ---
+|PHP 7.2.0alpha1 centminmod.com php-fpm + PGO|0.3852|2.1047|1.7820
+|PHP 7.2.0alpha1 centminmod.com php-fpm + No PGO|0.3888|2.2572|1.7793
+|PHP 7.1.6 centminmod.com php-fpm + No PGO|0.4069|2.2363|1.9149
+|PHP 7.1.6 centminmod.com php-fpm + PGO|0.4135|2.2365|1.9436
+|PHP 7.2.0alpha1 remi scl php-fpm|0.3942|2.2707|1.9384
+|PHP 7.1.6 remi scl php-fpm|0.4148|2.3908|2.0900
+|PHP 7.0.20 remi scl php-fpm|0.4330|2.2682|2.1270
+|PHP 5.6.30 remi scl php-fpm|1.2167|5.8848|4.1424
+
 ## PHP 7.1
 
 This PHP-FPM 7.1 branch version `php71.sh`:
