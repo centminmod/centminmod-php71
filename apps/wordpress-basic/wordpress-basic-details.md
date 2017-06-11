@@ -79,6 +79,26 @@ nprestart
 curl -sI http://domain.com
 ```
 
+## Setup Wordpress Nginx Vhost
+
+Switching base Wordpress install from HTTP to HTTPS with self-signed SSL certificate
+
+```
+cd /home/nginx/domains/domain.com/public
+wp option update home 'https://domain.com' --allow-root
+wp option update siteurl 'https://domain.com' --allow-root
+wp search-replace 'http://domain.com' 'https://domain.com' --skip-columns=guid --allow-root
+```
+
+Switch back from HTTPS to HTTP
+
+```
+cd /home/nginx/domains/domain.com/public
+wp option update home 'http://domain.com' --allow-root
+wp option update siteurl 'http://domain.com' --allow-root
+wp search-replace 'https://domain.com' 'http://domain.com' --skip-columns=guid --allow-root
+```
+
 ## Disable Centmin Mod 123.09beta01's installed Wordpress Plugins
 
 ```
