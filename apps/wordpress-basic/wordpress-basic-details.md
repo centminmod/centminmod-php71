@@ -79,7 +79,7 @@ nprestart
 curl -sI http://domain.com
 ```
 
-## Setup Wordpress Nginx Vhost
+## Switch To/From HTTPS
 
 Switching base Wordpress install from HTTP to HTTPS with self-signed SSL certificate
 
