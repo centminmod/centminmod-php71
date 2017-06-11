@@ -6,6 +6,16 @@ Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher suppor
 
 Benchmark comparison for [Centmin Mod 123.09beta01](https://centminmod.com/changelog.html#123eva200009) branch's PHP-FPM source installs with and without [Profile Guide Optimisations](https://community.centminmod.com/threads/added-profile-guided-optimizations-to-boost-php-7-performance.8961/).
 
+Syetem:
+
+* OVH MC-32 Intel Core i7 4790K
+* 32GB Memory
+* 2x240GB SSD
+* 250Mbit Network Bandwidth
+* CentOS 7.3 64bit
+* Centmin Mod 123.09beta01 LEMP stack - Nginx 1.13.1, MariaDB 10.1.24 MySQL, + CSF Firewall
+* BHS, Canada
+
 |PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
 |--- | --- |--- | ---
 |PHP 7.2.0alpha1 centminmod.com php-fpm + PGO|0.3852|2.1047|1.7820
@@ -16,6 +26,17 @@ Benchmark comparison for [Centmin Mod 123.09beta01](https://centminmod.com/chang
 |PHP 7.1.6 remi scl php-fpm|0.4148|2.3908|2.0900
 |PHP 7.0.20 remi scl php-fpm|0.4330|2.2682|2.1270
 |PHP 5.6.30 remi scl php-fpm|1.2167|5.8848|4.1424
+
+Blitz.io 1000 user load test from Virginia Region to OVH MC-32 BHS, Canada
+
+|PHP Version|requests|requests/s|peak requests/s|requests/day|avg resp time|min resp time|max resp time
+|--- | --- |--- | ---| --- |--- | --- | ---
+|PHP 7.2.0alpha1 centminmod.com php-fpm + PGO|23047|384.12|580|33187680|215ms|115ms|654ms
+|PHP 7.2.0alpha1 remi scl php-fpm|21968|366.13|541|31633920|260ms|115ms|809ms
+|PHP 7.1.6 remi scl php-fpm|21687|361.45|527|31229280|273ms|116ms|845ms
+|PHP 7.0.20 remi scl php-fpm|21886|374.77|531|31515840|264ms|116ms|819ms
+|PHP 5.6.30 remi scl php-fpm|11192|186.53|219|16116480|1307ms|127ms|3238ms
+
 
 ## PHP 7.1
 

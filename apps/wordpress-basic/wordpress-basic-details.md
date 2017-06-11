@@ -87,6 +87,8 @@ Switching base Wordpress install from HTTP to HTTPS with self-signed SSL certifi
 cd /home/nginx/domains/domain.com/public
 wp option update home 'https://domain.com' --allow-root
 wp option update siteurl 'https://domain.com' --allow-root
+wp option get siteurl --allow-root
+wp option get home --allow-root
 wp search-replace 'http://domain.com' 'https://domain.com' --skip-columns=guid --allow-root
 ```
 
@@ -96,6 +98,8 @@ Switch back from HTTPS to HTTP
 cd /home/nginx/domains/domain.com/public
 wp option update home 'http://domain.com' --allow-root
 wp option update siteurl 'http://domain.com' --allow-root
+wp option get siteurl --allow-root
+wp option get home --allow-root
 wp search-replace 'https://domain.com' 'http://domain.com' --skip-columns=guid --allow-root
 ```
 
@@ -129,3 +133,20 @@ rm -rf /usr/local/nginx/conf/wpincludes/domain.com/rediscache_domain.com.conf
 rm -rf /usr/local/nginx/conf/wpincludes/domain.com/wpcacheenabler_domain.com.conf
 nprestart
 ```
+
+## Test Parameters
+
+HTTP Test urls
+
+* http://domain.com/
+* http://domain.com/1/hello-world/
+* http://domain.com/date/2017/06/
+* http://domain.com/category/uncategorized/
+
+HTTPS Test urls
+
+* https://domain.com/
+* https://domain.com/1/hello-world/
+* https://domain.com/date/2017/06/
+* https://domain.com/category/uncategorized/
+
