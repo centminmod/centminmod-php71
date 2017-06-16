@@ -6,7 +6,7 @@ Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher suppor
 
 Benchmark comparison for [Centmin Mod 123.09beta01](https://centminmod.com/changelog.html#123eva200009) branch's PHP-FPM source installs with and without [Profile Guide Optimisations](https://community.centminmod.com/threads/added-profile-guided-optimizations-to-boost-php-7-performance.8961/).
 
-Syetem:
+System:
 
 * OVH MC-32 Intel Core i7 4790K
 * 32GB Memory
