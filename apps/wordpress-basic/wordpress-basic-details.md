@@ -32,10 +32,21 @@ Wordpress Admin Email: email@domain.com
 Wordpress Admin Display Name: wpdemo-admin
 ```
 
-# Manual Setup
+# Manual Setup or Quick Setup
 
 
-## Setup MySQL Database
+## Quick Setup
+
+
+```
+mkdir -p /root/tools
+cd /root/tools
+wget -O wpbasic-setup.sh https://github.com/centminmod/centminmod-php71/raw/master/apps/wordpress-basic/wpbasic-setup.sh
+chmod +x wpbasic-setup.sh
+./wpbasic-setup.sh
+```
+
+## Manual Setup MySQL Database
 
 ```
 mysqladmin create wp4206978db_9407
@@ -43,7 +54,7 @@ mysql -e "CREATE USER wpdb9407u4894@'localhost' IDENTIFIED BY 'wpdbsFsQFdauRq4Jz
 mysql -e "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, LOCK TABLES, CREATE TEMPORARY TABLES ON wp4206978db_9407.* TO wpdb9407u4894@'localhost'; FLUSH PRIVILEGES;"
 ```
 
-## Setup Wordpress Nginx Vhost
+## Manual Setup Wordpress Nginx Vhost
 
 ```
 vhostname=domain.com
