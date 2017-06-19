@@ -247,6 +247,10 @@ phpsededit() {
       sed -i "s|opcache.memory_consumption=.*|opcache.memory_consumption=$ZOLIMIT|" "${CONFIGSCANDIR}/20-opcache.ini"
     fi
     # opcachehugepages
+    if [ -f /opt/remi/php56/root/etc/php-fpm.d/www.conf ]; then
+      sed -i 's|pm.max_children = .*|pm.max_children = 20|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
+      sed -i 's|pm.max_spare_servers = .*|pm.max_spare_servers = 15|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
+    fi
 }
 
 phpinstall() {
