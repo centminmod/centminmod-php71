@@ -44,6 +44,7 @@ This PHP-FPM 7.1 branch version `php71.sh`:
 
 * CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
 * listens on port `9900` instead of `9000` with php-fpm pool named `php71-www`
+* php-fpm status path = `/php71status`
 * custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php71/php.d/zzz_customphp.ini`
 * php config scan directory is at `/etc/opt/remi/php71/php.d`
 * php-fpm config file at `/etc/opt/remi/php71/php-fpm.d/www.conf`
@@ -62,6 +63,7 @@ The PHP-FPM 7.0 branch version `php70.sh`:
 
 * CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
 * listens on port `9800` instead of `9000` with php-fpm pool named `php70-www`
+* php-fpm status path = `/php70status`
 * custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php70/php.d/zzz_customphp.ini`
 * php config scan directory is at `/etc/opt/remi/php70/php.d`
 * php-fpm config file at `/etc/opt/remi/php70/php-fpm.d/www.conf`
@@ -80,6 +82,7 @@ The PHP-FPM 5.6 branch version `php56.sh` has slightly different paths compared 
 
 * CentOS 7 transparent hugepages support for Zend Opcache is disabled as PHP <7 doesn't support it in Zend Opcache
 * listens on port `9700` instead of `9000` with php-fpm pool named `php56-www`
+* php-fpm status path = `/php56status`
 * custom php.ini settings calculated by centmin mod are placed in `/opt/remi/php56/root/etc/php.d/zzz_customphp.ini`
 * php config scan directory is at `/opt/remi/php56/root/etc/php.d`
 * php-fpm config file at `/opt/remi/php56/root/etc/php-fpm.d/www.conf`
@@ -99,6 +102,7 @@ This PHP-FPM 7.2 branch version `php72.sh`:
 * Currently, following PHP extensions, json-post, mailparse, memcache and memcached aren't available yet in Remi SCL php72 YUM repo
 * CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
 * listens on port `10000` instead of `9000` with php-fpm pool named `php72-www`
+* php-fpm status path = `/php72status`
 * custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php72/php.d/zzz_customphp.ini`
 * php config scan directory is at `/etc/opt/remi/php72/php.d`
 * php-fpm config file at `/etc/opt/remi/php72/php-fpm.d/www.conf`
