@@ -18,10 +18,12 @@ System:
 
 |PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
 |--- | --- |--- | ---
-|PHP 7.2.0alpha1 centminmod.com php-fpm + PGO|0.3852|2.1047|1.7820
-|PHP 7.2.0alpha1 centminmod.com php-fpm + No PGO|0.3888|2.2572|1.7793
-|PHP 7.1.6 centminmod.com php-fpm + No PGO|0.4069|2.2363|1.9149
-|PHP 7.1.6 centminmod.com php-fpm + PGO|0.4135|2.2365|1.9436
+|PHP 7.2.0alpha2 centminmod php-fpm + PGO |0.3947|2.0503|1.7457
+|PHP 7.2.0alpha2 centminmod php-fpm + No PGO|0.3973|2.1437|1.7540
+|PHP 7.2.0alpha1 centminmod php-fpm + PGO|0.3852|2.1047|1.7820
+|PHP 7.2.0alpha1 centminmod php-fpm + No PGO|0.3888|2.2572|1.7793
+|PHP 7.1.6 centminmod php-fpm + No PGO|0.4069|2.2363|1.9149
+|PHP 7.1.6 centminmod php-fpm + PGO|0.4135|2.2365|1.9436
 |PHP 7.2.0alpha1 remi scl php-fpm|0.3942|2.2707|1.9384
 |PHP 7.1.6 remi scl php-fpm|0.4148|2.3908|2.0900
 |PHP 7.0.20 remi scl php-fpm|0.4330|2.2682|2.1270
@@ -31,7 +33,7 @@ Blitz.io 1000 user load test from Virginia Region to OVH MC-32 BHS, Canada
 
 |PHP Version|requests|requests/s|peak requests/s|requests/day|avg resp time|min resp time|max resp time
 |--- | --- |--- | ---| --- |--- | --- | ---
-|PHP 7.2.0alpha1 centminmod.com php-fpm + PGO|23047|384.12|580|33187680|215ms|115ms|654ms
+|PHP 7.2.0alpha1 centminmod php-fpm + PGO|23047|384.12|580|33187680|215ms|115ms|654ms
 |PHP 7.2.0alpha1 remi scl php-fpm|21968|366.13|541|31633920|260ms|115ms|809ms
 |PHP 7.1.6 remi scl php-fpm|21687|361.45|527|31229280|273ms|116ms|845ms
 |PHP 7.0.20 remi scl php-fpm|21886|364.77|531|31515840|264ms|116ms|819ms
