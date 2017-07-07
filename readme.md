@@ -18,15 +18,28 @@ System:
 
 |PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
 |--- | --- |--- | ---
+|PHP 7.2.0alpha3 centminmod php-fpm + PGO |0.3850|2.0483|1.7543
+|PHP 7.2.0alpha3 centminmod php-fpm + no PGO |0.3877|2.2887|1.7613
 |PHP 7.2.0alpha2 centminmod php-fpm + PGO |0.3947|2.0503|1.7457
 |PHP 7.2.0alpha2 centminmod php-fpm + No PGO|0.3973|2.1437|1.7540
 |PHP 7.2.0alpha1 centminmod php-fpm + PGO|0.3852|2.1047|1.7820
 |PHP 7.2.0alpha1 centminmod php-fpm + No PGO|0.3888|2.2572|1.7793
+|PHP 7.1.7 centminmod php-fpm + PGO|0.4093|2.3673|1.9413
+|PHP 7.1.7 centminmod php-fpm + No PGO|0.4080|2.2580|1.9337
 |PHP 7.1.6 centminmod php-fpm + No PGO|0.4069|2.2363|1.9149
 |PHP 7.1.6 centminmod php-fpm + PGO|0.4135|2.2365|1.9436
+|PHP 7.0.21 centminmod php-fpm + PGO|0.4150|2.2337|2.0093
+|PHP 7.0.21 centminmod php-fpm + No PGO|0.4280|2.2863|1.9980
+|PHP 5.6.31 centminmod php-fpm |1.1470|5.5567|3.9703
+|PHP 5.6.30 centminmod php-fpm |1.1510|5.6733|3.9657
+|PHP 7.2.0alpha3 remi scl php-fpm |0.3853|2.1760|1.9057
+|PHP 7.2.0alpha2 remi scl php-fpm |0.3920|2.1953|1.9090
 |PHP 7.2.0alpha1 remi scl php-fpm|0.3942|2.2707|1.9384
+|PHP 7.1.7 remi scl php-fpm |0.4113|2.3783|2.1077
 |PHP 7.1.6 remi scl php-fpm|0.4148|2.3908|2.0900
+|PHP 7.0.21 remi scl php-fpm |0.4327|2.2907|2.1277
 |PHP 7.0.20 remi scl php-fpm|0.4330|2.2682|2.1270
+|PHP 5.6.31 remi scl php-fpm |1.1567|5.6847|4.0327
 |PHP 5.6.30 remi scl php-fpm|1.2167|5.8848|4.1424
 
 Blitz.io 1000 user load test from Virginia Region to OVH MC-32 BHS, Canada
