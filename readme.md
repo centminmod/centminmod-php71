@@ -18,6 +18,8 @@ System:
 
 |PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
 |--- | --- |--- | ---
+|PHP 7.2.0beta1 centminmod php-fpm + PGO |0.3877|2.0783|1.7167
+|PHP 7.2.0beta1 centminmod php-fpm + no PGO |0.3890|2.2053|1.7843
 |PHP 7.2.0alpha3 centminmod php-fpm + PGO |0.3850|2.0483|1.7543
 |PHP 7.2.0alpha3 centminmod php-fpm + no PGO |0.3877|2.2887|1.7613
 |PHP 7.2.0alpha2 centminmod php-fpm + PGO |0.3947|2.0503|1.7457
@@ -32,6 +34,7 @@ System:
 |PHP 7.0.21 centminmod php-fpm + No PGO|0.4280|2.2863|1.9980
 |PHP 5.6.31 centminmod php-fpm |1.1470|5.5567|3.9703
 |PHP 5.6.30 centminmod php-fpm |1.1510|5.6733|3.9657
+|PHP 7.2.0beta1 remi scl php-fpm |0.3957|2.1917|1.9207
 |PHP 7.2.0alpha3 remi scl php-fpm |0.3853|2.1760|1.9057
 |PHP 7.2.0alpha2 remi scl php-fpm |0.3920|2.1953|1.9090
 |PHP 7.2.0alpha1 remi scl php-fpm|0.3942|2.2707|1.9384
