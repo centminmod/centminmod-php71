@@ -13,7 +13,7 @@ System:
 * 2x240GB SSD
 * 250Mbit Network Bandwidth
 * CentOS 7.3 64bit
-* Centmin Mod 123.09beta01 LEMP stack - Nginx 1.13.1, MariaDB 10.1.24 MySQL, + CSF Firewall
+* Centmin Mod 123.09beta01 LEMP stack - Nginx 1.13.3, MariaDB 10.1.24 MySQL, + CSF Firewall
 * BHS, Canada
 
 |PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
