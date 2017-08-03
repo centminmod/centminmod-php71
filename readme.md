@@ -13,11 +13,13 @@ System:
 * 2x240GB SSD
 * 250Mbit Network Bandwidth
 * CentOS 7.3 64bit
-* Centmin Mod 123.09beta01 LEMP stack - Nginx 1.13.3, MariaDB 10.1.24 MySQL, + CSF Firewall
+* Centmin Mod 123.09beta01 LEMP stack - Nginx 1.13.3, MariaDB 10.1.25 MySQL, + CSF Firewall
 * BHS, Canada
 
 |PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
 |--- | --- |--- | ---
+|PHP 7.2.0beta2 centminmod php-fpm + PGO |0.3837|2.0617|1.7530
+|PHP 7.2.0beta2 centminmod php-fpm + no PGO |0.4003|2.2843|1.7693
 |PHP 7.2.0beta1 centminmod php-fpm + PGO |0.3877|2.0783|1.7167
 |PHP 7.2.0beta1 centminmod php-fpm + no PGO |0.3890|2.2053|1.7843
 |PHP 7.2.0alpha3 centminmod php-fpm + PGO |0.3850|2.0483|1.7543
@@ -26,20 +28,27 @@ System:
 |PHP 7.2.0alpha2 centminmod php-fpm + No PGO|0.3973|2.1437|1.7540
 |PHP 7.2.0alpha1 centminmod php-fpm + PGO|0.3852|2.1047|1.7820
 |PHP 7.2.0alpha1 centminmod php-fpm + No PGO|0.3888|2.2572|1.7793
+|PHP 7.1.8 centminmod php-fpm + PGO|0.4010|2.3073|1.9300
+|PHP 7.1.8 centminmod php-fpm + No PGO|0.4110|2.2667|1.9477
 |PHP 7.1.7 centminmod php-fpm + PGO|0.4093|2.3673|1.9413
 |PHP 7.1.7 centminmod php-fpm + No PGO|0.4080|2.2580|1.9337
 |PHP 7.1.6 centminmod php-fpm + No PGO|0.4069|2.2363|1.9149
 |PHP 7.1.6 centminmod php-fpm + PGO|0.4135|2.2365|1.9436
+|PHP 7.0.22 centminmod php-fpm + PGO|0.4260|2.2100|1.9900
+|PHP 7.0.22 centminmod php-fpm + No PGO |0.4253|2.2490|2.0273
 |PHP 7.0.21 centminmod php-fpm + PGO|0.4150|2.2337|2.0093
 |PHP 7.0.21 centminmod php-fpm + No PGO|0.4280|2.2863|1.9980
 |PHP 5.6.31 centminmod php-fpm |1.1470|5.5567|3.9703
 |PHP 5.6.30 centminmod php-fpm |1.1510|5.6733|3.9657
+|PHP 7.2.0beta2 remi scl php-fpm |0.3887|2.1637|1.9317
 |PHP 7.2.0beta1 remi scl php-fpm |0.3957|2.1917|1.9207
 |PHP 7.2.0alpha3 remi scl php-fpm |0.3853|2.1760|1.9057
 |PHP 7.2.0alpha2 remi scl php-fpm |0.3920|2.1953|1.9090
 |PHP 7.2.0alpha1 remi scl php-fpm|0.3942|2.2707|1.9384
+|PHP 7.1.8 remi scl php-fpm |0.4110|2.3637|2.1057
 |PHP 7.1.7 remi scl php-fpm |0.4113|2.3783|2.1077
 |PHP 7.1.6 remi scl php-fpm|0.4148|2.3908|2.0900
+|PHP 7.0.22 remi scl php-fpm |0.4303|2.2987|2.1110
 |PHP 7.0.21 remi scl php-fpm |0.4327|2.2907|2.1277
 |PHP 7.0.20 remi scl php-fpm|0.4330|2.2682|2.1270
 |PHP 5.6.31 remi scl php-fpm |1.1567|5.6847|4.0327
