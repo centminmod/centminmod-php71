@@ -9,7 +9,7 @@
 ############################################
 DT=$(date +"%d%m%y-%H%M%S")
 CENTMINLOGDIR='/root/centminlogs'
-repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi'
+repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi,remi-test'
 packages='php56 php56-php-fpm php56-php-devel php56-php-mysqlnd php56-php-bcmath php56-php-enchant php56-php-gd php56-php-pecl-geoip php56-php-gmp php56-php-pecl-igbinary php56-php-pecl-igbinary-devel php56-php-pecl-imagick php56-php-pecl-imagick-devel php56-php-imap php56-php-intl php56-php-pecl-json-post php56-php-ldap php56-php-pecl-mailparse php56-php-mbstring php56-php-mcrypt php56-php-pecl-memcache php56-php-pecl-memcached php56-php-pspell php56-php-pecl-redis php56-php-snmp php56-php-soap php56-php-tidy php56-php-xml php56-php-xmlrpc php56-php-pecl-zip php56-php-opcache'
 
 ############################################

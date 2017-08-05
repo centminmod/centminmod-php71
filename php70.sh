@@ -9,7 +9,7 @@
 ############################################
 DT=$(date +"%d%m%y-%H%M%S")
 CENTMINLOGDIR='/root/centminlogs'
-repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi'
+repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi,remi-test'
 packages='php70 php70-php-fpm php70-php-devel php70-php-mysqlnd php70-php-bcmath php70-php-enchant php70-php-gd php70-php-pecl-geoip php70-php-gmp php70-php-pecl-igbinary php70-php-pecl-igbinary-devel php70-php-pecl-imagick php70-php-pecl-imagick-devel php70-php-imap php70-php-intl php70-php-pecl-json-post php70-php-ldap php70-php-pecl-mailparse php70-php-mbstring php70-php-mcrypt php70-php-pecl-memcache php70-php-pecl-memcached php70-php-pecl-mysql php70-php-pdo-dblib php70-php-pspell php70-php-pecl-redis php70-php-snmp php70-php-soap php70-php-tidy php70-php-xml php70-php-xmlrpc php70-php-pecl-zip php70-php-opcache'
 
 ############################################

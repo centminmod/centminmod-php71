@@ -9,7 +9,7 @@
 ############################################
 DT=$(date +"%d%m%y-%H%M%S")
 CENTMINLOGDIR='/root/centminlogs'
-repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi,remi-test'
+repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi,remi-test,remi-test'
 packages='php72 php72-php-fpm php72-php-devel php72-php-mysqlnd php72-php-bcmath php72-php-enchant php72-php-gd php72-php-pecl-geoip php72-php-gmp php72-php-pecl-igbinary php72-php-pecl-igbinary-devel php72-php-pecl-imagick php72-php-pecl-imagick-devel php72-php-imap php72-php-intl php72-php-pecl-json-post php72-php-ldap php72-php-pecl-mailparse php72-php-mbstring php72-php-mcrypt php72-php-pecl-memcache php72-php-pecl-memcached php72-php-pecl-mysql php72-php-pdo-dblib php72-php-pspell php72-php-pecl-redis php72-php-snmp php72-php-soap php72-php-tidy php72-php-xml php72-php-xmlrpc php72-php-pecl-zip php72-php-opcache'
 
 ############################################
