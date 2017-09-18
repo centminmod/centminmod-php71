@@ -13,11 +13,13 @@ System:
 * 2x240GB SSD
 * 250Mbit Network Bandwidth
 * CentOS 7.3 64bit
-* Centmin Mod 123.09beta01 LEMP stack - Nginx 1.13.4, MariaDB 10.1.26 MySQL, + CSF Firewall
+* Centmin Mod 123.09beta01 LEMP stack - Nginx 1.13.5, MariaDB 10.1.26 MySQL, + CSF Firewall
 * BHS, Canada
 
 |PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
 |--- | --- |--- | ---
+|PHP 7.2.0RC2 centminmod php-fpm + PGO |0.3987|2.0753|1.7690
+|PHP 7.2.0RC2 centminmod php-fpm + no PGO |0.3967|2.3223|1.7670
 |PHP 7.2.0RC1 centminmod php-fpm + PGO |0.3983|2.1357|1.7633
 |PHP 7.2.0RC1 centminmod php-fpm + no PGO |0.3980|2.2853|1.7673
 |PHP 7.2.0beta3 centminmod php-fpm + PGO |0.3833|2.0583|1.7590
@@ -48,6 +50,7 @@ System:
 |PHP 7.0.21 centminmod php-fpm + No PGO|0.4280|2.2863|1.9980
 |PHP 5.6.31 centminmod php-fpm |1.1470|5.5567|3.9703
 |PHP 5.6.30 centminmod php-fpm |1.1510|5.6733|3.9657
+|PHP 7.2.0RC2 remi scl php-fpm|0.3817|2.2230|1.9050
 |PHP 7.2.0RC1 remi scl php-fpm|0.3863|2.1770|1.9057
 |PHP 7.2.0beta3 remi scl php-fpm|0.3817|2.2200|1.9300
 |PHP 7.2.0beta2 remi scl php-fpm |0.3887|2.1637|1.9317
