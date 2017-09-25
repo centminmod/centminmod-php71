@@ -284,6 +284,11 @@ phpinstall() {
   sed -i 's|group = apache|group = nginx|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
   sed -i 's|;pm.status_path = \/status|pm.status_path = \/php56status|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
 
+  # raise system limits
+  mkdir -p /etc/systemd/system/php56-php-fpm.service.d
+  echo -en "[Service]\nLimitNOFILE=262144\nLimitNPROC=16384\n" > /etc/systemd/system/php56-php-fpm.service.d/limit.conf
+  systemctl daemon-reload
+
   echo
   echo "start php56-php-fpm service"
   systemctl start php56-php-fpm

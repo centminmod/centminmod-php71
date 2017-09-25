@@ -284,6 +284,11 @@ phpinstall() {
   sed -i 's|group = apache|group = nginx|' /etc/opt/remi/php72/php-fpm.d/www.conf
   sed -i 's|;pm.status_path = \/status|pm.status_path = \/php72status|' /etc/opt/remi/php72/php-fpm.d/www.conf
 
+  # raise system limits
+  mkdir -p /etc/systemd/system/php72-php-fpm.service.d
+  echo -en "[Service]\nLimitNOFILE=262144\nLimitNPROC=16384\n" > /etc/systemd/system/php72-php-fpm.service.d/limit.conf
+  systemctl daemon-reload
+
   echo
   echo "start php72-php-fpm service"
   systemctl start php72-php-fpm
