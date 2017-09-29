@@ -6,7 +6,7 @@
 ######################################################
 # variables
 #############
-VERSION='0.1'
+VERSION='0.2'
 DT=$(date +"%d%m%y-%H%M%S")
 VERBOSE='n'
 OPCACHECLI='n'
@@ -23,6 +23,7 @@ PHPDETAILBENCHLOG="${PHPBENCHLOGDIR}/${PHPDETAILBENCHLOGFILE}"
 BENCHDIR='/home/phpbench'
 
 DETAILBENCH='y'
+TIMEBIN='/usr/bin/time'
 ######################################################
 # functions
 #############
@@ -67,12 +68,23 @@ bench() {
     PHPBIN='/usr/local/bin/php /usr/bin/php71'
   elif [[ ! -f /usr/bin/php72 && ! -f /usr/bin/php71 && ! -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
     PHPBIN='/usr/local/bin/php /usr/bin/php56'
+  elif [[ -f /etc/os-release && -f /usr/bin/php ]]; then
+    # ubuntu 16.0.4 check
+    PHPBIN='/usr/bin/php'
+    TIMEBIN='/usr/bin/time'
+    if [[ -f /etc/php/7.0/cli/conf.d/20-xdebug.ini && -z $(grep -w 'xdebug.max_nesting_level=2048' /etc/php/7.0/cli/conf.d/20-xdebug.ini) ]]; then
+      echo 'xdebug.max_nesting_level=2048' >> /etc/php/7.0/cli/conf.d/20-xdebug.ini
+      service php7.0-fpm restart >/dev/null 2>&1
+    fi
   else
     PHPBIN='/usr/local/bin/php'
   fi
 for p in $PHPBIN; do
  if [[ "$p" = '/usr/local/bin/php' ]]; then
   DESC='centminmod.com php-fpm'
+elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
+  DISTRO=$(awk -F '="' '/PRETTY_NAME/ {print $2}' /etc/os-release | sed -e 's|\"||')
+  DESC="$DISTRO php-fpm"
  else
   DESC='remi scl php-fpm'
  fi
@@ -89,11 +101,11 @@ for p in $PHPBIN; do
   echo "$p bench.php [run: $i]"
   if [[ "$VERBOSE" = [yY] ]]; then
     {
-    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI bench.php
+    $TIMEBIN --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI bench.php
     } 2>&1 | tee -a $PHPBENCHLOG
   else
     {
-    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI bench.php
+    $TIMEBIN --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI bench.php
     } 2>&1 >> $PHPBENCHLOG
   fi
  done
@@ -107,10 +119,18 @@ for p in $PHPBIN; do
   TIMECS=$(echo $TOTAL | awk '/maxmem:/ {print $0}' $PHPBENCHLOG | awk '{ sum += $13 } END { if (NR > 0) printf "%.2f\n", sum / NR }' )
   echo 
   
-  echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
+  if [[ -f /etc/os-release ]]; then
+    echo "[$($p -v 2>&1 | head -n1 | awk -F '+' '{print $1}')] $p"
+  else
+    echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
+  fi
   echo -e "bench.php results from $RUNS runs\n$TOTAL"
   echo
-  echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : bench.php avg : $AVG"
+  if [[ -f /etc/os-release ]]; then
+    echo "$($p -v 2>&1 | head -n1 | awk -F '+' '{print $1}') $DESC : bench.php avg : $AVG"
+  else
+    echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : bench.php avg : $AVG"
+  fi
   echo "Avg: real: ${TIMEREAL}s user: ${TIMEUSER}s sys: ${TIMESYS}s cpu: ${TIMECPU}% maxmem: ${TIMEMEM}KB cswaits: ${TIMECS}"
   echo "created results log at $PHPBENCHLOG"
   sleep "$SLEEP"
@@ -129,11 +149,11 @@ for p in $PHPBIN; do
   echo "$p micro_bench.php [run: $i]"
   if [[ "$VERBOSE" = [yY] ]]; then
     {
-    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI micro_bench.php
+    $TIMEBIN --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI micro_bench.php
     } 2>&1 | tee -a $PHPMICROBENCHLOG
   else
     {
-    /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI micro_bench.php
+    $TIMEBIN --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI micro_bench.php
     } 2>&1 >> $PHPMICROBENCHLOG
   fi
  done
@@ -147,10 +167,18 @@ for p in $PHPBIN; do
   MTIMECS=$(echo $MTOTAL | awk '/maxmem:/ {print $0}' $PHPMICROBENCHLOG | awk '{ sum += $13 } END { if (NR > 0) printf "%.2f\n", sum / NR }' )
   echo 
   
-  echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
+  if [[ -f /etc/os-release ]]; then
+    echo "[$($p -v 2>&1 | head -n1 | awk -F '+' '{print $1}')] $p"
+  else
+    echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
+  fi
   echo -e "micro_bench.php results from $RUNS runs\n$MTOTAL"
   echo
-  echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : micro_bench.php avg : $MAVG"
+  if [[ -f /etc/os-release ]]; then
+    echo "$($p -v 2>&1 | head -n1 | awk -F '+' '{print $1}') $DESC : micro_bench.php avg : $MAVG"
+  else
+    echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : micro_bench.php avg : $MAVG"
+  fi
   echo "Avg: real: ${MTIMEREAL}s user: ${MTIMEUSER}s sys: ${MTIMESYS}s cpu: ${MTIMECPU}% maxmem: ${MTIMEMEM}KB cswaits: ${MTIMECS}"
   echo "created results log at $PHPMICROBENCHLOG"
   sleep "$SLEEP"
@@ -170,11 +198,11 @@ for p in $PHPBIN; do
     echo "$p detailed_benchmark.php [run: $i]"
     if [[ "$VERBOSE" = [yY] ]]; then
       {
-      /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI detailed_benchmark.php 2>&1 | egrep -v 'Undefined' |sed -e 's|<pre>||' -e 's|</pre>||'| egrep ' sec|real:'
+      $TIMEBIN --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI detailed_benchmark.php 2>&1 | egrep -v 'Undefined' |sed -e 's|<pre>||' -e 's|</pre>||'| egrep ' sec|real:'
       } 2>&1 | tee -a $PHPDETAILBENCHLOG
     else
       {
-      /usr/bin/time --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI detailed_benchmark.php 2>&1 | egrep -v 'Undefined' |sed -e 's|<pre>||' -e 's|</pre>||'| egrep ' sec|real:'
+      $TIMEBIN --format='real: %es user: %Us sys: %Ss cpu: %P maxmem: %M KB cswaits: %w' $p $OPCLI detailed_benchmark.php 2>&1 | egrep -v 'Undefined' |sed -e 's|<pre>||' -e 's|</pre>||'| egrep ' sec|real:'
       } 2>&1 >> $PHPDETAILBENCHLOG
     fi
   done
@@ -275,7 +303,11 @@ for p in $PHPBIN; do
       echo 
     fi
     
-    echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
+    if [[ -f /etc/os-release ]]; then
+      echo "[$($p -v 2>&1 | head -n1 | awk -F '+' '{print $1}')] $p"
+    else
+      echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
+    fi
     echo -e "detailed_benchmark.php results from $RUNS runs"
     echo
     echo "averages:"
@@ -321,7 +353,11 @@ for p in $PHPBIN; do
     echo -e "addslashes\t\t\t$DB_ADDSLASHESAVG"
     echo -e "stripslashes\t\t\t$DB_STRIPSLASHESAVG"
     echo
-    echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : detailed_benchmark.php total avg : $DBAVG"
+    if [[ -f /etc/os-release ]]; then
+      echo "$($p -v 2>&1 | head -n1 | awk -F '+' '{print $1}') $DESC : detailed_benchmark.php total avg : $DBAVG"
+    else
+      echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : detailed_benchmark.php total avg : $DBAVG"
+    fi
     echo "Avg: real: ${DBTIMEREAL}s user: ${DBTIMEUSER}s sys: ${DBTIMESYS}s cpu: ${DBTIMECPU}% maxmem: ${DBTIMEMEM}KB cswaits: ${DBTIMECS}"
     echo "created results log at $PHPDETAILBENCHLOG"
     sleep "$SLEEP"
