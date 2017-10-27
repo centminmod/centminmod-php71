@@ -18,6 +18,8 @@ System:
 
 |PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
 |--- | --- |--- | ---
+|PHP 7.2.0RC5 centminmod php-fpm + PGO |0.3973|2.0800|1.7627
+|PHP 7.2.0RC5 centminmod php-fpm + no PGO |0.3887|2.3317|1.7473
 |PHP 7.2.0RC4 centminmod php-fpm + PGO |0.3953|2.0823|1.7677
 |PHP 7.2.0RC4 centminmod php-fpm + no PGO |0.3973|2.2330|1.7973
 |PHP 7.2.0RC3 centminmod php-fpm + PGO |0.4000|2.0760|1.7580
@@ -38,6 +40,8 @@ System:
 |PHP 7.2.0alpha2 centminmod php-fpm + No PGO|0.3973|2.1437|1.7540
 |PHP 7.2.0alpha1 centminmod php-fpm + PGO|0.3852|2.1047|1.7820
 |PHP 7.2.0alpha1 centminmod php-fpm + No PGO|0.3888|2.2572|1.7793
+|PHP 7.1.11 centminmod php-fpm + PGO|0.4177|2.3430|1.9313
+|PHP 7.1.11 centminmod php-fpm + No PGO|0.4130|2.2530|1.9400
 |PHP 7.1.10 centminmod php-fpm + PGO|0.4000|2.2017|1.9200
 |PHP 7.1.10 centminmod php-fpm + No PGO|0.4110|2.2557|1.9667
 |PHP 7.1.9 centminmod php-fpm + PGO|0.4013|2.1940|1.9543
@@ -48,6 +52,8 @@ System:
 |PHP 7.1.7 centminmod php-fpm + No PGO|0.4080|2.2580|1.9337
 |PHP 7.1.6 centminmod php-fpm + No PGO|0.4069|2.2363|1.9149
 |PHP 7.1.6 centminmod php-fpm + PGO|0.4135|2.2365|1.9436
+|PHP 7.0.25 centminmod php-fpm + PGO|0.4273|2.2577|1.9770
+|PHP 7.0.25 centminmod php-fpm + No PGO|0.4300|2.3300|2.0140
 |PHP 7.0.24 centminmod php-fpm + PGO|0.4303|2.2797|2.0413
 |PHP 7.0.24 centminmod php-fpm + No PGO |0.4293|2.3350|2.0487
 |PHP 7.0.23 centminmod php-fpm + PGO|0.4293|2.2430|2.0123
@@ -56,8 +62,10 @@ System:
 |PHP 7.0.22 centminmod php-fpm + No PGO |0.4253|2.2490|2.0273
 |PHP 7.0.21 centminmod php-fpm + PGO|0.4150|2.2337|2.0093
 |PHP 7.0.21 centminmod php-fpm + No PGO|0.4280|2.2863|1.9980
+|PHP 5.6.32 centminmod php-fpm |1.1580|5.5193|3.9357
 |PHP 5.6.31 centminmod php-fpm |1.1470|5.5567|3.9703
 |PHP 5.6.30 centminmod php-fpm |1.1510|5.6733|3.9657
+|PHP 7.2.0RC5 remi scl php-fpm|0.3880|2.3090|1.9210
 |PHP 7.2.0RC4 remi scl php-fpm|0.3823|2.2780|1.9077
 |PHP 7.2.0RC3 remi scl php-fpm||0.3867|2.1560|1.9073
 |PHP 7.2.0RC2 remi scl php-fpm|0.3817|2.2230|1.9050
@@ -68,16 +76,19 @@ System:
 |PHP 7.2.0alpha3 remi scl php-fpm |0.3853|2.1760|1.9057
 |PHP 7.2.0alpha2 remi scl php-fpm |0.3920|2.1953|1.9090
 |PHP 7.2.0alpha1 remi scl php-fpm|0.3942|2.2707|1.9384
+|PHP 7.1.11 remi scl php-fpm |0.4117|2.3860|2.0823
 |PHP 7.1.10 remi scl php-fpm |0.4050|2.4053|2.0727
 |PHP 7.1.9 remi scl php-fpm |0.4067|2.3673|2.1000
 |PHP 7.1.8 remi scl php-fpm |0.4110|2.3637|2.1057
 |PHP 7.1.7 remi scl php-fpm |0.4113|2.3783|2.1077
 |PHP 7.1.6 remi scl php-fpm|0.4148|2.3908|2.0900
+|PHP 7.0.25 remi scl php-fpm |0.4310|2.3513|2.0957
 |PHP 7.0.24 remi scl php-fpm |0.4330|2.2923|2.0943
 |PHP 7.0.23 remi scl php-fpm |0.4343|2.3023|2.0933
 |PHP 7.0.22 remi scl php-fpm |0.4303|2.2987|2.1110
 |PHP 7.0.21 remi scl php-fpm |0.4327|2.2907|2.1277
 |PHP 7.0.20 remi scl php-fpm|0.4330|2.2682|2.1270
+|PHP 5.6.32 remi scl php-fpm |1.1537|5.7430|4.0240
 |PHP 5.6.31 remi scl php-fpm |1.1567|5.6847|4.0327
 |PHP 5.6.30 remi scl php-fpm|1.2167|5.8848|4.1424
 
