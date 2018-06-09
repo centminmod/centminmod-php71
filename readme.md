@@ -190,7 +190,7 @@ The PHP-FPM 5.6 branch version `php56.sh` has slightly different paths compared 
 * `systemctl stop php56-php-fpm` command to stop php56-php-fpm service with command shortcut = `fpm56stop`
 * `systemctl status php56-php-fpm` command to get status for php56-php-fpm service with command shortcut = `fpm56status`
 
-## PHP 7.2 Alpha
+## PHP 7.2
 
 This PHP-FPM 7.2 branch version `php72.sh`:
 
@@ -211,6 +211,71 @@ This PHP-FPM 7.2 branch version `php72.sh`:
 * `systemctl status php72-php-fpm` command to get status for php72-php-fpm service with command shortcut = `fpm72status`
 
 ![](images/phpinfo-7.1.5-01.png)
+
+## PHP 7.3 Alpha
+
+This PHP-FPM 7.3 branch version `php73.sh`:
+
+* Currently, following PHP extensions, json-post, mailparse, memcache and memcached aren't available yet in Remi SCL php73 YUM repo
+* CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
+* listens on port `10000` instead of `9000` with php-fpm pool named `php73-www`
+* php-fpm status path = `/php73status`
+* custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php73/php.d/zzz_customphp.ini`
+* php config scan directory is at `/etc/opt/remi/php73/php.d`
+* php-fpm config file at `/etc/opt/remi/php73/php-fpm.d/www.conf`
+* error log at `/var/opt/remi/php73/log/php-fpm/www-error.log`
+* centmin mod nginx's php include file is at `/usr/local/nginx/conf/php73-remi.conf` instead of default at `/usr/local/nginx/conf/php.conf` which you replace references to in your centmin mod nginx vhost config file
+* `fpmconfphp73` is centmin mod command shortcut to invoke nano linux text editor to edit `/etc/opt/remi/php73/php-fpm.d/www.conf`
+* `phpincphp73` is centmin mod command shortcut to invoke nano linux text editor to edit `/usr/local/nginx/conf/php73-remi.conf`
+* `systemctl start php73-php-fpm` command to start php73-php-fpm service with command shortcut = `fpm73start`
+* `systemctl restart php73-php-fpm` command to restart php73-php-fpm service with command shortcut = `fpm73restart`
+* `systemctl stop php73-php-fpm` command to stop php73-php-fpm service with command shortcut = `fpm73stop`
+* `systemctl status php73-php-fpm` command to get status for php73-php-fpm service with command shortcut = `fpm73status`
+
+PHP 7.3.0 Alpha1 still has yet to have compatible PHP extensions for the following Remi YUM packages:
+
+* php73-php-pecl-geoip
+* php73-php-pecl-igbinary
+* php73-php-pecl-igbinary-devel
+* php73-php-pecl-imagick
+* php73-php-pecl-imagick-devel
+* php73-php-pecl-json-post
+* php73-php-pecl-mailparse
+* php73-php-mcrypt
+* php73-php-pecl-memcache
+* php73-php-pecl-memcached
+* php73-php-pecl-mysql
+* php73-php-pecl-redis
+* php73-php-pecl-zip
+
+Installed PHP extensions include:
+
+```
+./php73.sh list
+
+Installed Packages
+php73.x86_64                       1.0-0.1.el7.remi            @remi
+php73-php-bcmath.x86_64            7.3.0~alpha1-1.el7.remi     @remi
+php73-php-devel.x86_64             7.3.0~alpha1-1.el7.remi     @remi
+php73-php-embedded.x86_64          7.3.0~alpha1-1.el7.remi     @remi
+php73-php-enchant.x86_64           7.3.0~alpha1-1.el7.remi     @remi
+php73-php-fpm.x86_64               7.3.0~alpha1-1.el7.remi     @remi
+php73-php-gd.x86_64                7.3.0~alpha1-1.el7.remi     @remi
+php73-php-gmp.x86_64               7.3.0~alpha1-1.el7.remi     @remi
+php73-php-imap.x86_64              7.3.0~alpha1-1.el7.remi     @remi
+php73-php-intl.x86_64              7.3.0~alpha1-1.el7.remi     @remi
+php73-php-ldap.x86_64              7.3.0~alpha1-1.el7.remi     @remi
+php73-php-mbstring.x86_64          7.3.0~alpha1-1.el7.remi     @remi
+php73-php-mysqlnd.x86_64           7.3.0~alpha1-1.el7.remi     @remi
+php73-php-opcache.x86_64           7.3.0~alpha1-1.el7.remi     @remi
+php73-php-pdo-dblib.x86_64         7.3.0~alpha1-1.el7.remi     @remi
+php73-php-pspell.x86_64            7.3.0~alpha1-1.el7.remi     @remi
+php73-php-snmp.x86_64              7.3.0~alpha1-1.el7.remi     @remi
+php73-php-soap.x86_64              7.3.0~alpha1-1.el7.remi     @remi
+php73-php-tidy.x86_64              7.3.0~alpha1-1.el7.remi     @remi
+php73-php-xml.x86_64               7.3.0~alpha1-1.el7.remi     @remi
+php73-php-xmlrpc.x86_64            7.3.0~alpha1-1.el7.remi     @remi
+```
 
 ## Example
 
