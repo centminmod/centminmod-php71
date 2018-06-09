@@ -1,12 +1,12 @@
 #!/bin/bash
 ######################################################
-# bench.php and micro_bench.php script for PHP 7.1.6, 
-# 7.0.20, 5.6.30, 7.2.0 etc
+# bench.php and micro_bench.php script for PHP 7.1, 
+# 7.0, 5.6, 7.2 and 7.3 etc
 # written by George Liu (eva2000) centminmod.com
 ######################################################
 # variables
 #############
-VERSION='0.2'
+VERSION='0.3'
 DT=$(date +"%d%m%y-%H%M%S")
 VERBOSE='n'
 OPCACHECLI='n'
@@ -56,7 +56,9 @@ getfiles() {
 bench() {
   getfiles
   cd "$BENCHDIR"
-  if [[ -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
+  if [[ -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
+    PHPBIN='/usr/local/bin/php /usr/bin/php73 /usr/bin/php72 /usr/bin/php71 /usr/bin/php70 /usr/bin/php56'
+  elif [[ -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
     PHPBIN='/usr/local/bin/php /usr/bin/php72 /usr/bin/php71 /usr/bin/php70 /usr/bin/php56'
   elif [[ ! -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
     PHPBIN='/usr/local/bin/php /usr/bin/php71 /usr/bin/php70 /usr/bin/php56'
