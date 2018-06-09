@@ -218,7 +218,7 @@ This PHP-FPM 7.3 branch version `php73.sh`:
 
 * Currently, following PHP extensions, json-post, mailparse, memcache and memcached aren't available yet in Remi SCL php73 YUM repo
 * CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
-* listens on port `10000` instead of `9000` with php-fpm pool named `php73-www`
+* listens on port `11000` instead of `9000` with php-fpm pool named `php73-www`
 * php-fpm status path = `/php73status`
 * custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php73/php.d/zzz_customphp.ini`
 * php config scan directory is at `/etc/opt/remi/php73/php.d`
