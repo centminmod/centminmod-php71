@@ -152,6 +152,8 @@ This PHP-FPM 7.1 branch version `php71.sh`:
 * `systemctl stop php71-php-fpm` command to stop php71-php-fpm service with command shortcut = `fpm71stop`
 * `systemctl status php71-php-fpm` command to get status for php71-php-fpm service with command shortcut = `fpm71status`
 
+![](images/phpinfo-7.1.5-01.png)
+
 ## PHP 7.0
 
 The PHP-FPM 7.0 branch version `php70.sh`:
@@ -209,8 +211,6 @@ This PHP-FPM 7.2 branch version `php72.sh`:
 * `systemctl restart php72-php-fpm` command to restart php72-php-fpm service with command shortcut = `fpm72restart`
 * `systemctl stop php72-php-fpm` command to stop php72-php-fpm service with command shortcut = `fpm72stop`
 * `systemctl status php72-php-fpm` command to get status for php72-php-fpm service with command shortcut = `fpm72status`
-
-![](images/phpinfo-7.1.5-01.png)
 
 ## PHP 7.3 Alpha
 
