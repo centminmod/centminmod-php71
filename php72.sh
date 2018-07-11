@@ -315,7 +315,9 @@ phpinstall() {
 }
 
 phpupdate() {
+  yum versionlock delete ImageMagick6 ImageMagick6-devel ImageMagick6-c++ ImageMagick6-c++-devel ImageMagick6-libs
   yum -y update $packages $repoopt
+  yum versionlock ImageMagick6 ImageMagick6-devel ImageMagick6-c++ ImageMagick6-c++-devel ImageMagick6-libs
 }
 
 phplist() {
