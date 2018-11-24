@@ -321,7 +321,7 @@ phpupdate() {
 }
 
 phplist() {
-  yum list $packages $repoopt
+  yum -q list $packages $repoopt | tr -s ' ' | column -t
 }
 
 case "$1" in
