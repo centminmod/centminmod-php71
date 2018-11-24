@@ -32,7 +32,7 @@ System:
 |PHP 7.1.24 centminmod php-fpm + no PGO |0.4310|2.3460|2.0493
 |PHP 7.0.32 centminmod php-fpm + PGO |0.4320|2.3327|2.4067
 |PHP 7.0.32 centminmod php-fpm + no PGO |0.4603|2.3727|2.1070
-|PHP 7.3.0RC6 remi scl php-fpm |0.3907|2.0170|1.9153
+|PHP 7.3.0RC6 remi scl php-fpm |0.3913|2.0190|1.9253
 |PHP 7.2.13RC1 remi scl php-fpm |0.4063|2.2530|2.0160
 |PHP 7.1.25RC1 remi scl php-fpm |0.4267|2.4033|2.1490
 |PHP 7.0.32 remi scl php-fpm |0.4580|2.3997|2.2053
@@ -269,12 +269,12 @@ PHP 7.3.0 RC6 still has yet to have compatible PHP extensions for the following 
 
 * php73-php-pecl-mailparse
 * php73-php-mcrypt
-* php73-php-pecl-redis
+* php73-php-pecl-redis - replaced with php73-php-pecl-redis4
 
 Installed PHP extensions include:
 
 ```
-./php73.sh list
+./php73.sh list                      
 
 Installed                             Packages
 php73.x86_64                          1.0-0.1.el7.remi                      @remi
@@ -301,10 +301,12 @@ php73-php-pecl-json-post.x86_64       1.0.1-11.el7.remi                     @rem
 php73-php-pecl-memcache.x86_64        3.0.9-0.12.20170802.e702b5f.el7.remi  @remi
 php73-php-pecl-memcached.x86_64       3.0.4-8.el7.remi                      @remi
 php73-php-pecl-mysql.x86_64           1.0.0-0.20.20180226.647c933.el7.remi  @remi
+php73-php-pecl-redis4.x86_64          4.2.0-1.el7.remi                      @remi
 php73-php-pecl-zip.x86_64             1.15.4-1.el7.remi                     @remi
 php73-php-pspell.x86_64               7.3.0~rc6-1.el7.remi                  @remi
 php73-php-snmp.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
 php73-php-soap.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
+php73-php-sodium.x86_64               7.3.0~rc6-1.el7.remi                  @remi
 php73-php-tidy.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
 php73-php-xml.x86_64                  7.3.0~rc6-1.el7.remi                  @remi
 php73-php-xmlrpc.x86_64               7.3.0~rc6-1.el7.remi                  @remi
