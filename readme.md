@@ -1,5 +1,7 @@
 # Multiple PHP-FPM Versions For Centmin Mod LEMP
 
+This is experimental and unsupported code.
+
 Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher support for multiple PHP-FPM versions utilising [Remi Yum Repository's SCL](https://blog.remirepo.net/post/2017/05/11/PHP-version-7.0.19-and-7.1.5) `php71` version to work side by side concurrently with Centmin Mod's default PHP-FPM version. This Remi SCL based PHP 7.1 branch version will not be able to support advanced optimisations like Centmin Mod 123.09beta01's source compiled PHP 7.x versions which support optionally, [Profile Guide Optimisations](https://community.centminmod.com/threads/added-profile-guided-optimizations-to-boost-php-7-performance.8961/) to boost PHP 7 performance by another 3-17% ([benchmarks](https://community.centminmod.com/threads/addons-php71-sh-multiple-php-fpm-versions-work-preview.11900/#post-50643)) or Intel cpu specific optimised PHP compilations.
 
 ## Compare Centmin Mod PHP-FPM vs Remi SCL PHP-FPM
