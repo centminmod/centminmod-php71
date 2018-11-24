@@ -24,7 +24,6 @@ System:
 
 |PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
 |--- | --- |--- | ---
-|PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
 |PHP 7.3.0RC6 centminmod php-fpm + PGO |0.3897|1.9333|2.0130
 |PHP 7.3.0RC6 centminmod php-fpm + no PGO |0.3817|1.9203|1.7037
 |PHP 7.2.12 centminmod php-fpm + PGO |0.3957|2.0957|2.1783
