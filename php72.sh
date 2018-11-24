@@ -321,6 +321,7 @@ phpupdate() {
 }
 
 phplist() {
+  echo
   yum -q list $packages $repoopt | tr -s ' ' | column -t
 }
 

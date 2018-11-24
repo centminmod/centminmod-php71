@@ -245,7 +245,7 @@ This PHP-FPM 7.2 branch version `php72.sh`:
 * `systemctl stop php72-php-fpm` command to stop php72-php-fpm service with command shortcut = `fpm72stop`
 * `systemctl status php72-php-fpm` command to get status for php72-php-fpm service with command shortcut = `fpm72status`
 
-## PHP 7.3 Alpha
+## PHP 7.3 RC6
 
 This PHP-FPM 7.3 branch version `php73.sh`:
 
@@ -265,49 +265,49 @@ This PHP-FPM 7.3 branch version `php73.sh`:
 * `systemctl stop php73-php-fpm` command to stop php73-php-fpm service with command shortcut = `fpm73stop`
 * `systemctl status php73-php-fpm` command to get status for php73-php-fpm service with command shortcut = `fpm73status`
 
-PHP 7.3.0 Alpha1 still has yet to have compatible PHP extensions for the following Remi YUM packages:
+PHP 7.3.0 RC6 still has yet to have compatible PHP extensions for the following Remi YUM packages:
 
-* php73-php-pecl-geoip
-* php73-php-pecl-igbinary
-* php73-php-pecl-igbinary-devel
-* php73-php-pecl-imagick
-* php73-php-pecl-imagick-devel
-* php73-php-pecl-json-post
 * php73-php-pecl-mailparse
 * php73-php-mcrypt
-* php73-php-pecl-memcache
-* php73-php-pecl-memcached
-* php73-php-pecl-mysql
 * php73-php-pecl-redis
-* php73-php-pecl-zip
 
 Installed PHP extensions include:
 
 ```
 ./php73.sh list
 
-Installed Packages
-php73.x86_64                       1.0-0.1.el7.remi            @remi
-php73-php-bcmath.x86_64            7.3.0~alpha1-1.el7.remi     @remi
-php73-php-devel.x86_64             7.3.0~alpha1-1.el7.remi     @remi
-php73-php-embedded.x86_64          7.3.0~alpha1-1.el7.remi     @remi
-php73-php-enchant.x86_64           7.3.0~alpha1-1.el7.remi     @remi
-php73-php-fpm.x86_64               7.3.0~alpha1-1.el7.remi     @remi
-php73-php-gd.x86_64                7.3.0~alpha1-1.el7.remi     @remi
-php73-php-gmp.x86_64               7.3.0~alpha1-1.el7.remi     @remi
-php73-php-imap.x86_64              7.3.0~alpha1-1.el7.remi     @remi
-php73-php-intl.x86_64              7.3.0~alpha1-1.el7.remi     @remi
-php73-php-ldap.x86_64              7.3.0~alpha1-1.el7.remi     @remi
-php73-php-mbstring.x86_64          7.3.0~alpha1-1.el7.remi     @remi
-php73-php-mysqlnd.x86_64           7.3.0~alpha1-1.el7.remi     @remi
-php73-php-opcache.x86_64           7.3.0~alpha1-1.el7.remi     @remi
-php73-php-pdo-dblib.x86_64         7.3.0~alpha1-1.el7.remi     @remi
-php73-php-pspell.x86_64            7.3.0~alpha1-1.el7.remi     @remi
-php73-php-snmp.x86_64              7.3.0~alpha1-1.el7.remi     @remi
-php73-php-soap.x86_64              7.3.0~alpha1-1.el7.remi     @remi
-php73-php-tidy.x86_64              7.3.0~alpha1-1.el7.remi     @remi
-php73-php-xml.x86_64               7.3.0~alpha1-1.el7.remi     @remi
-php73-php-xmlrpc.x86_64            7.3.0~alpha1-1.el7.remi     @remi
+Installed                             Packages
+php73.x86_64                          1.0-0.1.el7.remi                      @remi
+php73-php-bcmath.x86_64               7.3.0~rc6-1.el7.remi                  @remi
+php73-php-devel.x86_64                7.3.0~rc6-1.el7.remi                  @remi
+php73-php-embedded.x86_64             7.3.0~rc6-1.el7.remi                  @remi
+php73-php-enchant.x86_64              7.3.0~rc6-1.el7.remi                  @remi
+php73-php-fpm.x86_64                  7.3.0~rc6-1.el7.remi                  @remi
+php73-php-gd.x86_64                   7.3.0~rc6-1.el7.remi                  @remi
+php73-php-gmp.x86_64                  7.3.0~rc6-1.el7.remi                  @remi
+php73-php-imap.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
+php73-php-intl.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
+php73-php-ldap.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
+php73-php-mbstring.x86_64             7.3.0~rc6-1.el7.remi                  @remi
+php73-php-mysqlnd.x86_64              7.3.0~rc6-1.el7.remi                  @remi
+php73-php-opcache.x86_64              7.3.0~rc6-1.el7.remi                  @remi
+php73-php-pdo-dblib.x86_64            7.3.0~rc6-1.el7.remi                  @remi
+php73-php-pecl-geoip.x86_64           1.1.1-6.el7.remi                      @remi
+php73-php-pecl-igbinary.x86_64        2.0.8-1.el7.remi                      @remi
+php73-php-pecl-igbinary-devel.x86_64  2.0.8-1.el7.remi                      @remi
+php73-php-pecl-imagick.x86_64         3.4.3-13.el7.remi                     @remi
+php73-php-pecl-imagick-devel.x86_64   3.4.3-13.el7.remi                     @remi
+php73-php-pecl-json-post.x86_64       1.0.1-11.el7.remi                     @remi
+php73-php-pecl-memcache.x86_64        3.0.9-0.12.20170802.e702b5f.el7.remi  @remi
+php73-php-pecl-memcached.x86_64       3.0.4-8.el7.remi                      @remi
+php73-php-pecl-mysql.x86_64           1.0.0-0.20.20180226.647c933.el7.remi  @remi
+php73-php-pecl-zip.x86_64             1.15.4-1.el7.remi                     @remi
+php73-php-pspell.x86_64               7.3.0~rc6-1.el7.remi                  @remi
+php73-php-snmp.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
+php73-php-soap.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
+php73-php-tidy.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
+php73-php-xml.x86_64                  7.3.0~rc6-1.el7.remi                  @remi
+php73-php-xmlrpc.x86_64               7.3.0~rc6-1.el7.remi                  @remi
 ```
 
 ## Example
