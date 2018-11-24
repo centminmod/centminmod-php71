@@ -8,6 +8,38 @@ Testing [centminmod.com](https://centminmod.com) 123.09beta01+ and higher suppor
 
 Benchmark comparison for [Centmin Mod 123.09beta01](https://centminmod.com/changelog.html#123eva200009) branch's PHP-FPM source installs with and without [Profile Guide Optimisations](https://community.centminmod.com/threads/added-profile-guided-optimizations-to-boost-php-7-performance.8961/).
 
+## After November 25, 2018
+
+Latest tests are with Kernel updates for meltdown/spectre vulnerability patches which can reduce PHP performance compared to benchmarks done prior to November 25, 2018
+
+System:
+
+* OVH MC-32 Intel Core i7 4790K
+* 32GB Memory
+* 2x240GB SSD
+* 250Mbit Network Bandwidth
+* CentOS 7.5 64bit
+* Centmin Mod 123.09beta01 LEMP stack - Nginx 1.15.6, MariaDB 10.1.37 MySQL, + CSF Firewall
+* BHS, Canada
+
+|PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
+|--- | --- |--- | ---
+|PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
+|PHP 7.3.0RC6 centminmod php-fpm + PGO |0.3897|1.9333|2.0130
+|PHP 7.3.0RC6 centminmod php-fpm + no PGO |0.3817|1.9203|1.7037
+|PHP 7.2.12 centminmod php-fpm + PGO |0.3957|2.0957|2.1783
+|PHP 7.2.12 centminmod php-fpm + no PGO |0.4173|2.3550|1.8613
+|PHP 7.1.24 centminmod php-fpm + PGO |0.4143|2.4223|2.3073
+|PHP 7.1.24 centminmod php-fpm + no PGO |0.4310|2.3460|2.0493
+|PHP 7.0.32 centminmod php-fpm + PGO |0.4320|2.3327|2.4067
+|PHP 7.0.32 centminmod php-fpm + no PGO |0.4603|2.3727|2.1070
+|PHP 7.3.0RC6 remi scl php-fpm |0.3907|2.0170|1.9153
+|PHP 7.2.13RC1 remi scl php-fpm |0.4063|2.2530|2.0160
+|PHP 7.1.25RC1 remi scl php-fpm |0.4267|2.4033|2.1490
+|PHP 7.0.32 remi scl php-fpm |0.4580|2.3997|2.2053
+
+## Before November 25, 2018
+
 System:
 
 * OVH MC-32 Intel Core i7 4790K
