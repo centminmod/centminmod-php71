@@ -6,7 +6,7 @@
 ######################################################
 # variables
 #############
-VERSION='0.4'
+VERSION='0.5'
 DT=$(date +"%d%m%y-%H%M%S")
 VERBOSE='n'
 OPCACHECLI='n'
@@ -394,6 +394,6 @@ egrep 'bench.php avg :|micro_bench.php avg :|detailed_benchmark.php total avg :'
 echo
 
 V=$(egrep '\[PHP|bench.php avg :|micro_bench.php avg :|detailed_benchmark.php total avg :' "${PHPBENCHLOGDIR}/phpbench-summary-${DT}.log" | awk -F " : " '/avg : / {print $3}')
-echo "|bench.php|micro_bench.php|detailed_benchmark.php"
-echo $V | xargs -n3 | while read x y z; do echo "|$x|$y|$z"; done
+echo "|bench.php|micro_bench.php|detailed_benchmark.php|total"
+echo $V | xargs -n3 | while read x y z; do echo "|$x|$y|$z" | awk -F '|' '{print $0"|"$2+$3+$4}'; done
 echo
