@@ -22,32 +22,32 @@ System:
 * Centmin Mod 123.09beta01 LEMP stack - Nginx 1.15.6, MariaDB 10.1.37 MySQL, + CSF Firewall
 * BHS, Canada
 
-|PHP Version|bench.php|micro_bench.php|detailed_benchmark.php
-|--- | --- |--- | ---
-|PHP 7.3.0RC6 centminmod php-fpm + PGO (3.10.0-862.14.4) |0.3873|1.9717|1.9923
-|PHP 7.3.0RC6 centminmod php-fpm + PGO (3.10.0-862.3.2) |0.3897|1.9333|2.0130
-|PHP 7.3.0RC6 centminmod php-fpm + no PGO (3.10.0-862.14.4) |0.3940|1.9780|1.7563
-|PHP 7.3.0RC6 centminmod php-fpm + no PGO (3.10.0-862.3.2) |0.3817|1.9203|1.7037
-|PHP 7.2.12 centminmod php-fpm + PGO (3.10.0-862.14.4) |0.4163|2.0510|2.1243
-|PHP 7.2.12 centminmod php-fpm + PGO (3.10.0-862.3.2) |0.3957|2.0957|2.1783
-|PHP 7.2.12 centminmod php-fpm + no PGO (3.10.0-862.14.4) |0.4257|2.4257|1.8947
-|PHP 7.2.12 centminmod php-fpm + no PGO (3.10.0-862.3.2) |0.4173|2.3550|1.8613
-|PHP 7.1.24 centminmod php-fpm + PGO (3.10.0-862.14.4) |0.4177|2.3393|2.3260
-|PHP 7.1.24 centminmod php-fpm + PGO (3.10.0-862.3.2) |0.4143|2.4223|2.3073
-|PHP 7.1.24 centminmod php-fpm + no PGO (3.10.0-862.14.4) |0.4337|2.3550|2.0503
-|PHP 7.1.24 centminmod php-fpm + no PGO (3.10.0-862.3.2) |0.4310|2.3460|2.0493
-|PHP 7.0.32 centminmod php-fpm + PGO (3.10.0-862.14.4) |0.4293|2.3343|2.4027
-|PHP 7.0.32 centminmod php-fpm + PGO (3.10.0-862.3.2) |0.4320|2.3327|2.4067
-|PHP 7.0.32 centminmod php-fpm + no PGO (3.10.0-862.14.4) |0.4573|2.3747|2.0973
-|PHP 7.0.32 centminmod php-fpm + no PGO (3.10.0-862.3.2) |0.4603|2.3727|2.1070
-|PHP 7.3.0RC6 remi scl php-fpm (3.10.0-862.14.4) |0.3873|2.0250|1.9090
-|PHP 7.3.0RC6 remi scl php-fpm (3.10.0-862.3.2) |0.3907|2.0170|1.9153
-|PHP 7.2.13RC1 remi scl php-fpm (3.10.0-862.14.4) |0.4017|2.3210|2.0050
-|PHP 7.2.13RC1 remi scl php-fpm (3.10.0-862.3.2) |0.4063|2.2530|2.0160
-|PHP 7.1.25RC1 remi scl php-fpm (3.10.0-862.14.4) |0.4237|2.5137|2.1347
-|PHP 7.1.25RC1 remi scl php-fpm (3.10.0-862.3.2) |0.4267|2.4033|2.1490
-|PHP 7.0.32 remi scl php-fpm (3.10.0-862.14.4) |0.4517|2.4390|2.1940
-|PHP 7.0.32 remi scl php-fpm (3.10.0-862.3.2) |0.4580|2.3997|2.2053
+|PHP Version|bench.php|micro_bench.php|detailed_benchmark.php|TOTAL
+|--- | --- |--- | --- | ---
+|PHP 7.3.0RC6 centminmod php-fpm + PGO (3.10.0-862.14.4) |0.3873|1.9717|1.9923|6.359
+|PHP 7.3.0RC6 centminmod php-fpm + PGO (3.10.0-862.3.2) |0.3897|1.9333|2.0130|6.323
+|PHP 7.3.0RC6 centminmod php-fpm + no PGO (3.10.0-862.14.4) |0.3940|1.9780|1.7563|6.372
+|PHP 7.3.0RC6 centminmod php-fpm + no PGO (3.10.0-862.3.2) |0.3817|1.9203|1.7037|6.302
+|PHP 7.2.12 centminmod php-fpm + PGO (3.10.0-862.14.4) |0.4163|2.0510|2.1243|6.4673
+|PHP 7.2.12 centminmod php-fpm + PGO (3.10.0-862.3.2) |0.3957|2.0957|2.1783|6.4914
+|PHP 7.2.12 centminmod php-fpm + no PGO (3.10.0-862.14.4) |0.4257|2.4257|1.8947|6.8514
+|PHP 7.2.12 centminmod php-fpm + no PGO (3.10.0-862.3.2) |0.4173|2.3550|1.8613|6.7723
+|PHP 7.1.24 centminmod php-fpm + PGO (3.10.0-862.14.4) |0.4177|2.3393|2.3260|6.757
+|PHP 7.1.24 centminmod php-fpm + PGO (3.10.0-862.3.2) |0.4143|2.4223|2.3073|6.8366
+|PHP 7.1.24 centminmod php-fpm + no PGO (3.10.0-862.14.4) |0.4337|2.3550|2.0503|6.7887
+|PHP 7.1.24 centminmod php-fpm + no PGO (3.10.0-862.3.2) |0.4310|2.3460|2.0493|6.777
+|PHP 7.0.32 centminmod php-fpm + PGO (3.10.0-862.14.4) |0.4293|2.3343|2.4027|6.7636
+|PHP 7.0.32 centminmod php-fpm + PGO (3.10.0-862.3.2) |0.4320|2.3327|2.4067|6.7647
+|PHP 7.0.32 centminmod php-fpm + no PGO (3.10.0-862.14.4) |0.4573|2.3747|2.0973|6.832
+|PHP 7.0.32 centminmod php-fpm + no PGO (3.10.0-862.3.2) |0.4603|2.3727|2.1070|6.833
+|PHP 7.3.0RC6 remi scl php-fpm (3.10.0-862.14.4) |0.3873|2.0250|1.9090|6.4123
+|PHP 7.3.0RC6 remi scl php-fpm (3.10.0-862.3.2) |0.3907|2.0170|1.9153|6.4077
+|PHP 7.2.13RC1 remi scl php-fpm (3.10.0-862.14.4) |0.4017|2.3210|2.0050|6.7227
+|PHP 7.2.13RC1 remi scl php-fpm (3.10.0-862.3.2) |0.4063|2.2530|2.0160|6.6593
+|PHP 7.1.25RC1 remi scl php-fpm (3.10.0-862.14.4) |0.4237|2.5137|2.1347|6.9374
+|PHP 7.1.25RC1 remi scl php-fpm (3.10.0-862.3.2) |0.4267|2.4033|2.1490|6.83
+|PHP 7.0.32 remi scl php-fpm (3.10.0-862.14.4) |0.4517|2.4390|2.1940|6.8907
+|PHP 7.0.32 remi scl php-fpm (3.10.0-862.3.2) |0.4580|2.3997|2.2053|6.8577
 
 ## Before November 25, 2018
 
