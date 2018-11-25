@@ -10,7 +10,7 @@ Benchmark comparison for [Centmin Mod 123.09beta01](https://centminmod.com/chang
 
 ## After November 25, 2018
 
-Latest tests are with Kernel updates for meltdown/spectre vulnerability patches which can reduce PHP performance compared to benchmarks done prior to November 25, 2018
+Latest tests are with Kernel updates for meltdown/spectre vulnerability patches which can reduce PHP performance compared to benchmarks done prior to November 25, 2018. Linux Kernel 3.10.0-862.14.4.el7 and 3.10.0-862.3.2.el7 were used.
 
 System:
 
