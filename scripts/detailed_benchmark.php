@@ -8,7 +8,11 @@ $timer = new benchmarkTimer();
 
 $head = str_pad("#", 36, "#");
 
+if(isset($_SERVER["SERVER_NAME"])) {
 echo "<pre>" . str_pad(' PHP ' . PHP_VERSION . ' BENCHMARK ', 36, "#", STR_PAD_BOTH) . "\nStart : " . date("m/d/Y H:i:s a") . "\nServer : {$_SERVER['SERVER_NAME']}@{$_SERVER['SERVER_ADDR']}\nPlatform : " . PHP_OS . "\nPHP version: ".phpversion()."\n$head\n";
+} else {
+echo "<pre>" . str_pad(' PHP ' . PHP_VERSION . ' BENCHMARK ', 36, "#", STR_PAD_BOTH) . "\nStart : " . date("m/d/Y H:i:s a") . "\nServer : N/A\nPlatform : " . PHP_OS . "\nPHP version: ".phpversion()."\n$head\n";
+}
 
 $run_times = 1000000;
 $run_times_slow_function = 10000;
