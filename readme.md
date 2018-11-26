@@ -22,20 +22,26 @@ System:
 * Centmin Mod 123.09beta01 LEMP stack - Nginx 1.15.6, MariaDB 10.1.37 MySQL, + CSF Firewall
 * BHS, Canada
 
+Note: PGO Tuned runs are for [detailed_benchmark.php PGO trained optimisations](https://community.centminmod.com/threads/php-7-3-vs-7-2-vs-7-1-vs-7-0-php-fpm-benchmarks.16090/#post-68855).
+
 |PHP Version|bench.php|micro_bench.php|detailed_benchmark.php|total
 |--- | --- |--- | --- | ---
+|PHP 7.3.0RC6 centminmod php-fpm + PGO tuned (3.10.0-862.14.4) |0.3933|1.8467|1.4887|3.7287
 |PHP 7.3.0RC6 centminmod php-fpm + PGO (3.10.0-862.14.4) |0.3873|1.9717|1.9923|4.3513
 |PHP 7.3.0RC6 centminmod php-fpm + PGO (3.10.0-862.3.2) |0.3897|1.9333|2.0130|4.336
 |PHP 7.3.0RC6 centminmod php-fpm + no PGO (3.10.0-862.14.4) |0.3940|1.9780|1.7563|4.1283
 |PHP 7.3.0RC6 centminmod php-fpm + no PGO (3.10.0-862.3.2) |0.3817|1.9203|1.7037|4.0057
+|PHP 7.2.12 centminmod php-fpm + PGO tuned (3.10.0-862.14.4) |0.4037|2.0907|1.6017|4.0961
 |PHP 7.2.12 centminmod php-fpm + PGO (3.10.0-862.14.4) |0.4163|2.0510|2.1243|4.5916
 |PHP 7.2.12 centminmod php-fpm + PGO (3.10.0-862.3.2) |0.3957|2.0957|2.1783|4.6697
 |PHP 7.2.12 centminmod php-fpm + no PGO (3.10.0-862.14.4) |0.4257|2.4257|1.8947|4.7461
 |PHP 7.2.12 centminmod php-fpm + no PGO (3.10.0-862.3.2) |0.4173|2.3550|1.8613|4.6336
+|PHP 7.1.24 centminmod php-fpm + PGO tuned (3.10.0-862.14.4) |0.4183|2.4050|1.7750|4.5983
 |PHP 7.1.24 centminmod php-fpm + PGO (3.10.0-862.14.4) |0.4177|2.3393|2.3260|5.083
 |PHP 7.1.24 centminmod php-fpm + PGO (3.10.0-862.3.2) |0.4143|2.4223|2.3073|5.1439
 |PHP 7.1.24 centminmod php-fpm + no PGO (3.10.0-862.14.4) |0.4337|2.3550|2.0503|4.839
 |PHP 7.1.24 centminmod php-fpm + no PGO (3.10.0-862.3.2) |0.4310|2.3460|2.0493|4.8263
+|PHP 7.0.32 centminmod php-fpm + PGO tuned (3.10.0-862.14.4) |0.4297|2.3350|1.8310|4.5957
 |PHP 7.0.32 centminmod php-fpm + PGO (3.10.0-862.14.4) |0.4293|2.3343|2.4027|5.1663
 |PHP 7.0.32 centminmod php-fpm + PGO (3.10.0-862.3.2) |0.4320|2.3327|2.4067|5.1714
 |PHP 7.0.32 centminmod php-fpm + no PGO (3.10.0-862.14.4) |0.4573|2.3747|2.0973|4.9293
