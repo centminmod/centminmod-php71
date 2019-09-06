@@ -149,7 +149,7 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
   echo -e "bench.php results from $RUNS runs\n$TOTAL"
   echo
   if [[ -f /etc/os-release ]]; then
-    echo "$($p -v 2>&1 | head -n1 | awk -F '+' '{print $1}') $DESC : bench.php avg : $AVG"
+    echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : bench.php avg : $AVG"
   else
     echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : bench.php avg : $AVG"
   fi
@@ -197,7 +197,7 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
   echo -e "micro_bench.php results from $RUNS runs\n$MTOTAL"
   echo
   if [[ -f /etc/os-release ]]; then
-    echo "$($p -v 2>&1 | head -n1 | awk -F '+' '{print $1}') $DESC : micro_bench.php avg : $MAVG"
+    echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : micro_bench.php avg : $MAVG"
   else
     echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : micro_bench.php avg : $MAVG"
   fi
@@ -376,7 +376,7 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
     echo -e "stripslashes\t\t\t$DB_STRIPSLASHESAVG"
     echo
     if [[ -f /etc/os-release ]]; then
-      echo "$($p -v 2>&1 | head -n1 | awk -F '+' '{print $1}') $DESC : detailed_benchmark.php total avg : $DBAVG"
+      echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : detailed_benchmark.php total avg : $DBAVG"
     else
       echo "$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2) $DESC : detailed_benchmark.php total avg : $DBAVG"
     fi
