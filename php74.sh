@@ -275,8 +275,8 @@ phpinstall() {
   echo "nano -w /usr/local/nginx/conf/php74-remi.conf" >/usr/bin/phpincphp74 ; chmod 700 /usr/bin/phpincphp74
   cp -a /usr/local/nginx/conf/php.conf /usr/local/nginx/conf/php74-remi.conf
   sed -i 's|\[www\]|\[php74-www\]|' /etc/opt/remi/php74/php-fpm.d/www.conf
-  sed -i 's|9000|11000|' /etc/opt/remi/php74/php-fpm.d/www.conf
-  sed -i 's|9000|11000|' /usr/local/nginx/conf/php74-remi.conf
+  sed -i 's|9000|12000|' /etc/opt/remi/php74/php-fpm.d/www.conf
+  sed -i 's|9000|12000|' /usr/local/nginx/conf/php74-remi.conf
   sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /etc/opt/remi/php74/php-fpm.d/www.conf
   sed -i 's|;listen.owner = .*|listen.owner = nginx|' /etc/opt/remi/php74/php-fpm.d/www.conf
   sed -i 's|;listen.group = .*|listen.group = nginx|' /etc/opt/remi/php74/php-fpm.d/www.conf

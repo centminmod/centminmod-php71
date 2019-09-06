@@ -275,7 +275,7 @@ This PHP-FPM 7.2 branch version `php72.sh`:
 * `systemctl stop php72-php-fpm` command to stop php72-php-fpm service with command shortcut = `fpm72stop`
 * `systemctl status php72-php-fpm` command to get status for php72-php-fpm service with command shortcut = `fpm72status`
 
-## PHP 7.3 RC6
+## PHP 7.3
 
 This PHP-FPM 7.3 branch version `php73.sh`:
 
@@ -341,6 +341,26 @@ php73-php-tidy.x86_64                 7.3.0~rc6-1.el7.remi                  @rem
 php73-php-xml.x86_64                  7.3.0~rc6-1.el7.remi                  @remi
 php73-php-xmlrpc.x86_64               7.3.0~rc6-1.el7.remi                  @remi
 ```
+
+## PHP 7.4
+
+This PHP-FPM 7.4 branch version `php74.sh`:
+
+* Currently, following PHP extensions, json-post, mailparse, memcache and memcached aren't available yet in Remi SCL php74 YUM repo
+* CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
+* listens on port `12000` instead of `9000` with php-fpm pool named `php74-www`
+* php-fpm status path = `/php74status`
+* custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php74/php.d/zzz_customphp.ini`
+* php config scan directory is at `/etc/opt/remi/php74/php.d`
+* php-fpm config file at `/etc/opt/remi/php74/php-fpm.d/www.conf`
+* error log at `/var/opt/remi/php74/log/php-fpm/www-error.log`
+* centmin mod nginx's php include file is at `/usr/local/nginx/conf/php74-remi.conf` instead of default at `/usr/local/nginx/conf/php.conf` which you replace references to in your centmin mod nginx vhost config file
+* `fpmconfphp74` is centmin mod command shortcut to invoke nano linux text editor to edit `/etc/opt/remi/php74/php-fpm.d/www.conf`
+* `phpincphp74` is centmin mod command shortcut to invoke nano linux text editor to edit `/usr/local/nginx/conf/php74-remi.conf`
+* `systemctl start php74-php-fpm` command to start php74-php-fpm service with command shortcut = `fpm74start`
+* `systemctl restart php74-php-fpm` command to restart php74-php-fpm service with command shortcut = `fpm74restart`
+* `systemctl stop php74-php-fpm` command to stop php74-php-fpm service with command shortcut = `fpm74stop`
+* `systemctl status php74-php-fpm` command to get status for php74-php-fpm service with command shortcut = `fpm74status`
 
 ## Example
 
