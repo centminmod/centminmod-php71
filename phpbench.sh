@@ -142,7 +142,7 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
   echo 
   
   if [[ -f /etc/os-release ]]; then
-    echo "[$($p -v 2>&1 | head -n1 | awk -F '+' '{print $1}')] $p"
+    echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
   else
     echo "[$($p -v 2>&1 | head -n1 | cut -d ' ' -f1,2)] $p"
   fi
@@ -163,7 +163,7 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
  echo -e "\n$(date)" >> $PHPMICROBENCHLOG
  PHPMICROBENCHLOGFILE="bench_micro_${DT}.log"
  PHPMICROBENCHLOG="${PHPBENCHLOGDIR}/${PHPMICROBENCHLOGFILE}"
- touch $PHPMICROBENCHLOG
+ touch $PHPMICROBENCHLOGFILE
  for ((i = 0 ; i < $RUNS ; i++)); do
   if [[ "$VERBOSE" = [yY] ]]; then
     echo
