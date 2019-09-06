@@ -1,16 +1,16 @@
 #/bin/bash
 ############################################
 # centminmod.com multiple PHP-FPM version
-# installer for PHP 7.3 branch installed
+# installer for PHP 7.4 branch installed
 # side by side concurrently with default
 # centmin mod installed PHP version using
-# using Remi YUM repo's SCL php73 version
+# using Remi YUM repo's SCL php74 version
 # written by George Liu centminmod.com
 ############################################
 DT=$(date +"%d%m%y-%H%M%S")
 CENTMINLOGDIR='/root/centminlogs'
 repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi,remi-test'
-packages='php73 php73-php-fpm php73-php-devel php73-php-embedded php73-php-mysqlnd php73-php-bcmath php73-php-enchant php73-php-gd php73-php-pecl-geoip php73-php-gmp php73-php-pecl-igbinary php73-php-pecl-igbinary-devel php73-php-pecl-imagick php73-php-pecl-imagick-devel php73-php-imap php73-php-intl php73-php-pecl-json-post php73-php-ldap php73-php-pecl-mailparse php73-php-mbstring php73-php-mcrypt php73-php-pecl-memcache php73-php-pecl-memcached php73-php-pecl-mysql php73-php-pdo-dblib php73-php-pspell php73-php-pecl-redis4 php73-php-snmp php73-php-soap php73-php-tidy php73-php-xml php73-php-xmlrpc php73-php-pecl-zip php73-php-opcache php73-php-sodium'
+packages='php74 php74-php-fpm php74-php-devel php74-php-embedded php74-php-mysqlnd php74-php-bcmath php74-php-enchant php74-php-gd php74-php-pecl-geoip php74-php-gmp php74-php-pecl-igbinary php74-php-pecl-igbinary-devel php74-php-pecl-imagick php74-php-pecl-imagick-devel php74-php-imap php74-php-intl php74-php-pecl-json-post php74-php-ldap php74-php-pecl-mailparse php74-php-mbstring php74-php-mcrypt php74-php-pecl-memcache php74-php-pecl-memcached php74-php-pecl-mysql php74-php-pdo-dblib php74-php-pspell php74-php-pecl-redis4 php74-php-snmp php74-php-soap php74-php-tidy php74-php-xml php74-php-xmlrpc php74-php-pecl-zip php74-php-opcache php74-php-sodium'
 
 ############################################
 # set locale temporarily to english
@@ -143,7 +143,7 @@ opcachehugepages() {
 phpsededit() {
     TOTALMEM=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
     PHPINICUSTOM='zzz_customphp.ini'
-    CONFIGSCANDIR='/etc/opt/remi/php73/php.d'
+    CONFIGSCANDIR='/etc/opt/remi/php74/php.d'
     CUSTOMPHPINIFILE="${CONFIGSCANDIR}/${PHPINICUSTOM}"
 
     if [[ ! -f "${CUSTOMPHPINIFILE}" ]]; then
@@ -247,70 +247,70 @@ phpsededit() {
       sed -i "s|opcache.memory_consumption=.*|opcache.memory_consumption=$ZOLIMIT|" "${CONFIGSCANDIR}/20-opcache.ini"
     fi
     opcachehugepages
-    if [ -f /etc/opt/remi/php73/php-fpm.d/www.conf ]; then
-      sed -i 's|pm.max_children = .*|pm.max_children = 20|' /etc/opt/remi/php73/php-fpm.d/www.conf
-      sed -i 's|pm.max_spare_servers = .*|pm.max_spare_servers = 15|' /etc/opt/remi/php73/php-fpm.d/www.conf
+    if [ -f /etc/opt/remi/php74/php-fpm.d/www.conf ]; then
+      sed -i 's|pm.max_children = .*|pm.max_children = 20|' /etc/opt/remi/php74/php-fpm.d/www.conf
+      sed -i 's|pm.max_spare_servers = .*|pm.max_spare_servers = 15|' /etc/opt/remi/php74/php-fpm.d/www.conf
     fi
 }
 
 phpinstall() {
   yum -y install $packages $repoopt
   phpsededit
-  if [ ! -f /var/opt/remi/php73/log/php-fpm/www-error.log ]; then
-    touch /var/opt/remi/php73/log/php-fpm/www-error.log
-    chmod 0666 /var/opt/remi/php73/log/php-fpm/www-error.log
-    chown nginx:nginx /var/opt/remi/php73/log/php-fpm/www-error.log
+  if [ ! -f /var/opt/remi/php74/log/php-fpm/www-error.log ]; then
+    touch /var/opt/remi/php74/log/php-fpm/www-error.log
+    chmod 0666 /var/opt/remi/php74/log/php-fpm/www-error.log
+    chown nginx:nginx /var/opt/remi/php74/log/php-fpm/www-error.log
   fi
-  if [ ! -f /var/opt/remi/php73/log/php-fpm/www-slow.log ]; then
-    touch /var/opt/remi/php73/log/php-fpm/www-slow.log
-    chmod 0666 /var/opt/remi/php73/log/php-fpm/www-slow.log
-    chown nginx:nginx /var/opt/remi/php73/log/php-fpm/www-slow.log
+  if [ ! -f /var/opt/remi/php74/log/php-fpm/www-slow.log ]; then
+    touch /var/opt/remi/php74/log/php-fpm/www-slow.log
+    chmod 0666 /var/opt/remi/php74/log/php-fpm/www-slow.log
+    chown nginx:nginx /var/opt/remi/php74/log/php-fpm/www-slow.log
   fi
-  echo "systemctl stop php73-php-fpm" >/usr/bin/fpm73stop ; chmod 700 /usr/bin/fpm73stop
-  echo "systemctl start php73-php-fpm" >/usr/bin/fpm73start ; chmod 700 /usr/bin/fpm73start
-  echo "systemctl restart php73-php-fpm" >/usr/bin/fpm73restart ; chmod 700 /usr/bin/fpm73restart
-  echo "systemctl reload php73-php-fpm" >/usr/bin/fpm73reload ; chmod 700 /usr/bin/fpm73reload
-  echo "systemctl status php73-php-fpm" >/usr/bin/fpm73status ; chmod 700 /usr/bin/fpm73status
-  echo "nano -w /etc/opt/remi/php73/php-fpm.d/www.conf" >/usr/bin/fpmconfphp73 ; chmod 700 /usr/bin/fpmconfphp73
-  echo "nano -w /usr/local/nginx/conf/php73-remi.conf" >/usr/bin/phpincphp73 ; chmod 700 /usr/bin/phpincphp73
-  cp -a /usr/local/nginx/conf/php.conf /usr/local/nginx/conf/php73-remi.conf
-  sed -i 's|\[www\]|\[php73-www\]|' /etc/opt/remi/php73/php-fpm.d/www.conf
-  sed -i 's|9000|11000|' /etc/opt/remi/php73/php-fpm.d/www.conf
-  sed -i 's|9000|11000|' /usr/local/nginx/conf/php73-remi.conf
-  sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /etc/opt/remi/php73/php-fpm.d/www.conf
-  sed -i 's|;listen.owner = .*|listen.owner = nginx|' /etc/opt/remi/php73/php-fpm.d/www.conf
-  sed -i 's|;listen.group = .*|listen.group = nginx|' /etc/opt/remi/php73/php-fpm.d/www.conf
-  sed -i 's|user = apache|user = nginx|' /etc/opt/remi/php73/php-fpm.d/www.conf
-  sed -i 's|group = apache|group = nginx|' /etc/opt/remi/php73/php-fpm.d/www.conf
-  sed -i 's|;pm.status_path = \/status|pm.status_path = \/php73status|' /etc/opt/remi/php73/php-fpm.d/www.conf
+  echo "systemctl stop php74-php-fpm" >/usr/bin/fpm74stop ; chmod 700 /usr/bin/fpm74stop
+  echo "systemctl start php74-php-fpm" >/usr/bin/fpm74start ; chmod 700 /usr/bin/fpm74start
+  echo "systemctl restart php74-php-fpm" >/usr/bin/fpm74restart ; chmod 700 /usr/bin/fpm74restart
+  echo "systemctl reload php74-php-fpm" >/usr/bin/fpm74reload ; chmod 700 /usr/bin/fpm74reload
+  echo "systemctl status php74-php-fpm" >/usr/bin/fpm74status ; chmod 700 /usr/bin/fpm74status
+  echo "nano -w /etc/opt/remi/php74/php-fpm.d/www.conf" >/usr/bin/fpmconfphp74 ; chmod 700 /usr/bin/fpmconfphp74
+  echo "nano -w /usr/local/nginx/conf/php74-remi.conf" >/usr/bin/phpincphp74 ; chmod 700 /usr/bin/phpincphp74
+  cp -a /usr/local/nginx/conf/php.conf /usr/local/nginx/conf/php74-remi.conf
+  sed -i 's|\[www\]|\[php74-www\]|' /etc/opt/remi/php74/php-fpm.d/www.conf
+  sed -i 's|9000|11000|' /etc/opt/remi/php74/php-fpm.d/www.conf
+  sed -i 's|9000|11000|' /usr/local/nginx/conf/php74-remi.conf
+  sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /etc/opt/remi/php74/php-fpm.d/www.conf
+  sed -i 's|;listen.owner = .*|listen.owner = nginx|' /etc/opt/remi/php74/php-fpm.d/www.conf
+  sed -i 's|;listen.group = .*|listen.group = nginx|' /etc/opt/remi/php74/php-fpm.d/www.conf
+  sed -i 's|user = apache|user = nginx|' /etc/opt/remi/php74/php-fpm.d/www.conf
+  sed -i 's|group = apache|group = nginx|' /etc/opt/remi/php74/php-fpm.d/www.conf
+  sed -i 's|;pm.status_path = \/status|pm.status_path = \/php74status|' /etc/opt/remi/php74/php-fpm.d/www.conf
 
   # raise system limits
-  mkdir -p /etc/systemd/system/php73-php-fpm.service.d
-  echo -en "[Service]\nLimitNOFILE=262144\nLimitNPROC=16384\n" > /etc/systemd/system/php73-php-fpm.service.d/limit.conf
+  mkdir -p /etc/systemd/system/php74-php-fpm.service.d
+  echo -en "[Service]\nLimitNOFILE=262144\nLimitNPROC=16384\n" > /etc/systemd/system/php74-php-fpm.service.d/limit.conf
   systemctl daemon-reload
 
   echo
-  echo "start php73-php-fpm service"
-  systemctl start php73-php-fpm
-  systemctl enable php73-php-fpm
+  echo "start php74-php-fpm service"
+  systemctl start php74-php-fpm
+  systemctl enable php74-php-fpm
   echo
-  echo "status php73-php-fpm service"
-  systemctl status php73-php-fpm
+  echo "status php74-php-fpm service"
+  systemctl status php74-php-fpm
   echo
   echo "command shortcuts"
-  echo "phpincphp73 - edit /usr/local/nginx/conf/php73-remi.conf include file"
-  echo "fpmconfphp73 - edit /etc/opt/remi/php73/php-fpm.d/www.conf php-fpm config"
+  echo "phpincphp74 - edit /usr/local/nginx/conf/php74-remi.conf include file"
+  echo "fpmconfphp74 - edit /etc/opt/remi/php74/php-fpm.d/www.conf php-fpm config"
   echo
-  echo "php73 -v"
-  php73 -v
+  echo "php74 -v"
+  php74 -v
   echo
-  echo "which php73"
-  which php73
+  echo "which php74"
+  which php74
   echo
-  echo "php73 -m"
-  php73 -m
-  echo "php73 --ini"
-  php73 --ini
+  echo "php74 -m"
+  php74 -m
+  echo "php74 --ini"
+  php74 --ini
   echo
 }
 
@@ -336,44 +336,44 @@ case "$1" in
     phplist
     ;;
   phpconfig )
-    if [ -f /opt/remi/php73/root/usr/bin/php-config ]; then
-      /opt/remi/php73/root/usr/bin/php-config
+    if [ -f /opt/remi/php74/root/usr/bin/php-config ]; then
+      /opt/remi/php74/root/usr/bin/php-config
     fi
     ;;
   phperrors )
-    if [ -f /var/opt/remi/php73/log/php-fpm/www-error.log ]; then
-      echo "tail -100 /var/opt/remi/php73/log/php-fpm/www-error.log"
-      tail -100 /var/opt/remi/php73/log/php-fpm/www-error.log
+    if [ -f /var/opt/remi/php74/log/php-fpm/www-error.log ]; then
+      echo "tail -100 /var/opt/remi/php74/log/php-fpm/www-error.log"
+      tail -100 /var/opt/remi/php74/log/php-fpm/www-error.log
     fi
     ;;
   phpcustom )
-    if [ -f /etc/opt/remi/php73/php.d/zzz_customphp.ini ]; then
-      nano /etc/opt/remi/php73/php.d/zzz_customphp.ini
+    if [ -f /etc/opt/remi/php74/php.d/zzz_customphp.ini ]; then
+      nano /etc/opt/remi/php74/php.d/zzz_customphp.ini
     fi
     ;;
   phpslowlog )
-    if [ -f /var/opt/remi/php73/log/php-fpm/www-slow.log ]; then
-      echo "tail -100 /var/opt/remi/php73/log/php-fpm/www-slow.log"
-      tail -100 /var/opt/remi/php73/log/php-fpm/www-slow.log
+    if [ -f /var/opt/remi/php74/log/php-fpm/www-slow.log ]; then
+      echo "tail -100 /var/opt/remi/php74/log/php-fpm/www-slow.log"
+      tail -100 /var/opt/remi/php74/log/php-fpm/www-slow.log
     fi
     ;;
   phpini )
-    php73 --ini
+    php74 --ini
     ;;
   phpext )
-    php73 -m
+    php74 -m
     ;;
   start )
-    systemctl start php73-php-fpm
+    systemctl start php74-php-fpm
     ;;
   restart )
-    systemctl restart php73-php-fpm
+    systemctl restart php74-php-fpm
     ;;
   stop )
-    systemctl stop php73-php-fpm
+    systemctl stop php74-php-fpm
     ;;
   status )
-    systemctl status php73-php-fpm
+    systemctl status php74-php-fpm
     ;;
   process )
     ps aufxw | egrep -w 'php-fpm|nginx' | grep -v grep
