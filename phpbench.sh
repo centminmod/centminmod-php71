@@ -248,6 +248,8 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
     cachetool opcache:configuration --fcgi=127.0.0.1:${FPM_PORT}
     cachetool opcache:status --fcgi=127.0.0.1:${FPM_PORT}
     cachetool opcache:status:scripts --fcgi=127.0.0.1:${FPM_PORT}
+    cachetool stat:realpath_get --fcgi=127.0.0.1:${FPM_PORT}
+    cachetool stat:realpath_size --fcgi=127.0.0.1:${FPM_PORT}
   fi
   sleep "$SLEEP"
   # if [[ "$VERBOSE" = [yY] ]]; then
@@ -301,6 +303,8 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
     cachetool opcache:configuration --fcgi=127.0.0.1:${FPM_PORT}
     cachetool opcache:status --fcgi=127.0.0.1:${FPM_PORT}
     cachetool opcache:status:scripts --fcgi=127.0.0.1:${FPM_PORT}
+    cachetool stat:realpath_get --fcgi=127.0.0.1:${FPM_PORT}
+    cachetool stat:realpath_size --fcgi=127.0.0.1:${FPM_PORT}
   fi
   sleep "$SLEEP"
   # if [[ "$VERBOSE" = [yY] ]]; then
@@ -485,6 +489,8 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
       cachetool opcache:configuration --fcgi=127.0.0.1:${FPM_PORT}
       cachetool opcache:status --fcgi=127.0.0.1:${FPM_PORT}
       cachetool opcache:status:scripts --fcgi=127.0.0.1:${FPM_PORT}
+      cachetool stat:realpath_get --fcgi=127.0.0.1:${FPM_PORT}
+      cachetool stat:realpath_size --fcgi=127.0.0.1:${FPM_PORT}
     fi
     sleep "$SLEEP"
     # if [[ "$VERBOSE" = [yY] ]]; then
