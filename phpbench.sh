@@ -6,10 +6,11 @@
 ######################################################
 # variables
 #############
-VERSION='0.6'
+VERSION='0.7'
 DT=$(date +"%d%m%y-%H%M%S")
 VERBOSE='n'
 OPCACHECLI='n'
+CACHETOOL='y'
 RUNS=3
 SLEEP=3
 
@@ -37,9 +38,78 @@ fi
 
 if [[ "$OPCACHECLI" = [yY] ]]; then
   OPCLI='-d opcache.enable_cli=1'
+  if [ -f /etc/centminmod/php.d/zendopcache.ini ]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/centminmod/php.d/zendopcache.ini
+  fi
+  if [ -f /etc/centminmod/php.d/zz-zendopcache.ini ]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/centminmod/php.d/zz-zendopcache.ini
+  fi
+  if [[ -f /usr/bin/php74 && -f /etc/opt/remi/php74/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/opt/remi/php74/php.d/20-opcache.ini
+    fpm74restart
+  fi
+  if [[ -f /usr/bin/php73 && -f /etc/opt/remi/php73/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/opt/remi/php73/php.d/20-opcache.ini
+    fpm73restart
+  fi
+  if [[ -f /usr/bin/php72 && -f /etc/opt/remi/php72/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/opt/remi/php72/php.d/20-opcache.ini
+    fpm72restart
+  fi
+  if [[ -f /usr/bin/php71 && -f /etc/opt/remi/php71/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/opt/remi/php71/php.d/20-opcache.ini
+    fpm71restart
+  fi
+  if [[ -f /usr/bin/php70 && -f /etc/opt/remi/php70/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/opt/remi/php70/php.d/20-opcache.ini
+    fpm70restart
+  fi
+  if [[ -f /usr/bin/php56 && -f /etc/opt/remi/php56/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/opt/remi/php56/php.d/20-opcache.ini
+    fpm56restart
+  fi
+  service php-fpm restart >/dev/null 2>&1
 else
   OPCLI='-d opcache.enable_cli=0'
+  if [ -f /etc/centminmod/php.d/zendopcache.ini ]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/centminmod/php.d/zendopcache.ini
+  fi
+  if [ -f /etc/centminmod/php.d/zz-zendopcache.ini ]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/centminmod/php.d/zz-zendopcache.ini
+  fi
+  if [[ -f /usr/bin/php74 && -f /etc/opt/remi/php74/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/opt/remi/php74/php.d/20-opcache.ini
+    fpm74restart
+  fi
+  if [[ -f /usr/bin/php73 && -f /etc/opt/remi/php73/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/opt/remi/php73/php.d/20-opcache.ini
+    fpm73restart
+  fi
+  if [[ -f /usr/bin/php72 && -f /etc/opt/remi/php72/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/opt/remi/php72/php.d/20-opcache.ini
+    fpm72restart
+  fi
+  if [[ -f /usr/bin/php71 && -f /etc/opt/remi/php71/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/opt/remi/php71/php.d/20-opcache.ini
+    fpm71restart
+  fi
+  if [[ -f /usr/bin/php70 && -f /etc/opt/remi/php70/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/opt/remi/php70/php.d/20-opcache.ini
+    fpm70restart
+  fi
+  if [[ -f /usr/bin/php56 && -f /etc/opt/remi/php56/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/opt/remi/php56/php.d/20-opcache.ini
+    fpm56restart
+  fi
+  service php-fpm restart >/dev/null 2>&1
 fi
+
+cachetool_setup() {
+  # install cachetool https://github.com/gordalina/cachetool
+  rm -f /usr/local/bin/cachetool
+  wget -qcnv -O /usr/local/bin/cachetool http://gordalina.github.io/cachetool/downloads/cachetool.phar
+  chmod +x /usr/local/bin/cachetool
+}
 
 getfiles() {
   cd "$BENCHDIR"
@@ -55,6 +125,7 @@ getfiles() {
 
 bench() {
   getfiles
+  cachetool_setup
   cd "$BENCHDIR"
   if [[ -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
     PHPBIN='/usr/local/bin/php /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php71 /usr/bin/php70 /usr/bin/php56'
@@ -112,6 +183,22 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
  else
   DESC='remi scl php-fpm'
  fi
+ # map php-fpm listening ports
+ if [[ "$p" = '/usr/local/bin/php' ]]; then
+  FPM_PORT='9000'
+ elif [[ "$p" = '/usr/bin/php74' ]]; then
+  FPM_PORT='12000'
+ elif [[ "$p" = '/usr/bin/php73' ]]; then
+  FPM_PORT='11000'
+ elif [[ "$p" = '/usr/bin/php72' ]]; then
+  FPM_PORT='10000'
+ elif [[ "$p" = '/usr/bin/php71' ]]; then
+  FPM_PORT='9900'
+ elif [[ "$p" = '/usr/bin/php70' ]]; then
+  FPM_PORT='9800'
+ elif [[ "$p" = '/usr/bin/php56' ]]; then
+  FPM_PORT='9700'
+ fi
  DT=$(date +"%d%m%y-%H%M%S")
  echo -e "\n$(date)" >> $PHPBENCHLOG
  PHPBENCHLOGFILE="bench_${DT}.log"
@@ -157,6 +244,11 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
   fi
   echo "Avg: real: ${TIMEREAL}s user: ${TIMEUSER}s sys: ${TIMESYS}s cpu: ${TIMECPU}% maxmem: ${TIMEMEM}KB cswaits: ${TIMECS}"
   echo "created results log at $PHPBENCHLOG"
+  if [[ "$CACHETOOL" = [yY] && -f /usr/local/bin/cachetool ]]; then
+    cachetool opcache:configuration --fcgi=127.0.0.1:${FPM_PORT}
+    cachetool opcache:status --fcgi=127.0.0.1:${FPM_PORT}
+    cachetool opcache:status:scripts --fcgi=127.0.0.1:${FPM_PORT}
+  fi
   sleep "$SLEEP"
   # if [[ "$VERBOSE" = [yY] ]]; then
     echo
@@ -205,6 +297,11 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
   fi
   echo "Avg: real: ${MTIMEREAL}s user: ${MTIMEUSER}s sys: ${MTIMESYS}s cpu: ${MTIMECPU}% maxmem: ${MTIMEMEM}KB cswaits: ${MTIMECS}"
   echo "created results log at $PHPMICROBENCHLOG"
+  if [[ "$CACHETOOL" = [yY] && -f /usr/local/bin/cachetool ]]; then
+    cachetool opcache:configuration --fcgi=127.0.0.1:${FPM_PORT}
+    cachetool opcache:status --fcgi=127.0.0.1:${FPM_PORT}
+    cachetool opcache:status:scripts --fcgi=127.0.0.1:${FPM_PORT}
+  fi
   sleep "$SLEEP"
   # if [[ "$VERBOSE" = [yY] ]]; then
     echo
@@ -384,6 +481,11 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
     fi
     echo "Avg: real: ${DBTIMEREAL}s user: ${DBTIMEUSER}s sys: ${DBTIMESYS}s cpu: ${DBTIMECPU}% maxmem: ${DBTIMEMEM}KB cswaits: ${DBTIMECS}"
     echo "created results log at $PHPDETAILBENCHLOG"
+    if [[ "$CACHETOOL" = [yY] && -f /usr/local/bin/cachetool ]]; then
+      cachetool opcache:configuration --fcgi=127.0.0.1:${FPM_PORT}
+      cachetool opcache:status --fcgi=127.0.0.1:${FPM_PORT}
+      cachetool opcache:status:scripts --fcgi=127.0.0.1:${FPM_PORT}
+    fi
     sleep "$SLEEP"
     # if [[ "$VERBOSE" = [yY] ]]; then
     #   echo
