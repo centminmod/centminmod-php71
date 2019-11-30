@@ -1,18 +1,21 @@
 #!/bin/bash
 ######################################################
 # bench.php and micro_bench.php script for PHP 7.1, 
-# 7.0, 5.6, 7.2 and 7.3 etc
+# 7.0, 5.6, 7.2, 7.3, 7.4, 8.0 etc
 # written by George Liu (eva2000) centminmod.com
 ######################################################
 # variables
 #############
-VERSION='0.7'
+VERSION='0.8'
 DT=$(date +"%d%m%y-%H%M%S")
 VERBOSE='n'
 OPCACHECLI='n'
 CACHETOOL='y'
 RUNS=3
 SLEEP=3
+
+# PHP 8 JIT
+PHP_JIT='y'
 
 PHPBENCHLOGDIR='/home/phpbench_logs'
 PHPBENCHLOGFILE="bench_${DT}.log"
@@ -37,7 +40,7 @@ if [ ! -d "$PHPBENCHLOGDIR" ]; then
 fi
 
 if [[ "$OPCACHECLI" = [yY] ]]; then
-  OPCLI='-d opcache.enable_cli=1'
+  OPCLI='-dopcache.enable_cli=1'
   if [ -f /etc/centminmod/php.d/zendopcache.ini ]; then
     sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/centminmod/php.d/zendopcache.ini
   fi
@@ -186,19 +189,36 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
  # map php-fpm listening ports
  if [[ "$p" = '/usr/local/bin/php' ]]; then
   FPM_PORT='9000'
+  PHPVERNUM=$(/usr/local/bin/php-config --vernum| cut -c1,3)
  elif [[ "$p" = '/usr/bin/php74' ]]; then
   FPM_PORT='12000'
+  PHPVERNUM=$(/opt/remi/php74/root/usr/bin/php-config --vernum| cut -c1,3)
  elif [[ "$p" = '/usr/bin/php73' ]]; then
   FPM_PORT='11000'
+  PHPVERNUM=$(/opt/remi/php73/root/usr/bin/php-config --vernum| cut -c1,3)
  elif [[ "$p" = '/usr/bin/php72' ]]; then
   FPM_PORT='10000'
+  PHPVERNUM=$(/opt/remi/php72/root/usr/bin/php-config --vernum| cut -c1,3)
  elif [[ "$p" = '/usr/bin/php71' ]]; then
   FPM_PORT='9900'
+  PHPVERNUM=$(/opt/remi/php71/root/usr/bin/php-config --vernum| cut -c1,3)
  elif [[ "$p" = '/usr/bin/php70' ]]; then
   FPM_PORT='9800'
+  PHPVERNUM=$(/opt/remi/php70/root/usr/bin/php-config --vernum| cut -c1,3)
  elif [[ "$p" = '/usr/bin/php56' ]]; then
   FPM_PORT='9700'
+  PHPVERNUM=$(/opt/remi/php56/root/usr/bin/php-config --vernum| cut -c1,3)
  fi
+ # PHP 8 JIT tests
+ if [[ "$PHP_JIT" = [yY] && "$PHPVERNUM" -eq '80' ]]; then
+  if [[ "$OPCACHECLI" = [yY] ]]; then
+    OPCLI='-dopcache.enable_cli=1'
+  elif [[ "$OPCACHECLI" = [nN] ]]; then
+    OPCLI='-dopcache.enable_cli=1'
+  fi
+  OPCLI="$OPCLI -dopcache.jit=1235 -dopcache.file_update_protection=0 -dopcache.jit_buffer_size=256M"
+ fi
+
  DT=$(date +"%d%m%y-%H%M%S")
  echo -e "\n$(date)" >> $PHPBENCHLOG
  PHPBENCHLOGFILE="bench_${DT}.log"
