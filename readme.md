@@ -295,58 +295,56 @@ This PHP-FPM 7.3 branch version `php73.sh`:
 * `systemctl stop php73-php-fpm` command to stop php73-php-fpm service with command shortcut = `fpm73stop`
 * `systemctl status php73-php-fpm` command to get status for php73-php-fpm service with command shortcut = `fpm73status`
 
-PHP 7.3.0 RC6 still has yet to have compatible PHP extensions for the following Remi YUM packages:
+PHP 7.3.25 listed packages:
 
-* php73-php-pecl-mailparse
-* php73-php-mcrypt
 * php73-php-pecl-redis - replaced with php73-php-pecl-redis4
 
 Installed PHP extensions include:
 
 ```
-./php73.sh list                      
+./php73.sh list
 
 Installed                             Packages
-php73.x86_64                          1.0-0.1.el7.remi                      @remi
-php73-php-bcmath.x86_64               7.3.0~rc6-1.el7.remi                  @remi
-php73-php-devel.x86_64                7.3.0~rc6-1.el7.remi                  @remi
-php73-php-embedded.x86_64             7.3.0~rc6-1.el7.remi                  @remi
-php73-php-enchant.x86_64              7.3.0~rc6-1.el7.remi                  @remi
-php73-php-fpm.x86_64                  7.3.0~rc6-1.el7.remi                  @remi
-php73-php-gd.x86_64                   7.3.0~rc6-1.el7.remi                  @remi
-php73-php-gmp.x86_64                  7.3.0~rc6-1.el7.remi                  @remi
-php73-php-imap.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
-php73-php-intl.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
-php73-php-ldap.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
-php73-php-mbstring.x86_64             7.3.0~rc6-1.el7.remi                  @remi
-php73-php-mysqlnd.x86_64              7.3.0~rc6-1.el7.remi                  @remi
-php73-php-opcache.x86_64              7.3.0~rc6-1.el7.remi                  @remi
-php73-php-pdo-dblib.x86_64            7.3.0~rc6-1.el7.remi                  @remi
+php73.x86_64                          2.0-1.el7.remi                        @remi
+php73-php-bcmath.x86_64               7.3.25-1.el7.remi                     @remi
+php73-php-devel.x86_64                7.3.25-1.el7.remi                     @remi
+php73-php-embedded.x86_64             7.3.25-1.el7.remi                     @remi
+php73-php-enchant.x86_64              7.3.25-1.el7.remi                     @remi
+php73-php-fpm.x86_64                  7.3.25-1.el7.remi                     @remi
+php73-php-gd.x86_64                   7.3.25-1.el7.remi                     @remi
+php73-php-gmp.x86_64                  7.3.25-1.el7.remi                     @remi
+php73-php-imap.x86_64                 7.3.25-1.el7.remi                     @remi
+php73-php-intl.x86_64                 7.3.25-1.el7.remi                     @remi
+php73-php-ldap.x86_64                 7.3.25-1.el7.remi                     @remi
+php73-php-mbstring.x86_64             7.3.25-1.el7.remi                     @remi
+php73-php-mysqlnd.x86_64              7.3.25-1.el7.remi                     @remi
+php73-php-opcache.x86_64              7.3.25-1.el7.remi                     @remi
+php73-php-pdo-dblib.x86_64            7.3.25-1.el7.remi                     @remi
 php73-php-pecl-geoip.x86_64           1.1.1-6.el7.remi                      @remi
-php73-php-pecl-igbinary.x86_64        2.0.8-1.el7.remi                      @remi
-php73-php-pecl-igbinary-devel.x86_64  2.0.8-1.el7.remi                      @remi
-php73-php-pecl-imagick.x86_64         3.4.3-13.el7.remi                     @remi
-php73-php-pecl-imagick-devel.x86_64   3.4.3-13.el7.remi                     @remi
-php73-php-pecl-json-post.x86_64       1.0.1-11.el7.remi                     @remi
-php73-php-pecl-memcache.x86_64        3.0.9-0.12.20170802.e702b5f.el7.remi  @remi
-php73-php-pecl-memcached.x86_64       3.0.4-8.el7.remi                      @remi
+php73-php-pecl-igbinary.x86_64        3.1.6-1.el7.remi                      @remi
+php73-php-pecl-igbinary-devel.x86_64  3.1.6-1.el7.remi                      @remi
+php73-php-pecl-imagick.x86_64         3.4.4-10.el7.remi                     @remi
+php73-php-pecl-imagick-devel.x86_64   3.4.4-10.el7.remi                     @remi
+php73-php-pecl-json-post.x86_64       1.0.2-1.el7.remi                      @remi
+php73-php-pecl-mailparse.x86_64       3.1.1-1.el7.remi                      @remi
+php73-php-pecl-memcache.x86_64        4.0.5.2-1.el7.remi                    @remi
+php73-php-pecl-memcached.x86_64       3.1.5-1.el7.remi                      @remi
 php73-php-pecl-mysql.x86_64           1.0.0-0.20.20180226.647c933.el7.remi  @remi
-php73-php-pecl-redis4.x86_64          4.2.0-1.el7.remi                      @remi
-php73-php-pecl-zip.x86_64             1.15.4-1.el7.remi                     @remi
-php73-php-pspell.x86_64               7.3.0~rc6-1.el7.remi                  @remi
-php73-php-snmp.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
-php73-php-soap.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
-php73-php-sodium.x86_64               7.3.0~rc6-1.el7.remi                  @remi
-php73-php-tidy.x86_64                 7.3.0~rc6-1.el7.remi                  @remi
-php73-php-xml.x86_64                  7.3.0~rc6-1.el7.remi                  @remi
-php73-php-xmlrpc.x86_64               7.3.0~rc6-1.el7.remi                  @remi
+php73-php-pecl-redis4.x86_64          4.3.0-1.el7.remi                      @remi
+php73-php-pecl-zip.x86_64             1.19.2-1.el7.remi                     @remi
+php73-php-pspell.x86_64               7.3.25-1.el7.remi                     @remi
+php73-php-snmp.x86_64                 7.3.25-1.el7.remi                     @remi
+php73-php-soap.x86_64                 7.3.25-1.el7.remi                     @remi
+php73-php-sodium.x86_64               7.3.25-1.el7.remi                     @remi
+php73-php-tidy.x86_64                 7.3.25-1.el7.remi                     @remi
+php73-php-xml.x86_64                  7.3.25-1.el7.remi                     @remi
+php73-php-xmlrpc.x86_64               7.3.25-1.el7.remi                     @remi
 ```
 
 ## PHP 7.4
 
 This PHP-FPM 7.4 branch version `php74.sh`:
 
-* Currently, following PHP extensions, json-post, mailparse, memcache and memcached aren't available yet in Remi SCL php74 YUM repo
 * CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
 * listens on port `12000` instead of `9000` with php-fpm pool named `php74-www`
 * php-fpm status path = `/php74status`
@@ -361,6 +359,66 @@ This PHP-FPM 7.4 branch version `php74.sh`:
 * `systemctl restart php74-php-fpm` command to restart php74-php-fpm service with command shortcut = `fpm74restart`
 * `systemctl stop php74-php-fpm` command to stop php74-php-fpm service with command shortcut = `fpm74stop`
 * `systemctl status php74-php-fpm` command to get status for php74-php-fpm service with command shortcut = `fpm74status`
+
+```
+./php74.sh list
+
+Installed                             Packages
+php74.x86_64                          1.0-3.el7.remi                        @remi
+php74-php-bcmath.x86_64               7.4.13-1.el7.remi                     @remi
+php74-php-devel.x86_64                7.4.13-1.el7.remi                     @remi
+php74-php-embedded.x86_64             7.4.13-1.el7.remi                     @remi
+php74-php-enchant.x86_64              7.4.13-1.el7.remi                     @remi
+php74-php-fpm.x86_64                  7.4.13-1.el7.remi                     @remi
+php74-php-gd.x86_64                   7.4.13-1.el7.remi                     @remi
+php74-php-gmp.x86_64                  7.4.13-1.el7.remi                     @remi
+php74-php-imap.x86_64                 7.4.13-1.el7.remi                     @remi
+php74-php-intl.x86_64                 7.4.13-1.el7.remi                     @remi
+php74-php-ldap.x86_64                 7.4.13-1.el7.remi                     @remi
+php74-php-mbstring.x86_64             7.4.13-1.el7.remi                     @remi
+php74-php-mysqlnd.x86_64              7.4.13-1.el7.remi                     @remi
+php74-php-opcache.x86_64              7.4.13-1.el7.remi                     @remi
+php74-php-pdo-dblib.x86_64            7.4.13-1.el7.remi                     @remi
+php74-php-pecl-geoip.x86_64           1.1.1-11.el7.remi                     @remi
+php74-php-pecl-igbinary.x86_64        3.1.6-1.el7.remi                      @remi
+php74-php-pecl-igbinary-devel.x86_64  3.1.6-1.el7.remi                      @remi
+php74-php-pecl-imagick.x86_64         3.4.4-10.el7.remi                     @remi
+php74-php-pecl-imagick-devel.x86_64   3.4.4-10.el7.remi                     @remi
+php74-php-pecl-json-post.x86_64       1.0.2-1.el7.remi                      @remi
+php74-php-pecl-mailparse.x86_64       3.1.1-1.el7.remi                      @remi
+php74-php-pecl-memcache.x86_64        4.0.5.2-1.el7.remi                    @remi
+php74-php-pecl-memcached.x86_64       3.1.5-1.el7.remi                      @remi
+php74-php-pecl-mysql.x86_64           1.0.0-0.23.20190415.d7643af.el7.remi  @remi
+php74-php-pecl-redis5.x86_64          5.3.2-1.el7.remi                      @remi
+php74-php-pecl-zip.x86_64             1.19.2-1.el7.remi                     @remi
+php74-php-pspell.x86_64               7.4.13-1.el7.remi                     @remi
+php74-php-snmp.x86_64                 7.4.13-1.el7.remi                     @remi
+php74-php-soap.x86_64                 7.4.13-1.el7.remi                     @remi
+php74-php-sodium.x86_64               7.4.13-1.el7.remi                     @remi
+php74-php-tidy.x86_64                 7.4.13-1.el7.remi                     @remi
+php74-php-xml.x86_64                  7.4.13-1.el7.remi                     @remi
+php74-php-xmlrpc.x86_64               7.4.13-1.el7.remi                     @remi
+```
+
+## PHP 8.0
+
+This PHP-FPM 8.0 branch version `php80.sh`:
+
+* Currently, following PHP extensions, memcache aren't available yet in Remi SCL php80 YUM repo
+* CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
+* listens on port `14000` instead of `9000` with php-fpm pool named `php80-www`
+* php-fpm status path = `/php80status`
+* custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php80/php.d/zzz_customphp.ini`
+* php config scan directory is at `/etc/opt/remi/php80/php.d`
+* php-fpm config file at `/etc/opt/remi/php80/php-fpm.d/www.conf`
+* error log at `/var/opt/remi/php80/log/php-fpm/www-error.log`
+* centmin mod nginx's php include file is at `/usr/local/nginx/conf/php80-remi.conf` instead of default at `/usr/local/nginx/conf/php.conf` which you replace references to in your centmin mod nginx vhost config file
+* `fpmconfphp80` is centmin mod command shortcut to invoke nano linux text editor to edit `/etc/opt/remi/php80/php-fpm.d/www.conf`
+* `phpincphp80` is centmin mod command shortcut to invoke nano linux text editor to edit `/usr/local/nginx/conf/php80-remi.conf`
+* `systemctl start php80-php-fpm` command to start php80-php-fpm service with command shortcut = `fpm80start`
+* `systemctl restart php80-php-fpm` command to restart php80-php-fpm service with command shortcut = `fpm80restart`
+* `systemctl stop php80-php-fpm` command to stop php80-php-fpm service with command shortcut = `fpm80stop`
+* `systemctl status php80-php-fpm` command to get status for php80-php-fpm service with command shortcut = `fpm80status`
 
 ## Example
 

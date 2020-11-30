@@ -10,7 +10,7 @@
 DT=$(date +"%d%m%y-%H%M%S")
 CENTMINLOGDIR='/root/centminlogs'
 repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi,remi-test'
-packages='php71 php71-php-fpm php71-php-devel php71-php-embedded php71-php-mysqlnd php71-php-bcmath php71-php-enchant php71-php-gd php71-php-pecl-geoip php71-php-gmp php71-php-pecl-igbinary php71-php-pecl-igbinary-devel php71-php-pecl-imagick php71-php-pecl-imagick-devel php71-php-imap php71-php-intl php71-php-pecl-json-post php71-php-ldap php71-php-pecl-mailparse php71-php-mbstring php71-php-mcrypt php71-php-pecl-memcache php71-php-pecl-memcached php71-php-pecl-mysql php71-php-pdo-dblib php71-php-pspell php71-php-pecl-redis php71-php-snmp php71-php-soap php71-php-tidy php71-php-xml php71-php-xmlrpc php71-php-pecl-zip php71-php-opcache'
+packages='php71 php71-php-fpm php71-php-devel php71-php-embedded php71-php-mysqlnd php71-php-bcmath php71-php-enchant php71-php-gd php71-php-pecl-geoip php71-php-gmp php71-php-pecl-igbinary php71-php-pecl-igbinary-devel php71-php-pecl-imagick php71-php-pecl-imagick-devel php71-php-imap php71-php-intl php71-php-pecl-json-post php71-php-ldap php71-php-pecl-mailparse php71-php-mbstring php71-php-mcrypt php71-php-pecl-memcache php71-php-pecl-memcached php71-php-pecl-mysql php71-php-pdo-dblib php71-php-pspell php71-php-pecl-redis5 php71-php-snmp php71-php-soap php71-php-tidy php71-php-xml php71-php-xmlrpc php71-php-pecl-zip php71-php-opcache'
 
 ############################################
 # set locale temporarily to english

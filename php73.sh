@@ -10,7 +10,7 @@
 DT=$(date +"%d%m%y-%H%M%S")
 CENTMINLOGDIR='/root/centminlogs'
 repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi,remi-test'
-packages='php73 php73-php-fpm php73-php-devel php73-php-embedded php73-php-mysqlnd php73-php-bcmath php73-php-enchant php73-php-gd php73-php-pecl-geoip php73-php-gmp php73-php-pecl-igbinary php73-php-pecl-igbinary-devel php73-php-pecl-imagick php73-php-pecl-imagick-devel php73-php-imap php73-php-intl php73-php-pecl-json-post php73-php-ldap php73-php-pecl-mailparse php73-php-mbstring php73-php-mcrypt php73-php-pecl-memcache php73-php-pecl-memcached php73-php-pecl-mysql php73-php-pdo-dblib php73-php-pspell php73-php-pecl-redis4 php73-php-snmp php73-php-soap php73-php-tidy php73-php-xml php73-php-xmlrpc php73-php-pecl-zip php73-php-opcache php73-php-sodium'
+packages='php73 php73-php-fpm php73-php-devel php73-php-embedded php73-php-mysqlnd php73-php-bcmath php73-php-enchant php73-php-gd php73-php-pecl-geoip php73-php-gmp php73-php-pecl-igbinary php73-php-pecl-igbinary-devel php73-php-pecl-imagick php73-php-pecl-imagick-devel php73-php-imap php73-php-intl php73-php-pecl-json-post php73-php-ldap php73-php-pecl-mailparse php73-php-mbstring php73-php-mcrypt php73-php-pecl-memcache php73-php-pecl-memcached php73-php-pecl-mysql php73-php-pdo-dblib php73-php-pspell php73-php-pecl-redis5 php73-php-snmp php73-php-soap php73-php-tidy php73-php-xml php73-php-xmlrpc php73-php-pecl-zip php73-php-opcache php73-php-sodium'
 
 ############################################
 # set locale temporarily to english
@@ -317,6 +317,7 @@ phpinstall() {
 phpupdate() {
   yum versionlock delete ImageMagick6 ImageMagick6-devel ImageMagick6-c++ ImageMagick6-c++-devel ImageMagick6-libs
   yum -y update $packages $repoopt
+  #yum -y swap php73-php-pecl-redis4 php73-php-pecl-redis5 $repoopt
   yum versionlock ImageMagick6 ImageMagick6-devel ImageMagick6-c++ ImageMagick6-c++-devel ImageMagick6-libs
 }
 

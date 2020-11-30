@@ -1,16 +1,16 @@
 #/bin/bash
 ############################################
 # centminmod.com multiple PHP-FPM version
-# installer for PHP 7.4 branch installed
+# installer for PHP 8.0 branch installed
 # side by side concurrently with default
 # centmin mod installed PHP version using
-# using Remi YUM repo's SCL php74 version
+# using Remi YUM repo's SCL php80 version
 # written by George Liu centminmod.com
 ############################################
 DT=$(date +"%d%m%y-%H%M%S")
 CENTMINLOGDIR='/root/centminlogs'
-repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi,remi-test'
-packages='php74 php74-php-fpm php74-php-devel php74-php-embedded php74-php-mysqlnd php74-php-bcmath php74-php-enchant php74-php-gd php74-php-pecl-geoip php74-php-gmp php74-php-pecl-igbinary php74-php-pecl-igbinary-devel php74-php-pecl-imagick php74-php-pecl-imagick-devel php74-php-imap php74-php-intl php74-php-pecl-json-post php74-php-ldap php74-php-pecl-mailparse php74-php-mbstring php74-php-mcrypt php74-php-pecl-memcache php74-php-pecl-memcached php74-php-pecl-mysql php74-php-pdo-dblib php74-php-pspell php74-php-pecl-redis5 php74-php-snmp php74-php-soap php74-php-tidy php74-php-xml php74-php-xmlrpc php74-php-pecl-zip php74-php-opcache php74-php-sodium oniguruma5 oniguruma5-devel'
+repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi,remi-php80,remi-safe'
+packages='php80 php80-php-fpm php80-php-devel php80-php-embedded php80-php-mysqlnd php80-php-bcmath php80-php-enchant php80-php-gd php80-php-pecl-geoip php80-php-gmp php80-php-pecl-igbinary php80-php-pecl-igbinary-devel php80-php-pecl-imagick php80-php-pecl-imagick-devel php80-php-imap php80-php-intl php80-php-pecl-json-post php80-php-ldap php80-php-pecl-mailparse php80-php-mbstring php80-php-mcrypt php80-php-pecl-memcache php80-php-pecl-memcached php80-php-pecl-mysql php80-php-pdo-dblib php80-php-pspell php80-php-pecl-redis5 php80-php-snmp php80-php-soap php80-php-tidy php80-php-xml php80-php-xmlrpc php80-php-pecl-zip php80-php-opcache php80-php-sodium oniguruma5 oniguruma5-devel'
 
 ############################################
 # set locale temporarily to english
@@ -143,7 +143,7 @@ opcachehugepages() {
 phpsededit() {
     TOTALMEM=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
     PHPINICUSTOM='zzz_customphp.ini'
-    CONFIGSCANDIR='/etc/opt/remi/php74/php.d'
+    CONFIGSCANDIR='/etc/opt/remi/php80/php.d'
     CUSTOMPHPINIFILE="${CONFIGSCANDIR}/${PHPINICUSTOM}"
 
     if [[ ! -f "${CUSTOMPHPINIFILE}" ]]; then
@@ -247,70 +247,70 @@ phpsededit() {
       sed -i "s|opcache.memory_consumption=.*|opcache.memory_consumption=$ZOLIMIT|" "${CONFIGSCANDIR}/20-opcache.ini"
     fi
     opcachehugepages
-    if [ -f /etc/opt/remi/php74/php-fpm.d/www.conf ]; then
-      sed -i 's|pm.max_children = .*|pm.max_children = 20|' /etc/opt/remi/php74/php-fpm.d/www.conf
-      sed -i 's|pm.max_spare_servers = .*|pm.max_spare_servers = 15|' /etc/opt/remi/php74/php-fpm.d/www.conf
+    if [ -f /etc/opt/remi/php80/php-fpm.d/www.conf ]; then
+      sed -i 's|pm.max_children = .*|pm.max_children = 20|' /etc/opt/remi/php80/php-fpm.d/www.conf
+      sed -i 's|pm.max_spare_servers = .*|pm.max_spare_servers = 15|' /etc/opt/remi/php80/php-fpm.d/www.conf
     fi
 }
 
 phpinstall() {
   yum -y install $packages $repoopt
   phpsededit
-  if [ ! -f /var/opt/remi/php74/log/php-fpm/www-error.log ]; then
-    touch /var/opt/remi/php74/log/php-fpm/www-error.log
-    chmod 0666 /var/opt/remi/php74/log/php-fpm/www-error.log
-    chown nginx:nginx /var/opt/remi/php74/log/php-fpm/www-error.log
+  if [ ! -f /var/opt/remi/php80/log/php-fpm/www-error.log ]; then
+    touch /var/opt/remi/php80/log/php-fpm/www-error.log
+    chmod 0666 /var/opt/remi/php80/log/php-fpm/www-error.log
+    chown nginx:nginx /var/opt/remi/php80/log/php-fpm/www-error.log
   fi
-  if [ ! -f /var/opt/remi/php74/log/php-fpm/www-slow.log ]; then
-    touch /var/opt/remi/php74/log/php-fpm/www-slow.log
-    chmod 0666 /var/opt/remi/php74/log/php-fpm/www-slow.log
-    chown nginx:nginx /var/opt/remi/php74/log/php-fpm/www-slow.log
+  if [ ! -f /var/opt/remi/php80/log/php-fpm/www-slow.log ]; then
+    touch /var/opt/remi/php80/log/php-fpm/www-slow.log
+    chmod 0666 /var/opt/remi/php80/log/php-fpm/www-slow.log
+    chown nginx:nginx /var/opt/remi/php80/log/php-fpm/www-slow.log
   fi
-  echo "systemctl stop php74-php-fpm" >/usr/bin/fpm74stop ; chmod 700 /usr/bin/fpm74stop
-  echo "systemctl start php74-php-fpm" >/usr/bin/fpm74start ; chmod 700 /usr/bin/fpm74start
-  echo "systemctl restart php74-php-fpm" >/usr/bin/fpm74restart ; chmod 700 /usr/bin/fpm74restart
-  echo "systemctl reload php74-php-fpm" >/usr/bin/fpm74reload ; chmod 700 /usr/bin/fpm74reload
-  echo "systemctl status php74-php-fpm" >/usr/bin/fpm74status ; chmod 700 /usr/bin/fpm74status
-  echo "nano -w /etc/opt/remi/php74/php-fpm.d/www.conf" >/usr/bin/fpmconfphp74 ; chmod 700 /usr/bin/fpmconfphp74
-  echo "nano -w /usr/local/nginx/conf/php74-remi.conf" >/usr/bin/phpincphp74 ; chmod 700 /usr/bin/phpincphp74
-  cp -a /usr/local/nginx/conf/php.conf /usr/local/nginx/conf/php74-remi.conf
-  sed -i 's|\[www\]|\[php74-www\]|' /etc/opt/remi/php74/php-fpm.d/www.conf
-  sed -i 's|9000|12000|' /etc/opt/remi/php74/php-fpm.d/www.conf
-  sed -i 's|9000|12000|' /usr/local/nginx/conf/php74-remi.conf
-  sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /etc/opt/remi/php74/php-fpm.d/www.conf
-  sed -i 's|;listen.owner = .*|listen.owner = nginx|' /etc/opt/remi/php74/php-fpm.d/www.conf
-  sed -i 's|;listen.group = .*|listen.group = nginx|' /etc/opt/remi/php74/php-fpm.d/www.conf
-  sed -i 's|user = apache|user = nginx|' /etc/opt/remi/php74/php-fpm.d/www.conf
-  sed -i 's|group = apache|group = nginx|' /etc/opt/remi/php74/php-fpm.d/www.conf
-  sed -i 's|;pm.status_path = \/status|pm.status_path = \/php74status|' /etc/opt/remi/php74/php-fpm.d/www.conf
+  echo "systemctl stop php80-php-fpm" >/usr/bin/fpm80stop ; chmod 700 /usr/bin/fpm80stop
+  echo "systemctl start php80-php-fpm" >/usr/bin/fpm80start ; chmod 700 /usr/bin/fpm80start
+  echo "systemctl restart php80-php-fpm" >/usr/bin/fpm80restart ; chmod 700 /usr/bin/fpm80restart
+  echo "systemctl reload php80-php-fpm" >/usr/bin/fpm80reload ; chmod 700 /usr/bin/fpm80reload
+  echo "systemctl status php80-php-fpm" >/usr/bin/fpm80status ; chmod 700 /usr/bin/fpm80status
+  echo "nano -w /etc/opt/remi/php80/php-fpm.d/www.conf" >/usr/bin/fpmconfphp80 ; chmod 700 /usr/bin/fpmconfphp80
+  echo "nano -w /usr/local/nginx/conf/php80-remi.conf" >/usr/bin/phpincphp80 ; chmod 700 /usr/bin/phpincphp80
+  cp -a /usr/local/nginx/conf/php.conf /usr/local/nginx/conf/php80-remi.conf
+  sed -i 's|\[www\]|\[php80-www\]|' /etc/opt/remi/php80/php-fpm.d/www.conf
+  sed -i 's|9000|14000|' /etc/opt/remi/php80/php-fpm.d/www.conf
+  sed -i 's|9000|14000|' /usr/local/nginx/conf/php80-remi.conf
+  sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /etc/opt/remi/php80/php-fpm.d/www.conf
+  sed -i 's|;listen.owner = .*|listen.owner = nginx|' /etc/opt/remi/php80/php-fpm.d/www.conf
+  sed -i 's|;listen.group = .*|listen.group = nginx|' /etc/opt/remi/php80/php-fpm.d/www.conf
+  sed -i 's|user = apache|user = nginx|' /etc/opt/remi/php80/php-fpm.d/www.conf
+  sed -i 's|group = apache|group = nginx|' /etc/opt/remi/php80/php-fpm.d/www.conf
+  sed -i 's|;pm.status_path = \/status|pm.status_path = \/php80status|' /etc/opt/remi/php80/php-fpm.d/www.conf
 
   # raise system limits
-  mkdir -p /etc/systemd/system/php74-php-fpm.service.d
-  echo -en "[Service]\nLimitNOFILE=262144\nLimitNPROC=16384\n" > /etc/systemd/system/php74-php-fpm.service.d/limit.conf
+  mkdir -p /etc/systemd/system/php80-php-fpm.service.d
+  echo -en "[Service]\nLimitNOFILE=262144\nLimitNPROC=16384\n" > /etc/systemd/system/php80-php-fpm.service.d/limit.conf
   systemctl daemon-reload
 
   echo
-  echo "start php74-php-fpm service"
-  systemctl start php74-php-fpm
-  systemctl enable php74-php-fpm
+  echo "start php80-php-fpm service"
+  systemctl start php80-php-fpm
+  systemctl enable php80-php-fpm
   echo
-  echo "status php74-php-fpm service"
-  systemctl status php74-php-fpm
+  echo "status php80-php-fpm service"
+  systemctl status php80-php-fpm
   echo
   echo "command shortcuts"
-  echo "phpincphp74 - edit /usr/local/nginx/conf/php74-remi.conf include file"
-  echo "fpmconfphp74 - edit /etc/opt/remi/php74/php-fpm.d/www.conf php-fpm config"
+  echo "phpincphp80 - edit /usr/local/nginx/conf/php80-remi.conf include file"
+  echo "fpmconfphp80 - edit /etc/opt/remi/php80/php-fpm.d/www.conf php-fpm config"
   echo
-  echo "php74 -v"
-  php74 -v
+  echo "php80 -v"
+  php80 -v
   echo
-  echo "which php74"
-  which php74
+  echo "which php80"
+  which php80
   echo
-  echo "php74 -m"
-  php74 -m
-  echo "php74 --ini"
-  php74 --ini
+  echo "php80 -m"
+  php80 -m
+  echo "php80 --ini"
+  php80 --ini
   echo
 }
 
@@ -336,44 +336,44 @@ case "$1" in
     phplist
     ;;
   phpconfig )
-    if [ -f /opt/remi/php74/root/usr/bin/php-config ]; then
-      /opt/remi/php74/root/usr/bin/php-config
+    if [ -f /opt/remi/php80/root/usr/bin/php-config ]; then
+      /opt/remi/php80/root/usr/bin/php-config
     fi
     ;;
   phperrors )
-    if [ -f /var/opt/remi/php74/log/php-fpm/www-error.log ]; then
-      echo "tail -100 /var/opt/remi/php74/log/php-fpm/www-error.log"
-      tail -100 /var/opt/remi/php74/log/php-fpm/www-error.log
+    if [ -f /var/opt/remi/php80/log/php-fpm/www-error.log ]; then
+      echo "tail -100 /var/opt/remi/php80/log/php-fpm/www-error.log"
+      tail -100 /var/opt/remi/php80/log/php-fpm/www-error.log
     fi
     ;;
   phpcustom )
-    if [ -f /etc/opt/remi/php74/php.d/zzz_customphp.ini ]; then
-      nano /etc/opt/remi/php74/php.d/zzz_customphp.ini
+    if [ -f /etc/opt/remi/php80/php.d/zzz_customphp.ini ]; then
+      nano /etc/opt/remi/php80/php.d/zzz_customphp.ini
     fi
     ;;
   phpslowlog )
-    if [ -f /var/opt/remi/php74/log/php-fpm/www-slow.log ]; then
-      echo "tail -100 /var/opt/remi/php74/log/php-fpm/www-slow.log"
-      tail -100 /var/opt/remi/php74/log/php-fpm/www-slow.log
+    if [ -f /var/opt/remi/php80/log/php-fpm/www-slow.log ]; then
+      echo "tail -100 /var/opt/remi/php80/log/php-fpm/www-slow.log"
+      tail -100 /var/opt/remi/php80/log/php-fpm/www-slow.log
     fi
     ;;
   phpini )
-    php74 --ini
+    php80 --ini
     ;;
   phpext )
-    php74 -m
+    php80 -m
     ;;
   start )
-    systemctl start php74-php-fpm
+    systemctl start php80-php-fpm
     ;;
   restart )
-    systemctl restart php74-php-fpm
+    systemctl restart php80-php-fpm
     ;;
   stop )
-    systemctl stop php74-php-fpm
+    systemctl stop php80-php-fpm
     ;;
   status )
-    systemctl status php74-php-fpm
+    systemctl status php80-php-fpm
     ;;
   process )
     ps aufxw | egrep -w 'php-fpm|nginx' | grep -v grep
