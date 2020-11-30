@@ -6,7 +6,7 @@
 ######################################################
 # variables
 #############
-VERSION='0.8'
+VERSION='0.9'
 DT=$(date +"%d%m%y-%H%M%S")
 VERBOSE='n'
 OPCACHECLI='n'
@@ -130,7 +130,9 @@ bench() {
   getfiles
   cachetool_setup
   cd "$BENCHDIR"
-  if [[ -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
+  if [[ -f /usr/bin/php80 && -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
+    PHPBIN='/usr/local/bin/php /usr/bin/php80 /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php71 /usr/bin/php70 /usr/bin/php56'
+  elif [[ -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
     PHPBIN='/usr/local/bin/php /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php71 /usr/bin/php70 /usr/bin/php56'
   elif [[ -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && ! -f /usr/bin/php56 ]]; then
     PHPBIN='/usr/local/bin/php /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php71 /usr/bin/php70'
@@ -190,6 +192,9 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
  if [[ "$p" = '/usr/local/bin/php' ]]; then
   FPM_PORT='9000'
   PHPVERNUM=$(/usr/local/bin/php-config --vernum| cut -c1,3)
+ elif [[ "$p" = '/usr/bin/php80' ]]; then
+  FPM_PORT='14000'
+  PHPVERNUM=$(/opt/remi/php80/root/usr/bin/php-config --vernum| cut -c1,3)
  elif [[ "$p" = '/usr/bin/php74' ]]; then
   FPM_PORT='12000'
   PHPVERNUM=$(/opt/remi/php74/root/usr/bin/php-config --vernum| cut -c1,3)
