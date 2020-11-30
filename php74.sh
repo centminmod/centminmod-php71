@@ -10,7 +10,7 @@
 DT=$(date +"%d%m%y-%H%M%S")
 CENTMINLOGDIR='/root/centminlogs'
 repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi,remi-test'
-packages='php74 php74-php-fpm php74-php-devel php74-php-embedded php74-php-mysqlnd php74-php-bcmath php74-php-enchant php74-php-gd php74-php-pecl-geoip php74-php-gmp php74-php-pecl-igbinary php74-php-pecl-igbinary-devel php74-php-pecl-imagick php74-php-pecl-imagick-devel php74-php-imap php74-php-intl php74-php-pecl-json-post php74-php-ldap php74-php-pecl-mailparse php74-php-mbstring php74-php-mcrypt php74-php-pecl-memcache php74-php-pecl-memcached php74-php-pecl-mysql php74-php-pdo-dblib php74-php-pspell php74-php-pecl-redis5 php74-php-snmp php74-php-soap php74-php-tidy php74-php-xml php74-php-xmlrpc php74-php-pecl-zip php74-php-opcache php74-php-sodium oniguruma5 oniguruma5-devel'
+packages='php74 php74-php-fpm php74-php-devel php74-php-embedded php74-php-mysqlnd php74-php-bcmath php74-php-enchant php74-php-gd php74-php-pecl-geoip php74-php-gmp php74-php-pecl-igbinary php74-php-pecl-igbinary-devel php74-php-pecl-imagick php74-php-pecl-imagick-devel php74-php-imap php74-php-intl php74-php-pecl-json-post php74-php-ldap php74-php-pecl-mailparse php74-php-mbstring php74-php-mcrypt php74-php-pecl-memcache php74-php-pecl-memcached php74-php-pecl-mysql php74-php-pdo-dblib php74-php-pspell php74-php-pecl-redis5 php74-php-snmp php74-php-soap php74-php-tidy php74-php-xml php74-php-xmlrpc php74-php-pecl-zip php74-php-opcache php74-php-sodium oniguruma5php oniguruma5php-devel'
 
 ############################################
 # set locale temporarily to english
