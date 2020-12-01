@@ -6,10 +6,14 @@
 ######################################################
 # variables
 #############
-VERSION='1.0'
+VERSION='1.2'
 DT=$(date +"%d%m%y-%H%M%S")
 VERBOSE='n'
 OPCACHECLI='n'
+# https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.jit
+# tracing = 1254
+# function = 1205
+OPCACHE_JITCRTO='1254'
 CACHETOOL='n'
 RUNS=3
 SLEEP=3
@@ -47,6 +51,10 @@ if [[ "$OPCACHECLI" = [yY] ]]; then
   if [ -f /etc/centminmod/php.d/zz-zendopcache.ini ]; then
     sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/centminmod/php.d/zz-zendopcache.ini
   fi
+  if [[ -f /usr/bin/php80 && -f /etc/opt/remi/php80/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/opt/remi/php80/php.d/20-opcache.ini
+    fpm80restart
+  fi
   if [[ -f /usr/bin/php74 && -f /etc/opt/remi/php74/php.d/20-opcache.ini ]]; then
     sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/opt/remi/php74/php.d/20-opcache.ini
     fpm74restart
@@ -79,6 +87,10 @@ else
   fi
   if [ -f /etc/centminmod/php.d/zz-zendopcache.ini ]; then
     sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/centminmod/php.d/zz-zendopcache.ini
+  fi
+  if [[ -f /usr/bin/php80 && -f /etc/opt/remi/php80/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/opt/remi/php80/php.d/20-opcache.ini
+    fpm80restart
   fi
   if [[ -f /usr/bin/php74 && -f /etc/opt/remi/php74/php.d/20-opcache.ini ]]; then
     sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/opt/remi/php74/php.d/20-opcache.ini
@@ -223,7 +235,7 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
   elif [[ "$OPCACHECLI" = [nN] ]]; then
     OPCLI='-dopcache.enable_cli=1'
   fi
-  OPCLI="$OPCLI -dopcache.jit=1235 -dopcache.file_update_protection=0 -dopcache.jit_buffer_size=256M"
+  OPCLI="$OPCLI -dopcache.jit=$OPCACHE_JITCRTO -dopcache.file_update_protection=0 -dopcache.jit_buffer_size=256M"
  fi
 
  DT=$(date +"%d%m%y-%H%M%S")

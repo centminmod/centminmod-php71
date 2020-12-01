@@ -364,6 +364,8 @@ This PHP-FPM 7.4 branch version `php74.sh`:
 ./php74.sh list
 
 Installed                             Packages
+oniguruma5php.x86_64                  6.9.6-1.el7.remi                      @remi
+oniguruma5php-devel.x86_64            6.9.6-1.el7.remi                      @remi
 php74.x86_64                          1.0-3.el7.remi                        @remi
 php74-php-bcmath.x86_64               7.4.13-1.el7.remi                     @remi
 php74-php-devel.x86_64                7.4.13-1.el7.remi                     @remi
@@ -399,6 +401,25 @@ php74-php-tidy.x86_64                 7.4.13-1.el7.remi                     @rem
 php74-php-xml.x86_64                  7.4.13-1.el7.remi                     @remi
 php74-php-xmlrpc.x86_64               7.4.13-1.el7.remi                     @remi
 ```
+```
+./php74.sh phpconfig  
+Usage: /opt/remi/php74/root/usr/bin/php-config [OPTION]
+Options:
+  --prefix            [/opt/remi/php74/root/usr]
+  --includes          [-I/opt/remi/php74/root/usr/include/php -I/opt/remi/php74/root/usr/include/php/main -I/opt/remi/php74/root/usr/include/php/TSRM -I/opt/remi/php74/root/usr/include/php/Zend -I/opt/remi/php74/root/usr/include/php/ext -I/opt/remi/php74/root/usr/include/php/ext/date/lib]
+  --ldflags           []
+  --libs              [-lcrypt   -lresolv -lcrypt -lrt -lm -ldl  -lxml2 -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -lssl -lcrypto -lz -lcrypt -lcrypt ]
+  --extension-dir     [/opt/remi/php74/root/usr/lib64/php/modules]
+  --include-dir       [/opt/remi/php74/root/usr/include/php]
+  --man-dir           [/opt/remi/php74/root/usr/share/man]
+  --php-binary        [/opt/remi/php74/root/usr/bin/php]
+  --php-sapis         [apache2handler litespeed fpm phpdbg  cli embed cgi]
+  --ini-path          [/etc/opt/remi/php74]
+  --ini-dir           [/etc/opt/remi/php74/php.d]
+  --configure-options [--build=x86_64-redhat-linux-gnu --host=x86_64-redhat-linux-gnu --program-prefix= --disable-dependency-tracking --prefix=/opt/remi/php74/root/usr --exec-prefix=/opt/remi/php74/root/usr --bindir=/opt/remi/php74/root/usr/bin --sbindir=/opt/remi/php74/root/usr/sbin --sysconfdir=/etc/opt/remi/php74 --datadir=/opt/remi/php74/root/usr/share --includedir=/opt/remi/php74/root/usr/include --libdir=/opt/remi/php74/root/usr/lib64 --libexecdir=/opt/remi/php74/root/usr/libexec --localstatedir=/var/opt/remi/php74 --sharedstatedir=/var/opt/remi/php74/lib --mandir=/opt/remi/php74/root/usr/share/man --infodir=/opt/remi/php74/root/usr/share/info --enable-rtld-now --cache-file=../config.cache --with-libdir=lib64 --with-config-file-path=/etc/opt/remi/php74 --with-config-file-scan-dir=/etc/opt/remi/php74/php.d --disable-debug --with-pic --disable-rpath --without-pear --with-exec-dir=/opt/remi/php74/root/usr/bin --without-gdbm --with-openssl --with-system-ciphers --with-zlib --with-layout=GNU --with-kerberos --with-libxml --with-system-tzdata --with-mhash --without-password-argon2 --enable-dtrace --enable-embed --without-mysqli --disable-pdo --disable-gd --disable-dom --disable-dba --without-unixODBC --disable-opcache --disable-phpdbg --disable-json --without-ffi --disable-xmlreader --disable-xmlwriter --without-sodium --without-sqlite3 --disable-phar --disable-fileinfo --without-pspell --without-curl --disable-posix --disable-xml --disable-simplexml --disable-exif --without-gettext --without-iconv --disable-ftp --without-bz2 --disable-ctype --disable-shmop --disable-sockets --disable-tokenizer --disable-sysvmsg --disable-sysvshm --disable-sysvsem build_alias=x86_64-redhat-linux-gnu host_alias=x86_64-redhat-linux-gnu PKG_CONFIG_PATH=/opt/rh/devtoolset-8/root/usr/lib64/pkgconfig::/opt/remi/php74/root/usr/lib64/pkgconfig:/opt/remi/php74/root/usr/share/pkgconfig CFLAGS=-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic -fno-strict-aliasing -Wno-pointer-sign CXXFLAGS=-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic]
+  --version           [7.4.13]
+  --vernum            [70413]
+```
 
 ## PHP 8.0
 
@@ -419,6 +440,66 @@ This PHP-FPM 8.0 branch version `php80.sh`:
 * `systemctl restart php80-php-fpm` command to restart php80-php-fpm service with command shortcut = `fpm80restart`
 * `systemctl stop php80-php-fpm` command to stop php80-php-fpm service with command shortcut = `fpm80stop`
 * `systemctl status php80-php-fpm` command to get status for php80-php-fpm service with command shortcut = `fpm80status`
+
+```
+./php80.sh list
+
+Installed                             Packages
+oniguruma5php.x86_64                  6.9.6-1.el7.remi                @remi
+oniguruma5php-devel.x86_64            6.9.6-1.el7.remi                @remi
+php80.x86_64                          1.0-3.el7.remi                  @remi
+php80-php-bcmath.x86_64               8.0.0-1.el7.remi                @remi
+php80-php-devel.x86_64                8.0.0-1.el7.remi                @remi
+php80-php-embedded.x86_64             8.0.0-1.el7.remi                @remi
+php80-php-enchant.x86_64              8.0.0-1.el7.remi                @remi
+php80-php-fpm.x86_64                  8.0.0-1.el7.remi                @remi
+php80-php-gd.x86_64                   8.0.0-1.el7.remi                @remi
+php80-php-gmp.x86_64                  8.0.0-1.el7.remi                @remi
+php80-php-imap.x86_64                 8.0.0-1.el7.remi                @remi
+php80-php-intl.x86_64                 8.0.0-1.el7.remi                @remi
+php80-php-ldap.x86_64                 8.0.0-1.el7.remi                @remi
+php80-php-mbstring.x86_64             8.0.0-1.el7.remi                @remi
+php80-php-mysqlnd.x86_64              8.0.0-1.el7.remi                @remi
+php80-php-opcache.x86_64              8.0.0-1.el7.remi                @remi
+php80-php-pdo-dblib.x86_64            8.0.0-1.el7.remi                @remi
+php80-php-pecl-geoip.x86_64           1.1.1-14.el7.remi               @remi
+php80-php-pecl-igbinary.x86_64        3.1.6-1.el7.remi                @remi
+php80-php-pecl-igbinary-devel.x86_64  3.1.6-1.el7.remi                @remi
+php80-php-pecl-imagick.x86_64         3.4.4-14.el7.remi               @remi
+php80-php-pecl-imagick-devel.x86_64   3.4.4-14.el7.remi               @remi
+php80-php-pecl-json-post.x86_64       1.0.2-4.el7.remi                @remi
+php80-php-pecl-mailparse.x86_64       3.1.1-2.el7.remi                @remi
+php80-php-pecl-memcached.x86_64       3.1.5-3.el7.remi                @remi
+php80-php-pecl-redis5.x86_64          5.3.2-1.el7.remi                @remi
+php80-php-pecl-zip.x86_64             1.19.2-1.el7.remi               @remi
+php80-php-pspell.x86_64               8.0.0-1.el7.remi                @remi
+php80-php-snmp.x86_64                 8.0.0-1.el7.remi                @remi
+php80-php-soap.x86_64                 8.0.0-1.el7.remi                @remi
+php80-php-sodium.x86_64               8.0.0-1.el7.remi                @remi
+php80-php-tidy.x86_64                 8.0.0-1.el7.remi                @remi
+php80-php-xml.x86_64                  8.0.0-1.el7.remi                @remi
+Available                             Packages
+php80-php-xmlrpc.x86_64               8.0.0~DEV.20200526-13.el7.remi  remi
+```
+```
+./php80.sh phpconfig
+Usage: /opt/remi/php80/root/usr/bin/php-config [OPTION]
+Options:
+  --prefix            [/opt/remi/php80/root/usr]
+  --includes          [-I/opt/remi/php80/root/usr/include/php -I/opt/remi/php80/root/usr/include/php/main -I/opt/remi/php80/root/usr/include/php/TSRM -I/opt/remi/php80/root/usr/include/php/Zend -I/opt/remi/php80/root/usr/include/php/ext -I/opt/remi/php80/root/usr/include/php/ext/date/lib]
+  --ldflags           []
+  --libs              [-lcrypt   -lresolv -lcrypt -lutil -lrt -lm -ldl  -lxml2 -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -lssl -lcrypto -lz -lcrypt ]
+  --extension-dir     [/opt/remi/php80/root/usr/lib64/php/modules]
+  --include-dir       [/opt/remi/php80/root/usr/include/php]
+  --man-dir           [/opt/remi/php80/root/usr/share/man]
+  --php-binary        [/opt/remi/php80/root/usr/bin/php]
+  --php-sapis         [apache2handler litespeed fpm phpdbg  cli embed cgi]
+  --ini-path          [/etc/opt/remi/php80]
+  --ini-dir           [/etc/opt/remi/php80/php.d]
+  --configure-options [--build=x86_64-redhat-linux-gnu --host=x86_64-redhat-linux-gnu --program-prefix= --disable-dependency-tracking --prefix=/opt/remi/php80/root/usr --exec-prefix=/opt/remi/php80/root/usr --bindir=/opt/remi/php80/root/usr/bin --sbindir=/opt/remi/php80/root/usr/sbin --sysconfdir=/etc/opt/remi/php80 --datadir=/opt/remi/php80/root/usr/share --includedir=/opt/remi/php80/root/usr/include --libdir=/opt/remi/php80/root/usr/lib64 --libexecdir=/opt/remi/php80/root/usr/libexec --localstatedir=/var/opt/remi/php80 --sharedstatedir=/var/opt/remi/php80/lib --mandir=/opt/remi/php80/root/usr/share/man --infodir=/opt/remi/php80/root/usr/share/info --enable-rtld-now --cache-file=../config.cache --with-libdir=lib64 --with-config-file-path=/etc/opt/remi/php80 --with-config-file-scan-dir=/etc/opt/remi/php80/php.d --disable-debug --with-pic --disable-rpath --without-pear --with-exec-dir=/opt/remi/php80/root/usr/bin --without-gdbm --with-openssl --with-system-ciphers --with-zlib --with-layout=GNU --with-kerberos --with-libxml --with-system-tzdata --with-mhash --without-password-argon2 --enable-dtrace --enable-embed --without-mysqli --disable-pdo --disable-gd --disable-dom --disable-dba --without-unixODBC --disable-opcache --disable-phpdbg --without-ffi --disable-xmlreader --disable-xmlwriter --without-sodium --without-sqlite3 --disable-phar --disable-fileinfo --without-pspell --without-curl --disable-posix --disable-xml --disable-simplexml --disable-exif --without-gettext --without-iconv --disable-ftp --without-bz2 --disable-ctype --disable-shmop --disable-sockets --disable-tokenizer --disable-sysvmsg --disable-sysvshm --disable-sysvsem build_alias=x86_64-redhat-linux-gnu host_alias=x86_64-redhat-linux-gnu PKG_CONFIG_PATH=/opt/rh/devtoolset-8/root/usr/lib64/pkgconfig::/opt/remi/php80/root/usr/lib64/pkgconfig:/opt/remi/php80/root/usr/share/pkgconfig CFLAGS=-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic -fno-strict-aliasing -Wno-pointer-sign CXXFLAGS=-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic]
+  --version           [8.0.0]
+  --vernum            [80000]
+```
 
 ## Example
 
