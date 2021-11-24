@@ -51,6 +51,10 @@ if [[ "$OPCACHECLI" = [yY] ]]; then
   if [ -f /etc/centminmod/php.d/zz-zendopcache.ini ]; then
     sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/centminmod/php.d/zz-zendopcache.ini
   fi
+  if [[ -f /usr/bin/php81 && -f /etc/opt/remi/php81/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/opt/remi/php81/php.d/20-opcache.ini
+    fpm81restart
+  fi
   if [[ -f /usr/bin/php80 && -f /etc/opt/remi/php80/php.d/20-opcache.ini ]]; then
     sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=1|' /etc/opt/remi/php80/php.d/20-opcache.ini
     fpm80restart
@@ -87,6 +91,10 @@ else
   fi
   if [ -f /etc/centminmod/php.d/zz-zendopcache.ini ]; then
     sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/centminmod/php.d/zz-zendopcache.ini
+  fi
+  if [[ -f /usr/bin/php81 && -f /etc/opt/remi/php81/php.d/20-opcache.ini ]]; then
+    sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/opt/remi/php81/php.d/20-opcache.ini
+    fpm81restart
   fi
   if [[ -f /usr/bin/php80 && -f /etc/opt/remi/php80/php.d/20-opcache.ini ]]; then
     sed -i 's|opcache.enable_cli=.*|opcache.enable_cli=0|' /etc/opt/remi/php80/php.d/20-opcache.ini
@@ -142,7 +150,11 @@ bench() {
   getfiles
   cachetool_setup
   cd "$BENCHDIR"
-  if [[ -f /usr/bin/php80 && -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
+  if [[ -f /usr/bin/php81 && -f /usr/bin/php80 && -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
+    PHPBIN='/usr/local/bin/php /usr/bin/php81 /usr/bin/php80 /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php71 /usr/bin/php70 /usr/bin/php56'
+  elif [[ -f /usr/bin/php81 && -f /usr/bin/php80 && -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && ! -f /usr/bin/php56 ]]; then
+    PHPBIN='/usr/local/bin/php /usr/bin/php81 /usr/bin/php80 /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php71 /usr/bin/php70'
+  elif [[ -f /usr/bin/php80 && -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
     PHPBIN='/usr/local/bin/php /usr/bin/php80 /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php71 /usr/bin/php70 /usr/bin/php56'
   elif [[ -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
     PHPBIN='/usr/local/bin/php /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php71 /usr/bin/php70 /usr/bin/php56'
@@ -206,6 +218,9 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
  if [[ "$p" = '/usr/local/bin/php' ]]; then
   FPM_PORT='9000'
   PHPVERNUM=$(/usr/local/bin/php-config --vernum| cut -c1,3)
+ elif [[ "$p" = '/usr/bin/php81' ]]; then
+  FPM_PORT='16000'
+  PHPVERNUM=$(/opt/remi/php81/root/usr/bin/php-config --vernum| cut -c1,3)
  elif [[ "$p" = '/usr/bin/php80' ]]; then
   FPM_PORT='14000'
   PHPVERNUM=$(/opt/remi/php80/root/usr/bin/php-config --vernum| cut -c1,3)
@@ -229,7 +244,7 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
   PHPVERNUM=$(/opt/remi/php56/root/usr/bin/php-config --vernum| cut -c1,3)
  fi
  # PHP 8 JIT tests
- if [[ "$PHP_JIT" = [yY] && "$PHPVERNUM" -eq '80' ]]; then
+ if [[ "$PHP_JIT" = [yY] && "$PHPVERNUM" -eq '80' ]] || [[ "$PHP_JIT" = [yY] && "$PHPVERNUM" -eq '81' ]]; then
   if [[ "$OPCACHECLI" = [yY] ]]; then
     OPCLI='-dopcache.enable_cli=1'
   elif [[ "$OPCACHECLI" = [nN] ]]; then

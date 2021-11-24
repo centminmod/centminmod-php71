@@ -501,6 +501,86 @@ Options:
   --vernum            [80000]
 ```
 
+## PHP 8.1
+
+This PHP-FPM 8.1 branch version `php81.sh`:
+
+* Currently, following PHP extensions, memcache aren't available yet in Remi SCL php81 YUM repo
+* CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
+* listens on port `16000` instead of `9000` with php-fpm pool named `php81-www`
+* php-fpm status path = `/php81status`
+* custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php81/php.d/zzz_customphp.ini`
+* php config scan directory is at `/etc/opt/remi/php81/php.d`
+* php-fpm config file at `/etc/opt/remi/php81/php-fpm.d/www.conf`
+* error log at `/var/opt/remi/php81/log/php-fpm/www-error.log`
+* centmin mod nginx's php include file is at `/usr/local/nginx/conf/php81-remi.conf` instead of default at `/usr/local/nginx/conf/php.conf` which you replace references to in your centmin mod nginx vhost config file
+* `fpmconfphp81` is centmin mod command shortcut to invoke nano linux text editor to edit `/etc/opt/remi/php81/php-fpm.d/www.conf`
+* `phpincphp81` is centmin mod command shortcut to invoke nano linux text editor to edit `/usr/local/nginx/conf/php81-remi.conf`
+* `systemctl start php81-php-fpm` command to start php81-php-fpm service with command shortcut = `fpm81start`
+* `systemctl restart php81-php-fpm` command to restart php81-php-fpm service with command shortcut = `fpm81restart`
+* `systemctl stop php81-php-fpm` command to stop php81-php-fpm service with command shortcut = `fpm81stop`
+* `systemctl status php81-php-fpm` command to get status for php81-php-fpm service with command shortcut = `fpm81status`
+
+```
+./php81.sh list
+
+Installed                                Packages
+oniguruma5php.x86_64                     6.9.7.1-1.el7.remi                    @remi
+oniguruma5php-devel.x86_64               6.9.7.1-1.el7.remi                    @remi
+php81.x86_64                             8.1-1.el7.remi                        @remi
+php81-php-bcmath.x86_64                  8.1.0-1.el7.remi                      @remi
+php81-php-devel.x86_64                   8.1.0-1.el7.remi                      @remi
+php81-php-embedded.x86_64                8.1.0-1.el7.remi                      @remi
+php81-php-enchant.x86_64                 8.1.0-1.el7.remi                      @remi
+php81-php-fpm.x86_64                     8.1.0-1.el7.remi                      @remi
+php81-php-gd.x86_64                      8.1.0-1.el7.remi                      @remi
+php81-php-gmp.x86_64                     8.1.0-1.el7.remi                      @remi
+php81-php-imap.x86_64                    8.1.0-1.el7.remi                      @remi
+php81-php-intl.x86_64                    8.1.0-1.el7.remi                      @remi
+php81-php-ldap.x86_64                    8.1.0-1.el7.remi                      @remi
+php81-php-mbstring.x86_64                8.1.0-1.el7.remi                      @remi
+php81-php-mysqlnd.x86_64                 8.1.0-1.el7.remi                      @remi
+php81-php-opcache.x86_64                 8.1.0-1.el7.remi                      @remi
+php81-php-pdo-dblib.x86_64               8.1.0-1.el7.remi                      @remi
+php81-php-pecl-geoip.x86_64              1.1.1-16.el7.remi                     @remi
+php81-php-pecl-igbinary.x86_64           3.2.6-2.el7.remi                      @remi
+php81-php-pecl-igbinary-devel.x86_64     3.2.6-2.el7.remi                      @remi
+php81-php-pecl-imagick-im6.x86_64        3.6.0-2.el7.remi                      @remi
+php81-php-pecl-imagick-im6-devel.x86_64  3.6.0-2.el7.remi                      @remi
+php81-php-pecl-json-post.x86_64          1.1.0-1.el7.remi                      @remi
+php81-php-pecl-mailparse.x86_64          3.1.2-1.el7.remi                      @remi
+php81-php-pecl-memcache.x86_64           8.0-3.el7.remi                        @remi
+php81-php-pecl-memcached.x86_64          3.1.5-11.el7.remi                     @remi
+php81-php-pecl-mysql.x86_64              1.0.0-0.25.20210423.ca514c4.el7.remi  @remi
+php81-php-pecl-redis5.x86_64             5.3.4-2.el7.remi                      @remi
+php81-php-pecl-zip.x86_64                1.20.0-1.el7.remi                     @remi
+php81-php-pspell.x86_64                  8.1.0-1.el7.remi                      @remi
+php81-php-snmp.x86_64                    8.1.0-1.el7.remi                      @remi
+php81-php-soap.x86_64                    8.1.0-1.el7.remi                      @remi
+php81-php-sodium.x86_64                  8.1.0-1.el7.remi                      @remi
+php81-php-tidy.x86_64                    8.1.0-1.el7.remi                      @remi
+php81-php-xml.x86_64                     8.1.0-1.el7.remi                      @remi
+```
+```
+./php81.sh phpconfig
+Usage: /opt/remi/php81/root/usr/bin/php-config [OPTION]
+Options:
+  --prefix            [/opt/remi/php81/root/usr]
+  --includes          [-I/opt/remi/php81/root/usr/include/php -I/opt/remi/php81/root/usr/include/php/main -I/opt/remi/php81/root/usr/include/php/TSRM -I/opt/remi/php81/root/usr/include/php/Zend -I/opt/remi/php81/root/usr/include/php/ext -I/opt/remi/php81/root/usr/include/php/ext/date/lib]
+  --ldflags           []
+  --libs              [-lcrypt   -lresolv -lcrypt -lutil -lrt -lm -ldl  -lxml2 -lgssapi_krb5 -lkrb5 -lk5crypto -lcom_err -lssl -lcrypto -lz -lcrypt ]
+  --extension-dir     [/opt/remi/php81/root/usr/lib64/php/modules]
+  --include-dir       [/opt/remi/php81/root/usr/include/php]
+  --man-dir           [/opt/remi/php81/root/usr/share/man]
+  --php-binary        [/opt/remi/php81/root/usr/bin/php]
+  --php-sapis         [apache2handler litespeed fpm phpdbg  cli embed cgi]
+  --ini-path          [/etc/opt/remi/php81]
+  --ini-dir           [/etc/opt/remi/php81/php.d]
+  --configure-options [--build=x86_64-redhat-linux-gnu --host=x86_64-redhat-linux-gnu --program-prefix= --disable-dependency-tracking --prefix=/opt/remi/php81/root/usr --exec-prefix=/opt/remi/php81/root/usr --bindir=/opt/remi/php81/root/usr/bin --sbindir=/opt/remi/php81/root/usr/sbin --sysconfdir=/etc/opt/remi/php81 --datadir=/opt/remi/php81/root/usr/share --includedir=/opt/remi/php81/root/usr/include --libdir=/opt/remi/php81/root/usr/lib64 --libexecdir=/opt/remi/php81/root/usr/libexec --localstatedir=/var/opt/remi/php81 --sharedstatedir=/var/opt/remi/php81/lib --mandir=/opt/remi/php81/root/usr/share/man --infodir=/opt/remi/php81/root/usr/share/info --enable-rtld-now --cache-file=../config.cache --with-libdir=lib64 --with-config-file-path=/etc/opt/remi/php81 --with-config-file-scan-dir=/etc/opt/remi/php81/php.d --disable-debug --with-pic --disable-rpath --without-pear --with-exec-dir=/opt/remi/php81/root/usr/bin --without-gdbm --with-openssl --with-system-ciphers --with-zlib --with-layout=GNU --with-kerberos --with-libxml --with-system-tzdata --with-mhash --without-password-argon2 --enable-dtrace --enable-embed --without-mysqli --disable-pdo --disable-gd --disable-dom --disable-dba --without-unixODBC --disable-opcache --disable-phpdbg --without-ffi --disable-xmlreader --disable-xmlwriter --without-sodium --without-sqlite3 --disable-phar --disable-fileinfo --without-pspell --without-curl --disable-posix --disable-xml --disable-simplexml --disable-exif --without-gettext --without-iconv --disable-ftp --without-bz2 --disable-ctype --disable-shmop --disable-sockets --disable-tokenizer --disable-sysvmsg --disable-sysvshm --disable-sysvsem build_alias=x86_64-redhat-linux-gnu host_alias=x86_64-redhat-linux-gnu PKG_CONFIG_PATH=/opt/rh/devtoolset-10/root/usr/lib64/pkgconfig::/opt/remi/php81/root/usr/lib64/pkgconfig:/opt/remi/php81/root/usr/share/pkgconfig CFLAGS=-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic -fno-strict-aliasing -Wno-pointer-sign CXXFLAGS=-O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector-strong --param=ssp-buffer-size=4 -grecord-gcc-switches -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -m64 -mtune=generic]
+  --version           [8.1.0]
+  --vernum            [80100]
+```
+
 ## Example
 
 PHP version
