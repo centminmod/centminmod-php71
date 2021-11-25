@@ -235,7 +235,13 @@ for p in $PHPBIN; do
  # map php-fpm listening ports
  if [[ "$p" = '/usr/local/bin/php' ]]; then
   FPM_PORT='9000'
+  FPM_CHECK_PGO=$("$p" -v | grep -o PGO)
   PHPVERNUM=$(/usr/local/bin/php-config --vernum| cut -c1,3)
+  if [[ "$FPM_CHECK_PGO" = 'PGO' ]]; then
+    DESC_PGO=' + PGO'
+  else
+    DESC_PGO=' + no PGO'
+  fi
  elif [[ "$p" = '/usr/bin/php81' ]]; then
   FPM_PORT='16000'
   PHPVERNUM=$(/opt/remi/php81/root/usr/bin/php-config --vernum| cut -c1,3)
@@ -271,7 +277,7 @@ for p in $PHPBIN; do
    DESC_JIT=''
  fi
  if [[ "$p" = '/usr/local/bin/php' ]]; then
-  DESC="centminmod.com php-fpm${DESC_JIT}"
+  DESC="centminmod.com php-fpm${DESC_PGO}${DESC_JIT}"
 elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
   DISTRO=$(awk -F '="' '/PRETTY_NAME/ {print $2}' /etc/os-release | sed -e 's|\"||')
   DESC="$DISTRO php-fpm${DESC_JIT}"
