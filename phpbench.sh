@@ -1,12 +1,12 @@
 #!/bin/bash
 ######################################################
-# bench.php and micro_bench.php script for PHP 7.1, 
+# bench.php and micro_bench.php script for PHP 7.1,
 # 7.0, 5.6, 7.2, 7.3, 7.4, 8.0 etc
 # written by George Liu (eva2000) centminmod.com
 ######################################################
 # variables
 #############
-VERSION='1.3'
+VERSION='1.4'
 DT=$(date +"%d%m%y-%H%M%S")
 VERBOSE='n'
 OPCACHECLI='n'
@@ -232,14 +232,6 @@ bench() {
     PHPBIN='/usr/local/bin/php'
   fi
 for p in $PHPBIN; do
- if [[ "$p" = '/usr/local/bin/php' ]]; then
-  DESC='centminmod.com php-fpm'
-elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
-  DISTRO=$(awk -F '="' '/PRETTY_NAME/ {print $2}' /etc/os-release | sed -e 's|\"||')
-  DESC="$DISTRO php-fpm"
- else
-  DESC='remi scl php-fpm'
- fi
  # map php-fpm listening ports
  if [[ "$p" = '/usr/local/bin/php' ]]; then
   FPM_PORT='9000'
@@ -268,6 +260,23 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
  elif [[ "$p" = '/usr/bin/php56' ]]; then
   FPM_PORT='9700'
   PHPVERNUM=$(/opt/remi/php56/root/usr/bin/php-config --vernum| cut -c1,3)
+ fi
+ if [[ "$PHP_JIT" = [yY] && "$PHPVERNUM" -eq '80' ]] || [[ "$PHP_JIT" = [yY] && "$PHPVERNUM" -eq '81' ]]; then
+   DESC_JIT=' + JIT'
+ elif [[ "$PHP_JIT" = [nN] && "$PHPVERNUM" -eq '80' ]] || [[ "$PHP_JIT" = [yY] && "$PHPVERNUM" -eq '81' ]]; then
+   DESC_JIT=' + no JIT'
+ elif [[ "$PHP_JIT" = [yY] && "$PHPVERNUM" -ne '80' ]] || [[ "$PHP_JIT" = [yY] && "$PHPVERNUM" -ne '81' ]]; then
+   DESC_JIT=''
+ else
+   DESC_JIT=''
+ fi
+ if [[ "$p" = '/usr/local/bin/php' ]]; then
+  DESC="centminmod.com php-fpm${DESC_JIT}"
+elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
+  DISTRO=$(awk -F '="' '/PRETTY_NAME/ {print $2}' /etc/os-release | sed -e 's|\"||')
+  DESC="$DISTRO php-fpm${DESC_JIT}"
+ else
+  DESC="remi scl php-fpm${DESC_JIT}"
  fi
  # PHP 8 JIT tests
  if [[ "$PHP_JIT" = [yY] && "$PHPVERNUM" -eq '80' ]] || [[ "$PHP_JIT" = [yY] && "$PHPVERNUM" -eq '81' ]]; then
