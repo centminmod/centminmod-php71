@@ -10,7 +10,7 @@
 DT=$(date +"%d%m%y-%H%M%S")
 CENTMINLOGDIR='/root/centminlogs'
 repoopt='--disableplugin=priorities,versionlock --disableexcludes=main,remi --enablerepo=remi,remi-php81,remi-safe'
-packages='php81 php81-php-fpm php81-php-devel php81-php-embedded php81-php-mysqlnd php81-php-bcmath php81-php-enchant php81-php-gd php81-php-pecl-geoip php81-php-gmp php81-php-pecl-igbinary php81-php-pecl-igbinary-devel php81-php-pecl-imagick-im6 php81-php-pecl-imagick-im6-devel php81-php-imap php81-php-intl php81-php-pecl-json-post php81-php-ldap php81-php-pecl-mailparse php81-php-mbstring php81-php-mcrypt php81-php-pecl-memcache php81-php-pecl-memcached php81-php-pecl-mysql php81-php-pdo-dblib php81-php-pspell php81-php-pecl-redis5 php81-php-snmp php81-php-soap php81-php-tidy php81-php-xml php81-php-xmlrpc php81-php-pecl-zip php81-php-opcache php81-php-sodium oniguruma5php oniguruma5php-devel'
+packages='php81 php81-php-fpm php81-php-devel php81-php-embedded php81-php-mysqlnd php81-php-bcmath php81-php-enchant php81-php-gd php81-php-pecl-geoip php81-php-gmp php81-php-pecl-igbinary php81-php-pecl-igbinary-devel php81-php-pecl-imagick-im6 php81-php-pecl-imagick-im6-devel php81-php-imap php81-php-intl php81-php-pecl-json-post php81-php-ldap php81-php-pecl-mailparse php81-php-mbstring php81-php-mcrypt php81-php-pecl-memcache php81-php-pecl-memcached php81-php-pecl-mysql php81-php-pdo-dblib php81-php-pspell php81-php-pecl-redis5 php81-php-snmp php81-php-soap php81-php-tidy php81-php-xml php81-php-xmlrpc php81-php-pecl-zip php81-php-opcache php81-php-sodium libsodium-devel oniguruma5php oniguruma5php-devel'
 
 ############################################
 # set locale temporarily to english

@@ -6,7 +6,7 @@
 ######################################################
 # variables
 #############
-VERSION='1.2'
+VERSION='1.3'
 DT=$(date +"%d%m%y-%H%M%S")
 VERBOSE='n'
 OPCACHECLI='n'
@@ -24,6 +24,20 @@ DISABLE_PHP_SEVEN_ONE='y'
 
 # PHP 8 JIT
 PHP_JIT='y'
+# JIT Tracing options
+# https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.jit-hot-loop
+# https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.jit-hot-func
+# https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.jit-hot-return
+# https://www.php.net/manual/en/opcache.configuration.php#ini.opcache.jit-hot-side-exit
+# respective defaults 64, 127, 8, 8
+# After how many iterations a loop is considered hot
+JIT_HOT_LOOP=64
+# After how many calls a function is considered hot
+JIT_HOT_FUNC=127
+# After how many returns a return is considered hot
+JIT_HOT_RETURN=8
+# After how many exits a side exit is considered hot
+JIT_HOT_SIDE_EXIT=8
 
 PHPBENCHLOGDIR='/home/phpbench_logs'
 PHPBENCHLOGFILE="bench_${DT}.log"
@@ -262,7 +276,13 @@ elif [[ -f /etc/os-release && "$p" = '/usr/bin/php' ]]; then
   elif [[ "$OPCACHECLI" = [nN] ]]; then
     OPCLI='-dopcache.enable_cli=1'
   fi
-  OPCLI="$OPCLI -dopcache.jit=$OPCACHE_JITCRTO -dopcache.file_update_protection=0 -dopcache.jit_buffer_size=256M"
+  OPCLI="$OPCLI -d opcache.jit=$OPCACHE_JITCRTO -d opcache.file_update_protection=0 -d opcache.jit_buffer_size=256M -d opcache.jit_hot_loop=$JIT_HOT_LOOP -d opcache.jit_hot_func=$JIT_HOT_FUNC -d opcache.jit_hot_return=$JIT_HOT_RETURN -d opcache.jit_hot_side_exit=$JIT_HOT_SIDE_EXIT"
+ else
+  if [[ "$OPCACHECLI" = [yY] ]]; then
+      OPCLI='-dopcache.enable_cli=1'
+  elif [[ "$OPCACHECLI" = [nN] ]]; then
+      OPCLI='-dopcache.enable_cli=0'
+  fi
  fi
 
  DT=$(date +"%d%m%y-%H%M%S")
