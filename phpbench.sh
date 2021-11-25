@@ -18,6 +18,10 @@ CACHETOOL='n'
 RUNS=3
 SLEEP=3
 
+# Disable PHP version tests for quicker benchmarking
+DISABLE_PHP_SEVEN_ZERO='y'
+DISABLE_PHP_SEVEN_ONE='y'
+
 # PHP 8 JIT
 PHP_JIT='y'
 
@@ -150,7 +154,15 @@ bench() {
   getfiles
   cachetool_setup
   cd "$BENCHDIR"
-  if [[ -f /usr/bin/php81 && -f /usr/bin/php80 && -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
+  if [[ "$DISABLE_PHP_SEVEN_ONE" = [yY] && "$DISABLE_PHP_SEVEN_ZERO" = [yY] && -f /usr/bin/php81 && -f /usr/bin/php80 && -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && ! -f /usr/bin/php56 ]]; then
+    PHPBIN='/usr/local/bin/php /usr/bin/php81 /usr/bin/php80 /usr/bin/php74 /usr/bin/php73 /usr/bin/php72'
+  elif [[ "$DISABLE_PHP_SEVEN_ONE" = [yY] && "$DISABLE_PHP_SEVEN_ZERO" = [yY] && -f /usr/bin/php81 && -f /usr/bin/php80 && -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
+    PHPBIN='/usr/local/bin/php /usr/bin/php81 /usr/bin/php80 /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php56'
+  elif [[ "$DISABLE_PHP_SEVEN_ZERO" = [yY] && -f /usr/bin/php81 && -f /usr/bin/php80 && -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && ! -f /usr/bin/php56 ]]; then
+    PHPBIN='/usr/local/bin/php /usr/bin/php81 /usr/bin/php80 /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php71'
+  elif [[ "$DISABLE_PHP_SEVEN_ZERO" = [yY] && -f /usr/bin/php81 && -f /usr/bin/php80 && -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
+    PHPBIN='/usr/local/bin/php /usr/bin/php81 /usr/bin/php80 /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php71 /usr/bin/php56'
+  elif [[ -f /usr/bin/php81 && -f /usr/bin/php80 && -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && -f /usr/bin/php56 ]]; then
     PHPBIN='/usr/local/bin/php /usr/bin/php81 /usr/bin/php80 /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php71 /usr/bin/php70 /usr/bin/php56'
   elif [[ -f /usr/bin/php81 && -f /usr/bin/php80 && -f /usr/bin/php74 && -f /usr/bin/php73 && -f /usr/bin/php72 && -f /usr/bin/php71 && -f /usr/bin/php70 && ! -f /usr/bin/php56 ]]; then
     PHPBIN='/usr/local/bin/php /usr/bin/php81 /usr/bin/php80 /usr/bin/php74 /usr/bin/php73 /usr/bin/php72 /usr/bin/php71 /usr/bin/php70'
