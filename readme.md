@@ -581,6 +581,36 @@ Options:
   --vernum            [80100]
 ```
 
+## PHP 8.2
+
+This PHP-FPM 8.2 branch version `php82.sh`:
+
+* Currently, following PHP extensions, memcache aren't available yet in Remi SCL php82 YUM repo
+* CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
+* listens on port `18000` instead of `9000` with php-fpm pool named `php82-www`
+* php-fpm status path = `/php82status`
+* custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php82/php.d/zzz_customphp.ini`
+* php config scan directory is at `/etc/opt/remi/php82/php.d`
+* php-fpm config file at `/etc/opt/remi/php82/php-fpm.d/www.conf`
+* error log at `/var/opt/remi/php82/log/php-fpm/www-error.log`
+* centmin mod nginx's php include file is at `/usr/local/nginx/conf/php82-remi.conf` instead of default at `/usr/local/nginx/conf/php.conf` which you replace references to in your centmin mod nginx vhost config file
+* `fpmconfphp82` is centmin mod command shortcut to invoke nano linux text editor to edit `/etc/opt/remi/php82/php-fpm.d/www.conf`
+* `phpincphp82` is centmin mod command shortcut to invoke nano linux text editor to edit `/usr/local/nginx/conf/php82-remi.conf`
+* `systemctl start php82-php-fpm` command to start php82-php-fpm service with command shortcut = `fpm82start`
+* `systemctl restart php82-php-fpm` command to restart php82-php-fpm service with command shortcut = `fpm82restart`
+* `systemctl stop php82-php-fpm` command to stop php82-php-fpm service with command shortcut = `fpm82stop`
+* `systemctl status php82-php-fpm` command to get status for php82-php-fpm service with command shortcut = `fpm82status`
+
+```
+./php82.sh list
+
+
+```
+```
+./php82.sh phpconfig
+
+```
+
 ## Example
 
 PHP version
