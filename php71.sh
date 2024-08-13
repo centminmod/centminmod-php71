@@ -364,6 +364,8 @@ phpinstall() {
   sed -i 's|\[www\]|\[php71-www\]|' /etc/opt/remi/php71/php-fpm.d/www.conf
   sed -i 's|9000|9900|' /etc/opt/remi/php71/php-fpm.d/www.conf
   sed -i 's|9000|9900|' /usr/local/nginx/conf/php71-remi.conf
+  sed -i 's/fastcgi_pass dft_php;/#fastcgi_pass dft_php;/g' /usr/local/nginx/conf/php71-remi.conf
+  sed -i 's/#fastcgi_pass   127.0.0.1/fastcgi_pass   127.0.0.1/g' /usr/local/nginx/conf/php71-remi.conf
   sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /etc/opt/remi/php71/php-fpm.d/www.conf
   sed -i 's|;listen.owner = .*|listen.owner = nginx|' /etc/opt/remi/php71/php-fpm.d/www.conf
   sed -i 's|;listen.group = .*|listen.group = nginx|' /etc/opt/remi/php71/php-fpm.d/www.conf

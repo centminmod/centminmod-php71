@@ -355,6 +355,8 @@ phpinstall() {
   sed -i 's|\[www\]|\[php83-www\]|' /etc/opt/remi/php83/php-fpm.d/www.conf
   sed -i 's|9000|20000|' /etc/opt/remi/php83/php-fpm.d/www.conf
   sed -i 's|9000|20000|' /usr/local/nginx/conf/php83-remi.conf
+  sed -i 's/fastcgi_pass dft_php;/#fastcgi_pass dft_php;/g' /usr/local/nginx/conf/php83-remi.conf
+  sed -i 's/#fastcgi_pass   127.0.0.1/fastcgi_pass   127.0.0.1/g' /usr/local/nginx/conf/php83-remi.conf
   sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /etc/opt/remi/php83/php-fpm.d/www.conf
   sed -i 's|;listen.owner = .*|listen.owner = nginx|' /etc/opt/remi/php83/php-fpm.d/www.conf
   sed -i 's|;listen.group = .*|listen.group = nginx|' /etc/opt/remi/php83/php-fpm.d/www.conf

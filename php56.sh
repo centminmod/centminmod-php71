@@ -364,6 +364,8 @@ phpinstall() {
   sed -i 's|\[www\]|\[php56-www\]|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
   sed -i 's|9000|9700|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
   sed -i 's|9000|9700|' /usr/local/nginx/conf/php56-remi.conf
+  sed -i 's/fastcgi_pass dft_php;/#fastcgi_pass dft_php;/g' /usr/local/nginx/conf/php56-remi.conf
+  sed -i 's/#fastcgi_pass   127.0.0.1/fastcgi_pass   127.0.0.1/g' /usr/local/nginx/conf/php56-remi.conf
   sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
   sed -i 's|;listen.owner = .*|listen.owner = nginx|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
   sed -i 's|;listen.group = .*|listen.group = nginx|' /opt/remi/php56/root/etc/php-fpm.d/www.conf
