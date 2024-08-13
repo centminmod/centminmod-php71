@@ -611,9 +611,39 @@ This PHP-FPM 8.2 branch version `php82.sh`:
 
 ```
 
-## Example
+## PHP 8.3
 
-PHP version
+This PHP-FPM 8.3 branch version `php83.sh`:
+
+* Currently, following PHP extensions, memcache aren't available yet in Remi SCL php83 YUM repo
+* CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
+* listens on port `20000` instead of `9000` with php-fpm pool named `php83-www`
+* php-fpm status path = `/php83status`
+* custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php83/php.d/zzz_customphp.ini`
+* php config scan directory is at `/etc/opt/remi/php83/php.d`
+* php-fpm config file at `/etc/opt/remi/php83/php-fpm.d/www.conf`
+* error log at `/var/opt/remi/php83/log/php-fpm/www-error.log`
+* centmin mod nginx's php include file is at `/usr/local/nginx/conf/php83-remi.conf` instead of default at `/usr/local/nginx/conf/php.conf` which you replace references to in your centmin mod nginx vhost config file
+* `fpmconfphp83` is centmin mod command shortcut to invoke nano linux text editor to edit `/etc/opt/remi/php83/php-fpm.d/www.conf`
+* `phpincphp83` is centmin mod command shortcut to invoke nano linux text editor to edit `/usr/local/nginx/conf/php83-remi.conf`
+* `systemctl start php83-php-fpm` command to start php83-php-fpm service with command shortcut = `fpm83start`
+* `systemctl restart php83-php-fpm` command to restart php83-php-fpm service with command shortcut = `fpm83restart`
+* `systemctl stop php83-php-fpm` command to stop php83-php-fpm service with command shortcut = `fpm83stop`
+* `systemctl status php83-php-fpm` command to get status for php83-php-fpm service with command shortcut = `fpm83status`
+
+```
+./php83.sh list
+
+
+```
+```
+./php83.sh phpconfig
+
+```
+
+## Examples
+
+PHP 7.1 version
 
 ```
 php71 -v

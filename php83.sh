@@ -1,16 +1,16 @@
 #/bin/bash
 ############################################
 # centminmod.com multiple PHP-FPM version
-# installer for PHP 7.2 branch installed
+# installer for PHP 8.3 branch installed
 # side by side concurrently with default
 # centmin mod installed PHP version using
-# using Remi YUM repo's SCL php72 version
+# using Remi YUM repo's SCL php83 version
 # written by George Liu centminmod.com
 ############################################
 DT=$(date +"%d%m%y-%H%M%S")
 CENTMINLOGDIR='/root/centminlogs'
-repoopt='--disableplugin=priorities --disableexcludes=main,remi --enablerepo=remi,remi-test'
-packages='php72 php72-php-fpm php72-php-devel php72-php-embedded php72-php-mysqlnd php72-php-bcmath php72-php-enchant php72-php-gd php72-php-pecl-geoip php72-php-gmp php72-php-pecl-igbinary php72-php-pecl-igbinary-devel php72-php-pecl-imagick php72-php-pecl-imagick-devel php72-php-imap php72-php-intl php72-php-pecl-json-post php72-php-ldap php72-php-pecl-mailparse php72-php-mbstring php72-php-mcrypt php72-php-pecl-memcache php72-php-pecl-memcached php72-php-pecl-mysql php72-php-pdo-dblib php72-php-pspell php72-php-pecl-redis5 php72-php-snmp php72-php-soap php72-php-tidy php72-php-xml php72-php-xmlrpc php72-php-pecl-zip php72-php-opcache'
+repoopt='--disableplugin=priorities,versionlock --disableexcludes=main,remi --enablerepo=remi,remi-safe'
+packages='php83 php83-php-fpm php83-php-devel php83-php-embedded php83-php-mysqlnd php83-php-bcmath php83-php-enchant php83-php-gd php83-php-pecl-geoip php83-php-gmp php83-php-pecl-igbinary php83-php-pecl-igbinary-devel php83-php-pecl-imagick-im6 php83-php-pecl-imagick-im6-devel php83-php-imap php83-php-intl php83-php-pecl-json-post php83-php-ldap php83-php-pecl-mailparse php83-php-mbstring php83-php-mcrypt php83-php-pecl-memcache php83-php-pecl-memcached php83-php-pecl-mysql php83-php-pdo-dblib php83-php-pspell php83-php-pecl-redis5 php83-php-snmp php83-php-soap php83-php-tidy php83-php-xml php83-php-xmlrpc php83-php-pecl-zip php83-php-opcache php83-php-sodium libsodium-devel oniguruma5php oniguruma5php-devel'
 
 ############################################
 # set locale temporarily to english
@@ -137,15 +137,6 @@ elif [ -f /etc/el-release ] && [[ "$EL_VERID" -eq 8 || "$EL_VERID" -eq 9 ]]; the
   fi
 fi
 
-if [[ "$CENTOS_NINE" -eq '9' ]]; then
-  echo
-  echo "EL9 detected"
-  echo "PHP 7.2 not supported on EL9 OS"
-  echo "aborting..."
-  echo
-  exit 1
-fi
-
 if [[ "$CENTOS_SIX" -eq '6' || "$CENTOS_SEVEN" -eq '7' ]]; then
   echo
   echo "EL8 or EL9 Only"
@@ -230,7 +221,7 @@ opcachehugepages() {
 phpsededit() {
     TOTALMEM=$(awk '/MemTotal/ {print $2}' /proc/meminfo)
     PHPINICUSTOM='zzz_customphp.ini'
-    CONFIGSCANDIR='/etc/opt/remi/php72/php.d'
+    CONFIGSCANDIR='/etc/opt/remi/php83/php.d'
     CUSTOMPHPINIFILE="${CONFIGSCANDIR}/${PHPINICUSTOM}"
 
     if [[ ! -f "${CUSTOMPHPINIFILE}" ]]; then
@@ -334,70 +325,70 @@ phpsededit() {
       sed -i "s|opcache.memory_consumption=.*|opcache.memory_consumption=$ZOLIMIT|" "${CONFIGSCANDIR}/20-opcache.ini"
     fi
     opcachehugepages
-    if [ -f /etc/opt/remi/php72/php-fpm.d/www.conf ]; then
-      sed -i 's|pm.max_children = .*|pm.max_children = 20|' /etc/opt/remi/php72/php-fpm.d/www.conf
-      sed -i 's|pm.max_spare_servers = .*|pm.max_spare_servers = 15|' /etc/opt/remi/php72/php-fpm.d/www.conf
+    if [ -f /etc/opt/remi/php83/php-fpm.d/www.conf ]; then
+      sed -i 's|pm.max_children = .*|pm.max_children = 20|' /etc/opt/remi/php83/php-fpm.d/www.conf
+      sed -i 's|pm.max_spare_servers = .*|pm.max_spare_servers = 15|' /etc/opt/remi/php83/php-fpm.d/www.conf
     fi
 }
 
 phpinstall() {
   yum -y install $packages $repoopt --skip-broken
   phpsededit
-  if [ ! -f /var/opt/remi/php72/log/php-fpm/www-error.log ]; then
-    touch /var/opt/remi/php72/log/php-fpm/www-error.log
-    chmod 0666 /var/opt/remi/php72/log/php-fpm/www-error.log
-    chown nginx:nginx /var/opt/remi/php72/log/php-fpm/www-error.log
+  if [ ! -f /var/opt/remi/php83/log/php-fpm/www-error.log ]; then
+    touch /var/opt/remi/php83/log/php-fpm/www-error.log
+    chmod 0666 /var/opt/remi/php83/log/php-fpm/www-error.log
+    chown nginx:nginx /var/opt/remi/php83/log/php-fpm/www-error.log
   fi
-  if [ ! -f /var/opt/remi/php72/log/php-fpm/www-slow.log ]; then
-    touch /var/opt/remi/php72/log/php-fpm/www-slow.log
-    chmod 0666 /var/opt/remi/php72/log/php-fpm/www-slow.log
-    chown nginx:nginx /var/opt/remi/php72/log/php-fpm/www-slow.log
+  if [ ! -f /var/opt/remi/php83/log/php-fpm/www-slow.log ]; then
+    touch /var/opt/remi/php83/log/php-fpm/www-slow.log
+    chmod 0666 /var/opt/remi/php83/log/php-fpm/www-slow.log
+    chown nginx:nginx /var/opt/remi/php83/log/php-fpm/www-slow.log
   fi
-  echo "systemctl stop php72-php-fpm" >/usr/bin/fpm72stop ; chmod 700 /usr/bin/fpm72stop
-  echo "systemctl start php72-php-fpm" >/usr/bin/fpm72start ; chmod 700 /usr/bin/fpm72start
-  echo "systemctl restart php72-php-fpm" >/usr/bin/fpm72restart ; chmod 700 /usr/bin/fpm72restart
-  echo "systemctl reload php72-php-fpm" >/usr/bin/fpm72reload ; chmod 700 /usr/bin/fpm72reload
-  echo "systemctl status php72-php-fpm" >/usr/bin/fpm72status ; chmod 700 /usr/bin/fpm72status
-  echo "nano -w /etc/opt/remi/php72/php-fpm.d/www.conf" >/usr/bin/fpmconfphp72 ; chmod 700 /usr/bin/fpmconfphp72
-  echo "nano -w /usr/local/nginx/conf/php72-remi.conf" >/usr/bin/phpincphp72 ; chmod 700 /usr/bin/phpincphp72
-  cp -a /usr/local/nginx/conf/php.conf /usr/local/nginx/conf/php72-remi.conf
-  sed -i 's|\[www\]|\[php72-www\]|' /etc/opt/remi/php72/php-fpm.d/www.conf
-  sed -i 's|9000|10000|' /etc/opt/remi/php72/php-fpm.d/www.conf
-  sed -i 's|9000|10000|' /usr/local/nginx/conf/php72-remi.conf
-  sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /etc/opt/remi/php72/php-fpm.d/www.conf
-  sed -i 's|;listen.owner = .*|listen.owner = nginx|' /etc/opt/remi/php72/php-fpm.d/www.conf
-  sed -i 's|;listen.group = .*|listen.group = nginx|' /etc/opt/remi/php72/php-fpm.d/www.conf
-  sed -i 's|user = apache|user = nginx|' /etc/opt/remi/php72/php-fpm.d/www.conf
-  sed -i 's|group = apache|group = nginx|' /etc/opt/remi/php72/php-fpm.d/www.conf
-  sed -i 's|;pm.status_path = \/status|pm.status_path = \/php72status|' /etc/opt/remi/php72/php-fpm.d/www.conf
+  echo "systemctl stop php83-php-fpm" >/usr/bin/fpm83stop ; chmod 700 /usr/bin/fpm83stop
+  echo "systemctl start php83-php-fpm" >/usr/bin/fpm83start ; chmod 700 /usr/bin/fpm83start
+  echo "systemctl restart php83-php-fpm" >/usr/bin/fpm83restart ; chmod 700 /usr/bin/fpm83restart
+  echo "systemctl reload php83-php-fpm" >/usr/bin/fpm83reload ; chmod 700 /usr/bin/fpm83reload
+  echo "systemctl status php83-php-fpm" >/usr/bin/fpm83status ; chmod 700 /usr/bin/fpm83status
+  echo "nano -w /etc/opt/remi/php83/php-fpm.d/www.conf" >/usr/bin/fpmconfphp83 ; chmod 700 /usr/bin/fpmconfphp83
+  echo "nano -w /usr/local/nginx/conf/php83-remi.conf" >/usr/bin/phpincphp83 ; chmod 700 /usr/bin/phpincphp83
+  cp -a /usr/local/nginx/conf/php.conf /usr/local/nginx/conf/php83-remi.conf
+  sed -i 's|\[www\]|\[php83-www\]|' /etc/opt/remi/php83/php-fpm.d/www.conf
+  sed -i 's|9000|20000|' /etc/opt/remi/php83/php-fpm.d/www.conf
+  sed -i 's|9000|20000|' /usr/local/nginx/conf/php83-remi.conf
+  sed -i 's|;listen.backlog = .*|;listen.backlog = 511|' /etc/opt/remi/php83/php-fpm.d/www.conf
+  sed -i 's|;listen.owner = .*|listen.owner = nginx|' /etc/opt/remi/php83/php-fpm.d/www.conf
+  sed -i 's|;listen.group = .*|listen.group = nginx|' /etc/opt/remi/php83/php-fpm.d/www.conf
+  sed -i 's|user = apache|user = nginx|' /etc/opt/remi/php83/php-fpm.d/www.conf
+  sed -i 's|group = apache|group = nginx|' /etc/opt/remi/php83/php-fpm.d/www.conf
+  sed -i 's|;pm.status_path = \/status|pm.status_path = \/php83status|' /etc/opt/remi/php83/php-fpm.d/www.conf
 
   # raise system limits
-  mkdir -p /etc/systemd/system/php72-php-fpm.service.d
-  echo -en "[Service]\nLimitNOFILE=262144\nLimitNPROC=16384\n" > /etc/systemd/system/php72-php-fpm.service.d/limit.conf
+  mkdir -p /etc/systemd/system/php83-php-fpm.service.d
+  echo -en "[Service]\nLimitNOFILE=262144\nLimitNPROC=16384\n" > /etc/systemd/system/php83-php-fpm.service.d/limit.conf
   systemctl daemon-reload
 
   echo
-  echo "start php72-php-fpm service"
-  systemctl start php72-php-fpm
-  systemctl enable php72-php-fpm
+  echo "start php83-php-fpm service"
+  systemctl start php83-php-fpm
+  systemctl enable php83-php-fpm
   echo
-  echo "status php72-php-fpm service"
-  systemctl status php72-php-fpm
+  echo "status php83-php-fpm service"
+  systemctl status php83-php-fpm
   echo
   echo "command shortcuts"
-  echo "phpincphp72 - edit /usr/local/nginx/conf/php72-remi.conf include file"
-  echo "fpmconfphp72 - edit /etc/opt/remi/php72/php-fpm.d/www.conf php-fpm config"
+  echo "phpincphp83 - edit /usr/local/nginx/conf/php83-remi.conf include file"
+  echo "fpmconfphp83 - edit /etc/opt/remi/php83/php-fpm.d/www.conf php-fpm config"
   echo
-  echo "php72 -v"
-  php72 -v
+  echo "php83 -v"
+  php83 -v
   echo
-  echo "which php72"
-  which php72
+  echo "which php83"
+  which php83
   echo
-  echo "php72 -m"
-  php72 -m
-  echo "php72 --ini"
-  php72 --ini
+  echo "php83 -m"
+  php83 -m
+  echo "php83 --ini"
+  php83 --ini
   echo
 }
 
@@ -423,44 +414,44 @@ case "$1" in
     phplist
     ;;
   phpconfig )
-    if [ -f /opt/remi/php72/root/usr/bin/php-config ]; then
-      /opt/remi/php72/root/usr/bin/php-config
+    if [ -f /opt/remi/php83/root/usr/bin/php-config ]; then
+      /opt/remi/php83/root/usr/bin/php-config
     fi
     ;;
   phperrors )
-    if [ -f /var/opt/remi/php72/log/php-fpm/www-error.log ]; then
-      echo "tail -100 /var/opt/remi/php72/log/php-fpm/www-error.log"
-      tail -100 /var/opt/remi/php72/log/php-fpm/www-error.log
+    if [ -f /var/opt/remi/php83/log/php-fpm/www-error.log ]; then
+      echo "tail -100 /var/opt/remi/php83/log/php-fpm/www-error.log"
+      tail -100 /var/opt/remi/php83/log/php-fpm/www-error.log
     fi
     ;;
   phpcustom )
-    if [ -f /etc/opt/remi/php72/php.d/zzz_customphp.ini ]; then
-      nano /etc/opt/remi/php72/php.d/zzz_customphp.ini
+    if [ -f /etc/opt/remi/php83/php.d/zzz_customphp.ini ]; then
+      nano /etc/opt/remi/php83/php.d/zzz_customphp.ini
     fi
     ;;
   phpslowlog )
-    if [ -f /var/opt/remi/php72/log/php-fpm/www-slow.log ]; then
-      echo "tail -100 /var/opt/remi/php72/log/php-fpm/www-slow.log"
-      tail -100 /var/opt/remi/php72/log/php-fpm/www-slow.log
+    if [ -f /var/opt/remi/php83/log/php-fpm/www-slow.log ]; then
+      echo "tail -100 /var/opt/remi/php83/log/php-fpm/www-slow.log"
+      tail -100 /var/opt/remi/php83/log/php-fpm/www-slow.log
     fi
     ;;
   phpini )
-    php72 --ini
+    php83 --ini
     ;;
   phpext )
-    php72 -m
+    php83 -m
     ;;
   start )
-    systemctl start php72-php-fpm
+    systemctl start php83-php-fpm
     ;;
   restart )
-    systemctl restart php72-php-fpm
+    systemctl restart php83-php-fpm
     ;;
   stop )
-    systemctl stop php72-php-fpm
+    systemctl stop php83-php-fpm
     ;;
   status )
-    systemctl status php72-php-fpm
+    systemctl status php83-php-fpm
     ;;
   process )
     ps aufxw | egrep -w 'php-fpm|nginx' | grep -v grep
