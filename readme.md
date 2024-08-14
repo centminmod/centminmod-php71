@@ -641,6 +641,36 @@ This PHP-FPM 8.3 branch version `php83.sh`:
 
 ```
 
+## PHP 8.4
+
+This PHP-FPM 8.4 branch version `php84.sh`:
+
+* Currently, following PHP extensions, memcache aren't available yet in Remi SCL php84 YUM repo
+* CentOS 7 transparent hugepages support is enabled for Zend Opcache if system detected to support it
+* listens on port `22000` instead of `9000` with php-fpm pool named `php84-www`
+* php-fpm status path = `/php84status`
+* custom php.ini settings calculated by centmin mod are placed in `/etc/opt/remi/php84/php.d/zzz_customphp.ini`
+* php config scan directory is at `/etc/opt/remi/php84/php.d`
+* php-fpm config file at `/etc/opt/remi/php84/php-fpm.d/www.conf`
+* error log at `/var/opt/remi/php84/log/php-fpm/www-error.log`
+* centmin mod nginx's php include file is at `/usr/local/nginx/conf/php84-remi.conf` instead of default at `/usr/local/nginx/conf/php.conf` which you replace references to in your centmin mod nginx vhost config file
+* `fpmconfphp84` is centmin mod command shortcut to invoke nano linux text editor to edit `/etc/opt/remi/php84/php-fpm.d/www.conf`
+* `phpincphp84` is centmin mod command shortcut to invoke nano linux text editor to edit `/usr/local/nginx/conf/php84-remi.conf`
+* `systemctl start php84-php-fpm` command to start php84-php-fpm service with command shortcut = `fpm84start`
+* `systemctl restart php84-php-fpm` command to restart php84-php-fpm service with command shortcut = `fpm84restart`
+* `systemctl stop php84-php-fpm` command to stop php84-php-fpm service with command shortcut = `fpm84stop`
+* `systemctl status php84-php-fpm` command to get status for php84-php-fpm service with command shortcut = `fpm84status`
+
+```
+./php84.sh list
+
+
+```
+```
+./php84.sh phpconfig
+
+```
+
 ## Examples
 
 PHP 7.1 version
